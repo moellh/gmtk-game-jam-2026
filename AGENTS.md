@@ -1,0 +1,13 @@
+# Info for AI Agent
+
+## Game Jam Rules
+
+See rules at [Game Jam Website](https://itch.io/jam/gmtk-jam-2026).
+Don't create art or audio: Generative AI for creating art & audio is disallowed by the rules and leads to disqualification.
+
+## Git Repo
+
+The Git repo uses the [Scoped Commits](https://scopedcommits.com/) commit naming convention.
+It is not enforced though strongly advised to, especially when auto-committing via an AI agent.
+Basically, the commit message consists of `scope: description`.
+Do not use [Conventional Commits](https://www.conventionalcommits.org) which usually prefix a `feat`, `fix`, `chore`, ...
