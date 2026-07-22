@@ -1,0 +1,15 @@
+[Unit]
+Description=Fetch and publish active GMTK jam branches
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=@SERVICE_USER@
+Group=@SERVICE_GROUP@
+WorkingDirectory=@REPO_DIR@
+ExecStart=/usr/bin/python3 @REPO_DIR@/deploy/update.py
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,32 @@
+name: gmtk-jam
+
+services:
+  web:
+    image: nginx:1.28-alpine
+    container_name: gmtk-jam-web
+    restart: unless-stopped
+    volumes:
+      - ./state:/srv/jam:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      app-net:
+        aliases:
+          - gmtk-jam-web
+
+  builder:
+    profiles: [build]
+    image: gmtk-jam-builder:4.7.1
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.builder
+      network: host
+    network_mode: none
+    user: "${BUILDER_UID:-0}:${BUILDER_GID:-0}"
+    volumes:
+      - ..:/repo:ro
+      - ./state:/state
+
+networks:
+  app-net:
+    external: true
+    name: app-net
