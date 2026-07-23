@@ -3,15 +3,13 @@ extends Node2D
 const ROUND_TIME := 10.0
 
 const BASE_VIEWPORT_SIZE := Vector2(384.0, 216.0)
-const LEVEL_VIEW_SIZE := BASE_VIEWPORT_SIZE
+const LEVEL_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
 
 const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
-@onready var timer_tens: Label = %TimerTens
-@onready var timer_ones: Label = %TimerOnes
-@onready var timer_tenths: Label = %TimerTenths
+@onready var timer_display: Label = %TimerDisplay
 
 var timer := ROUND_TIME
 
@@ -28,10 +26,10 @@ func update_world_camera() -> void:
 	var fit_scale := minf(width_scale, height_scale)
 	var visible_size := window_size / fit_scale
 	var level_zoom := minf(
-		visible_size.x / LEVEL_VIEW_SIZE.x,
-		visible_size.y / LEVEL_VIEW_SIZE.y,
+		visible_size.x / LEVEL_VIEW_RECT.size.x,
+		visible_size.y / LEVEL_VIEW_RECT.size.y,
 	)
-	world_camera.position = LEVEL_VIEW_SIZE * 0.5
+	world_camera.position = LEVEL_VIEW_RECT.get_center()
 	world_camera.zoom = Vector2.ONE * level_zoom
 
 func _process(delta: float) -> void:
@@ -49,9 +47,7 @@ func _process(delta: float) -> void:
 func update_hud() -> void:
 	var displayed_tenths := roundi(maxf(timer, 0.0) * 10.0)
 	var displayed_seconds := floori(displayed_tenths * 0.1)
-	timer_tens.text = str(floori(displayed_seconds * 0.1)) if displayed_seconds >= 10 else ""
-	timer_ones.text = str(displayed_seconds % 10)
-	timer_tenths.text = str(displayed_tenths % 10)
+	timer_display.text = "%d.%d" % [displayed_seconds, displayed_tenths % 10]
 
 func clear() -> void:
 	timer = ROUND_TIME
