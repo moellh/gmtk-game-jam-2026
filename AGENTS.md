@@ -11,3 +11,7 @@ The Git repo uses the [Scoped Commits](https://scopedcommits.com/) commit naming
 It is not enforced though strongly advised to, especially when auto-committing via an AI agent.
 Basically, the commit message consists of `scope: description`.
 Do not use [Conventional Commits](https://www.conventionalcommits.org) which usually prefix a `feat`, `fix`, `chore`, ...
+
+## Maintaining This File
+
+Agents may add to or modify this file as needed, but must not alter or remove either existing rule above: the prohibition on generative AI for art and audio, and the scoped commit naming convention.
