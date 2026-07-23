@@ -40,7 +40,7 @@ func _step_body_onto_platform(body: Node2D) -> void:
 		return
 
 	var character := body as CharacterBody2D
-	if character.velocity.y < 0.0:
+	if not character.is_on_floor() or character.velocity.y < 0.0:
 		return
 
 	var collision_shape := character.get_node_or_null("CollisionShape2D") as CollisionShape2D

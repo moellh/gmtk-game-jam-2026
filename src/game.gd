@@ -2,6 +2,7 @@ extends Node2D
 
 const ROUND_TIME := 10.0
 const TILE_SIZE := 16.0
+const LEVEL_TRANSITION_TIME := 1.0
 
 const HEART_TEXTURE := preload("res://assets/monochrome_tilemap_transparent.png")
 const HEART_ATLAS_COORDS := [
@@ -24,7 +25,9 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
-@onready var timer_display: Label = %TimerDisplay
+@onready var timer_tens: Label = %TimerTens
+@onready var timer_ones: Label = %TimerOnes
+@onready var timer_tenths: Label = %TimerTenths
 @onready var life_hearts: Node2D = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
 @onready var outside_fill: OutsideFill = $OutsideFill
@@ -34,6 +37,7 @@ var timer := ROUND_TIME
 var finished_figures := 0
 var completed := false
 var life_heart_icons: Array[AnimatedSprite2D] = []
+var accepting_input := false
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(update_world_camera)
@@ -42,6 +46,7 @@ func _ready() -> void:
 	build_life_hearts()
 	update_life_hearts()
 	update_hud()
+	play_level_intro()
 
 func update_world_camera() -> void:
 	var window_size := Vector2(get_window().size)
@@ -86,6 +91,9 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file(LEVEL_SELECT)
 		return
 
+	if not accepting_input:
+		return
+
 	if Input.is_action_just_pressed("clear"):
 		clear()
 		update_hud()
@@ -98,8 +106,37 @@ func _process(delta: float) -> void:
 
 func update_hud() -> void:
 	var displayed_tenths := roundi(maxf(timer, 0.0) * 10.0)
-	var displayed_seconds := floori(displayed_tenths * 0.1)
-	timer_display.text = "%d.%d" % [displayed_seconds, displayed_tenths % 10]
+	var displayed_seconds := mini(floori(displayed_tenths * 0.1), 99)
+	timer_tens.visible = displayed_seconds >= 10
+	timer_tens.text = (
+		str(floori(displayed_seconds * 0.1))
+		if timer_tens.visible
+		else "0"
+	)
+	timer_ones.text = str(displayed_seconds % 10)
+	timer_tenths.text = str(displayed_tenths % 10)
+
+func play_level_intro() -> void:
+	accepting_input = false
+	player.set_physics_process(false)
+
+	var opaque_modulate := player.modulate
+	opaque_modulate.a = 1.0
+	var transparent_modulate := opaque_modulate
+	transparent_modulate.a = 0.0
+	player.modulate = transparent_modulate
+
+	var tween := create_tween()
+	tween.tween_property(
+		player,
+		"modulate",
+		opaque_modulate,
+		LEVEL_TRANSITION_TIME,
+	)
+	await tween.finished
+
+	accepting_input = true
+	player.set_physics_process(true)
 
 func clear() -> void:
 	timer = ROUND_TIME
@@ -172,8 +209,32 @@ func update_life_hearts() -> void:
 	for index in life_heart_icons.size():
 		life_heart_icons[index].visible = index < visible_hearts
 
-func complete_level() -> void:
+func complete_level(goal_position: Vector2) -> void:
 	if completed:
 		return
 	completed = true
+	accepting_input = false
+	player.set_physics_process(false)
+	player.velocity = Vector2.ZERO
+	get_tree().paused = true
+
+	var transparent_modulate := player.modulate
+	transparent_modulate.a = 0.0
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.set_parallel(true)
+	tween.tween_property(
+		player,
+		"global_position",
+		goal_position,
+		LEVEL_TRANSITION_TIME,
+	)
+	tween.tween_property(
+		player,
+		"modulate",
+		transparent_modulate,
+		LEVEL_TRANSITION_TIME,
+	)
+	await tween.finished
+
 	level_complete.open(next_level)
