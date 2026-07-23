@@ -30,6 +30,15 @@ During active development, refresh `itch-page/` no more than once per hour unles
 When refreshing, keep its HTML description, screenshots, cover, credits, and setup notes aligned with the current game.
 Use real game captures and existing assets only; the generative-art and generative-audio prohibition also applies to itch.io page assets.
 
+## Code Maintenance
+
+When touching an area, briefly review adjacent older code for superseded paths, duplication, or unnecessary complexity.
+Simplify only when behavior can be preserved and validated.
+Avoid unrelated broad refactors.
+
+Prefer self-explanatory names and structure.
+Add brief comments for non-obvious intent, constraints, or workarounds, but do not narrate straightforward code.
+
 ## Maintaining This File
 
 Agents may add to or modify this file as needed, but must not alter or remove either existing rule above: the prohibition on generative AI for art and audio, and the scoped commit naming convention.
