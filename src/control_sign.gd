@@ -15,21 +15,26 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(player):
-		var centered_x := player.global_position.x - prompt.size.x * 0.5
-		prompt.global_position = Vector2(
-			clampf(
-				centered_x,
-				prompt_horizontal_bounds.x,
-				prompt_horizontal_bounds.y - prompt.size.x,
-			),
-			player.global_position.y - 42.0,
-		)
+		_update_prompt_position()
+
+
+func _update_prompt_position() -> void:
+	var centered_x := player.global_position.x - prompt.size.x * 0.5
+	prompt.global_position = Vector2(
+		clampf(
+			centered_x,
+			prompt_horizontal_bounds.x,
+			prompt_horizontal_bounds.y - prompt.size.x,
+		),
+		player.global_position.y - 42.0,
+	)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name != "Player":
 		return
 	player = body as CharacterBody2D
+	_update_prompt_position()
 	prompt.visible = true
 
 
