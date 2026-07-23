@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
 [ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
-[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
+[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door1x1.tscn" id="6_door"]
 [ext_resource type="FontFile" uid="uid://dkstoc421nmrg" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
 [ext_resource type="PackedScene" path="res://src/control_sign.tscn" id="8_sign"]
 [ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="9_complete"]
@@ -843,7 +843,7 @@ material = SubResource("ShaderMaterial_outside")
 script = ExtResource("10_outside")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
-tile_map_data = PackedByteArray("AAAGAAcAAAAQAAUAAAAHAAcAAAAQAAUAAAAIAAcAAAAQAAUAAAAJAAcAAAAQAAUAAAAKAAcAAAAQAAUAAAALAAcAAAAQAAUAAAAMAAcAAAAQAAUAAAANAAcAAAAQAAUAAAAOAAcAAAAQAAUAAAAPAAcAAAALAAYAAAAQAAcAAAAQAAUAAAARAAcAAAAQAAUAAAASAAcAAAAQAAYAAAATAAcAAAAQAAYAAAAPAAQAAAAQAAYAAAAPAAMAAAASAAcAAAAFAAgAAAAPAAcAAAAGAAgAAAAQAAcAAAAHAAgAAAAQAAcAAAAIAAgAAAAQAAcAAAAJAAgAAAAQAAcAAAAKAAgAAAAQAAcAAAALAAgAAAAQAAcAAAAMAAgAAAAQAAcAAAANAAgAAAAQAAcAAAAOAAgAAAAQAAcAAAAPAAgAAAAQAAcAAAAQAAgAAAAQAAcAAAARAAgAAAAQAAcAAAASAAgAAAAQAAcAAAATAAgAAAAQAAcAAAAUAAgAAAARAAcAAAAUAAcAAAARAAYAAAAUAAYAAAAMAAYAAAAUAAUAAAAMAAYAAAAUAAQAAAASAAoAAAAUAAMAAAASAAoAAAAUAAIAAAASAAoAAAAUAAEAAAARAAkAAAATAAEAAAAQAAwAAAASAAEAAAAQAAwAAAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAPAAwAAAANAAEAAAAQAAwAAAAMAAEAAAAQAAwAAAAPAAEAAAAQAAkAAAAPAAIAAAASAAYAAAALAAEAAAAQAAwAAAAKAAEAAAAPAAwAAAAJAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAARAAwAAAAGAAEAAAAQAAwAAAAFAAEAAAAPAAkAAAAFAAIAAAASAAoAAAAFAAMAAAASAAoAAAAFAAQAAAASAAoAAAAFAAUAAAASAAoAAAAFAAYAAAASAAoAAAAFAAcAAAAPAAYAAAASAAUAAAALAAYAAAATAAUAAAAPAAUAAAARAAYAAAALAAYAAAASAAYAAAAPAAUAAAATAAYAAAALAAYAAAAPAAYAAAASAAUAAAA=")
+tile_map_data = PackedByteArray("AAAGAAcAAAAQAAUAAAAHAAcAAAAQAAUAAAAIAAcAAAAQAAUAAAAJAAcAAAAQAAUAAAAKAAcAAAAQAAUAAAALAAcAAAAQAAUAAAAMAAcAAAAQAAUAAAANAAcAAAAQAAUAAAAOAAcAAAAQAAUAAAAPAAcAAAALAAYAAAAQAAcAAAAQAAUAAAARAAcAAAAQAAUAAAASAAcAAAAQAAYAAAATAAcAAAAQAAYAAAAPAAMAAAASAAcAAAAFAAgAAAAPAAcAAAAGAAgAAAAQAAcAAAAHAAgAAAAQAAcAAAAIAAgAAAAQAAcAAAAJAAgAAAAQAAcAAAAKAAgAAAAQAAcAAAALAAgAAAAQAAcAAAAMAAgAAAAQAAcAAAANAAgAAAAQAAcAAAAOAAgAAAAQAAcAAAAPAAgAAAAQAAcAAAAQAAgAAAAQAAcAAAARAAgAAAAQAAcAAAASAAgAAAAQAAcAAAATAAgAAAAQAAcAAAAUAAgAAAARAAcAAAAUAAcAAAARAAYAAAAUAAYAAAAMAAYAAAAUAAUAAAAMAAYAAAAUAAQAAAASAAoAAAAUAAMAAAASAAoAAAAUAAIAAAASAAoAAAAUAAEAAAARAAkAAAATAAEAAAAQAAwAAAASAAEAAAAQAAwAAAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAPAAwAAAANAAEAAAAQAAwAAAAMAAEAAAAQAAwAAAAPAAEAAAAQAAkAAAAPAAIAAAASAAYAAAALAAEAAAAQAAwAAAAKAAEAAAAPAAwAAAAJAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAARAAwAAAAGAAEAAAAQAAwAAAAFAAEAAAAPAAkAAAAFAAIAAAASAAoAAAAFAAMAAAASAAoAAAAFAAQAAAASAAoAAAAFAAUAAAASAAoAAAAFAAYAAAASAAoAAAAFAAcAAAAPAAYAAAATAAUAAAAPAAUAAAASAAYAAAAPAAUAAAATAAYAAAALAAYAAAAPAAYAAAASAAUAAAA=")
 tile_set = SubResource("TileSet_oi3di")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("2_vonw3")]
@@ -853,7 +853,7 @@ position = Vector2(120, 104)
 position = Vector2(312, 72)
 
 [node name="Button" parent="." unique_id=556200501 instance=ExtResource("5_button")]
-position = Vector2(184, 104)
+position = Vector2(184, 108)
 
 [node name="Door" parent="." unique_id=1161385492 instance=ExtResource("6_door")]
 position = Vector2(248, 88)
@@ -873,7 +873,7 @@ theme = SubResource("Theme_hud")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBox_timer_tile")
 
-[node name="TimerCenter" type="CenterContainer" parent="WorldUI/TimerDisplay"]
+[node name="TimerCenter" type="CenterContainer" parent="WorldUI/TimerDisplay" unique_id=1201240881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -882,11 +882,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TimerDigits" type="HBoxContainer" parent="WorldUI/TimerDisplay/TimerCenter"]
+[node name="TimerDigits" type="HBoxContainer" parent="WorldUI/TimerDisplay/TimerCenter" unique_id=159973982]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TimerTens" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits"]
+[node name="TimerTens" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=506273624]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(6, 16)
 layout_mode = 2
@@ -895,7 +895,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerOnes" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits"]
+[node name="TimerOnes" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=557413407]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(6, 16)
 layout_mode = 2
@@ -904,7 +904,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerDecimal" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits"]
+[node name="TimerDecimal" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=2022851610]
 custom_minimum_size = Vector2(4, 16)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
@@ -912,7 +912,7 @@ text = "."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerTenths" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits"]
+[node name="TimerTenths" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=147413522]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(6, 16)
 layout_mode = 2
@@ -935,11 +935,13 @@ JUMP"
 
 [node name="FreezeSign" parent="WorldUI" unique_id=2145279178 instance=ExtResource("8_sign")]
 position = Vector2(152, 104)
-instructions = "R\nFreeze Ghost"
+instructions = "R
+Freeze Ghost"
 
 [node name="ResetSign" parent="WorldUI" unique_id=659495750 instance=ExtResource("8_sign")]
 position = Vector2(216, 104)
-instructions = "C\n Reset"
+instructions = "C
+ Reset"
 
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("9_complete")]
 
