@@ -9,6 +9,11 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 var next_scene: PackedScene
 
 
+func _ready() -> void:
+	for button in [next_button, selection_button]:
+		button.mouse_entered.connect(button.grab_focus)
+
+
 func open(scene: PackedScene) -> void:
 	next_scene = scene
 	next_button.visible = next_scene != null
