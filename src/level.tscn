@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_vonw3"]
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
-[ext_resource type="PackedScene" path="res://src/button.tscn" id="5_button"]
-[ext_resource type="PackedScene" path="res://src/door.tscn" id="6_door"]
+[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
+[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -585,7 +585,6 @@ separation = Vector2i(1, 1)
 3:7/0 = 0
 3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:8/0 = 0
-3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:9/0 = 0
 3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:10/0 = 0
@@ -697,7 +696,6 @@ separation = Vector2i(1, 1)
 12:2/0 = 0
 12:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:3/0 = 0
-12:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:6/0 = 0
 12:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:19/0 = 0
@@ -705,7 +703,6 @@ separation = Vector2i(1, 1)
 13:2/0 = 0
 13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:3/0 = 0
-13:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:4/0 = 0
 13:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:5/0 = 0
@@ -753,7 +750,6 @@ separation = Vector2i(1, 1)
 17:2/0 = 0
 17:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:3/0 = 0
-17:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:4/0 = 0
 17:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 17:5/0 = 0
@@ -763,7 +759,6 @@ separation = Vector2i(1, 1)
 17:19/0 = 0
 17:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:2/0 = 0
-18:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:3/0 = 0
 18:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:4/0 = 0
@@ -820,20 +815,20 @@ texture_filter = 1
 script = ExtResource("3_game")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
-tile_map_data = PackedByteArray("AAAKAAcAAAALABAAAAALAAcAAAALABAAAAAMAAcAAAALABAAAAANAAcAAAALABAAAAAOAAcAAAALABAAAAAPAAcAAAALABAAAAAQAAcAAAALABAAAAARAAcAAAALABAAAAASAAcAAAALABAAAAAFAAcAAAAEAAYAAAAGAAcAAAAFAAYAAAAHAAcAAAAFAAYAAAAIAAcAAAAFAAYAAAAJAAcAAAAGAAYAAAA=")
+tile_map_data = PackedByteArray("AAAGAAcAAAAQAAUAAAAHAAcAAAAQAAUAAAAIAAcAAAAQAAUAAAAJAAcAAAAQAAUAAAAKAAcAAAAQAAUAAAALAAcAAAAQAAUAAAAMAAcAAAAQAAUAAAANAAcAAAAQAAUAAAAOAAcAAAAQAAUAAAAPAAcAAAAQAAUAAAAQAAcAAAAQAAUAAAARAAcAAAAQAAUAAAASAAcAAAAQAAUAAAATAAcAAAAQAAUAAAAHAAYAAAANAAMAAAALAAYAAAARAAMAAAAPAAUAAAANAAsAAAAPAAQAAAANAAoAAAAPAAMAAAANAAoAAAAFAAgAAAAPAAcAAAAGAAgAAAAQAAcAAAAHAAgAAAAQAAcAAAAIAAgAAAAQAAcAAAAJAAgAAAAQAAcAAAAKAAgAAAAQAAcAAAALAAgAAAAQAAcAAAAMAAgAAAAQAAcAAAANAAgAAAAQAAcAAAAOAAgAAAAQAAcAAAAPAAgAAAAQAAcAAAAQAAgAAAAQAAcAAAARAAgAAAAQAAcAAAASAAgAAAAQAAcAAAATAAgAAAAQAAcAAAAUAAgAAAARAAcAAAAUAAcAAAARAAYAAAAUAAYAAAASAAoAAAAUAAUAAAASAAoAAAAUAAQAAAASAAoAAAAUAAMAAAASAAoAAAAUAAIAAAASAAoAAAAUAAEAAAARAAkAAAATAAEAAAAQAAwAAAASAAEAAAAQAAwAAAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAQAAwAAAANAAEAAAAQAAwAAAAMAAEAAAAQAAwAAAAPAAEAAAAQAAkAAAAPAAIAAAANAAoAAAALAAEAAAAQAAwAAAAKAAEAAAAQAAwAAAAJAAEAAAAQAAwAAAAIAAEAAAAQAAwAAAAHAAEAAAAQAAwAAAAGAAEAAAAQAAwAAAAFAAEAAAAPAAkAAAAFAAIAAAASAAoAAAAFAAMAAAASAAoAAAAFAAQAAAASAAoAAAAFAAUAAAASAAoAAAAFAAYAAAASAAoAAAAFAAcAAAAPAAYAAAA=")
 tile_set = SubResource("TileSet_oi3di")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("2_vonw3")]
 position = Vector2(109, 104)
 
 [node name="Goal" parent="." unique_id=736253240 instance=ExtResource("4_goal")]
-position = Vector2(296, 103)
+position = Vector2(296, 104)
 
 [node name="Button" parent="." unique_id=556200501 instance=ExtResource("5_button")]
-position = Vector2(170, 108)
+position = Vector2(168, 104)
 
 [node name="Door" parent="." unique_id=1161385492 instance=ExtResource("6_door")]
-position = Vector2(249, 95)
+position = Vector2(248, 104)
 
 [connection signal="reached" from="Goal" to="." method="clear"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
