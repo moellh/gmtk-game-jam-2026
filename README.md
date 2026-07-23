@@ -79,3 +79,18 @@ Proxy the domain to `http://gmtk-jam-web:80` through `app-net`. Branches update 
 ```sh
 journalctl -u gmtk-jam-update.service
 ```
+
+### itch.io deployment
+
+The updater can also push each successful new `main` build to itch.io. Create
+`/etc/gmtk-jam-itch.env` as a root-readable file before installation:
+
+```ini
+ITCH_TARGET=account/game
+ITCH_CHANNEL=html5
+BUTLER_API_KEY=secret
+```
+
+Then run the server installer above, or restart `gmtk-jam-update.service`.
+The first upload must be marked as HTML5 / Playable in browser on the itch.io
+edit page.

@@ -22,6 +22,7 @@ install -m 0644 "$repo_dir/deploy/systemd/gmtk-jam-update.timer" "$unit_dir/gmtk
 mkdir -p "$repo_dir/deploy/state"
 chown -R "$service_user:$service_group" "$repo_dir/deploy/state"
 
+"$repo_dir/deploy/install-butler.sh"
 docker compose -f "$repo_dir/deploy/docker-compose.yml" --profile build build builder
 docker compose -f "$repo_dir/deploy/docker-compose.yml" up -d web
 

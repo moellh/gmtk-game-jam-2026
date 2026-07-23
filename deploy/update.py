@@ -23,6 +23,7 @@ STATE = DEPLOY / "state"
 CACHE = STATE / "cache"
 WORK = STATE / "work"
 WWW = STATE / "www"
+ITCH_STATE = STATE / "itch.json"
 COMPOSE = DEPLOY / "docker-compose.yml"
 MAX_AGE_SECONDS = 48 * 60 * 60
 FAILED_RETRY_SECONDS = 5 * 60
@@ -332,6 +333,72 @@ def publish(
     shutil.rmtree(old_www, ignore_errors=True)
 
 
+def deploy_itch(commit: str, metadata: dict[str, str]) -> None:
+    target = os.environ.get("ITCH_TARGET", "").strip()
+    if not target:
+        print("Itch deployment disabled (ITCH_TARGET is not set)", flush=True)
+        return
+    if metadata["status"] != "success":
+        print(f"Skipping itch deployment for failed main build {commit[:12]}", flush=True)
+        return
+
+    channel = os.environ.get("ITCH_CHANNEL", "html5").strip()
+    if (
+        target.count("/") != 1
+        or any(character.isspace() or character == ":" for character in target)
+        or not channel
+        or any(character.isspace() or character in ":/" for character in channel)
+    ):
+        raise UpdateError("ITCH_TARGET or ITCH_CHANNEL has an invalid format")
+
+    if ITCH_STATE.is_file():
+        deployed = json.loads(ITCH_STATE.read_text())
+        if (
+            deployed.get("commit") == commit
+            and deployed.get("target") == target
+            and deployed.get("channel") == channel
+        ):
+            print(f"Itch already has main commit {commit[:12]}", flush=True)
+            return
+
+    butler = shutil.which("butler")
+    if butler is None:
+        raise UpdateError("ITCH_TARGET is set but butler is not installed")
+
+    destination = f"{target}:{channel}"
+    print(f"Deploying main commit {commit[:12]} to itch {destination}", flush=True)
+    result = subprocess.run(
+        [
+            butler,
+            "push",
+            "--if-changed",
+            "--userversion",
+            commit[:12],
+            "--ignore",
+            "build.json",
+            "--ignore",
+            "build.log",
+            str(CACHE / commit),
+            destination,
+        ],
+        cwd=REPO,
+        text=True,
+    )
+    if result.returncode:
+        raise UpdateError(f"butler push failed with exit code {result.returncode}")
+
+    deployed = {
+        "commit": commit,
+        "target": target,
+        "channel": channel,
+        "deployed_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+    }
+    next_state = STATE / f"itch.next-{os.getpid()}.json"
+    next_state.write_text(json.dumps(deployed, indent=2) + "\n")
+    os.replace(next_state, ITCH_STATE)
+    print(f"Deployed main commit {commit[:12]} to itch", flush=True)
+
+
 def cleanup(active_commits: set[str]) -> None:
     shutil.rmtree(WORK, ignore_errors=True)
     WORK.mkdir(parents=True)
@@ -373,6 +440,7 @@ def main() -> int:
             metadata[commit]["browser_size_bytes"] = str(browser_size(CACHE / commit))
             details[commit] = commit_details(commit)
         publish(active, metadata, details, update_started_at)
+        deploy_itch(active["main"], metadata[active["main"]])
         cleanup(set(active.values()))
         print("Published branch site", flush=True)
         return 0

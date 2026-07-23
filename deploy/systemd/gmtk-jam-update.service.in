@@ -9,6 +9,7 @@ Type=oneshot
 User=@SERVICE_USER@
 Group=@SERVICE_GROUP@
 WorkingDirectory=@REPO_DIR@
+EnvironmentFile=-/etc/gmtk-jam-itch.env
 ExecStart=/usr/bin/python3 @REPO_DIR@/deploy/update.py
 
 [Install]
