@@ -1,15 +1,16 @@
 # itch.io Page Kit
 
-Everything in this directory is intended for the `chronost` itch.io edit page.
+Everything in this directory is intended for the `Chronost` itch.io edit page.
 
 ## Upload Checklist
 
-1. Copy the fields and formatted description from [`page-copy.md`](page-copy.md).
-2. Upload `cover.png` as the cover image.
-3. Upload the images in `screenshots/` in filename order.
-4. Apply the page and embed settings below.
-5. Copy the theme response from [`jam-submission.md`](jam-submission.md) when submitting to GMTK Game Jam 2026.
-6. Preview the public page once in a private browser window and verify that the game receives keyboard focus.
+1. Copy the title, tagline, and short description from [`page-copy.md`](page-copy.md).
+2. Paste [`description.html`](description.html) into the itch.io description HTML field.
+3. Upload `cover.png` as the cover image.
+4. Upload the images in `screenshots/` in filename order.
+5. Apply the page and embed settings below.
+6. Copy the theme response from [`jam-submission.md`](jam-submission.md) when submitting to GMTK Game Jam 2026.
+7. Preview the public page once in a private browser window and verify that the game receives keyboard focus.
 
 ## Image Set
 
@@ -56,5 +57,11 @@ No background image is needed. The black page lets the game, cover, and screensh
 - `cover.png` and every screenshot are direct captures of the game. No generated artwork is used.
 - The tile and character art comes from Kenney's [1-Bit Platformer Pack](https://kenney.nl/assets/1-bit-platformer-pack), licensed under CC0 1.0.
 - The UI uses [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke, licensed under the SIL Open Font License 1.1.
+
+## Team
+
+- [moellh](https://github.com/moellh)
+- [floppyMike](https://github.com/floppyMike)
+- [robat28](https://github.com/robat28)
 
 itch.io recommends a 315:250 cover ratio, preferably `630 × 500`, and three to five screenshots in its [project page guide](https://itch.io/docs/creators/getting-started).

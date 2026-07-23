@@ -6,8 +6,9 @@ Every attempt is a literal ten-second countdown. When it reaches zero, the run b
 
 ## Team
 
-- Henrik Möllmann
-- floppyMike
+- [moellh](https://github.com/moellh)
+- [floppyMike](https://github.com/floppyMike)
+- [robat28](https://github.com/robat28)
 
 ## Tools
 
