@@ -21,3 +21,5 @@ mono_crash.*.json
 build/
 deploy/state/
 .worktrees/
+
+Live Interaction.md
