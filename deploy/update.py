@@ -229,6 +229,15 @@ def tree_size(path: Path) -> int:
     return sum(entry.stat().st_size for entry in path.rglob("*") if entry.is_file())
 
 
+def browser_size(path: Path) -> int:
+    deploy_only_files = {"build.json", "build.log"}
+    return sum(
+        entry.stat().st_size
+        for entry in path.rglob("*")
+        if entry.is_file() and entry.relative_to(path).as_posix() not in deploy_only_files
+    )
+
+
 def format_size(size: int) -> str:
     value = float(size)
     units = ("B", "KiB", "MiB", "GiB", "TiB")
@@ -261,6 +270,7 @@ def branch_index(
             f'<dt>Author</dt><dd>{html.escape(str(info["author"]))}</dd>'
             f'<dt>Message</dt><dd>{html.escape(str(info["subject"]))}</dd>'
             f'<dt>Server size</dt><dd>{format_size(int(metadata[commit]["size_bytes"]))}</dd>'
+            f'<dt>Browser size</dt><dd>{format_size(int(metadata[commit]["browser_size_bytes"]))}</dd>'
             f'<dt>Build finished</dt><dd><time datetime="{metadata[commit]["built_at"]}">{metadata[commit]["built_at"]}</time></dd>'
             f'</dl></details></li>'
         )
@@ -273,7 +283,7 @@ def branch_index(
 </head><body><h1>Hosted branches</h1>
 <p class="schedule">Next update check: <strong id="countdown">calculating…</strong><br><small>Last published <time datetime="{published_iso}">{published_iso}</time></small></p>
 <ul>{''.join(items)}</ul>
-<p><small>Size is the branch export's logical size. Branches on the same commit share one cached copy on disk.</small></p>
+<p><small>Server size is the branch export's logical size. Browser size is its cold-cache, browser-facing payload and excludes build metadata and logs; HTTP caching and compression can change the transferred amount. Branches on the same commit share one cached copy on disk.</small></p>
 <script>
 const nextUpdate = new Date({json.dumps(next_update_iso)}).getTime();
 const countdown = document.getElementById("countdown");
@@ -360,6 +370,7 @@ def main() -> int:
         for commit in dict.fromkeys(active.values()):
             metadata[commit] = build_commit(commit)
             metadata[commit]["size_bytes"] = str(tree_size(CACHE / commit))
+            metadata[commit]["browser_size_bytes"] = str(browser_size(CACHE / commit))
             details[commit] = commit_details(commit)
         publish(active, metadata, details, update_started_at)
         cleanup(set(active.values()))
