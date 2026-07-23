@@ -1,26 +1,24 @@
-[gd_scene format=4 uid="uid://dp7t1cvck55bt"]
+[gd_scene format=4 uid="uid://dajfc1wf8xl1x"]
 
-[ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="1_u52ul"]
-[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_vonw3"]
-[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
-[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
-[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
-[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
-[ext_resource type="FontFile" uid="uid://dkstoc421nmrg" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
-[ext_resource type="PackedScene" path="res://src/control_sign.tscn" id="8_sign"]
-[ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="9_complete"]
-[ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="10_outside"]
-[ext_resource type="Shader" uid="uid://c2tp42fm8nojd" path="res://src/outside_fill.gdshader" id="11_outside_shader"]
-[ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_touch_controls"]
-[ext_resource type="PackedScene" path="res://src/pause_screen.tscn" id="13_pause"]
+[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="1_rp3sw"]
+[ext_resource type="Shader" uid="uid://c2tp42fm8nojd" path="res://src/outside_fill.gdshader" id="2_a7yoc"]
+[ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="3_ju8q8"]
+[ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="4_qjn4j"]
+[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="5_q1n56"]
+[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="6_34t5h"]
+[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="7_pwqgg"]
+[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="8_lgdr6"]
+[ext_resource type="FontFile" uid="uid://dkstoc421nmrg" path="res://assets/fonts/Silkscreen-Regular.ttf" id="9_yp1e3"]
+[ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="10_aymtk"]
+[ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="11_nscl2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_outside"]
-shader = ExtResource("11_outside_shader")
+shader = ExtResource("2_a7yoc")
 shader_parameter/level_rect = Vector4(80, 16, 336, 144)
 shader_parameter/visible_rect = Vector4(80, 16, 336, 144)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
-texture = ExtResource("1_u52ul")
+texture = ExtResource("4_qjn4j")
 separation = Vector2i(1, 1)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -728,7 +726,6 @@ separation = Vector2i(1, 1)
 14:3/0 = 0
 14:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:4/0 = 0
-14:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:5/0 = 0
 14:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:6/0 = 0
@@ -823,7 +820,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vonw3")
 
 [sub_resource type="Theme" id="Theme_hud"]
-default_font = ExtResource("7_font")
+default_font = ExtResource("9_yp1e3")
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_timer_tile"]
 bg_color = Color(0, 0, 0, 1)
@@ -833,32 +830,43 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.85, 0.85, 0.85, 1)
 
-[node name="Main2" type="Node2D" unique_id=908013008]
+[node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
-script = ExtResource("3_game")
+script = ExtResource("1_rp3sw")
 figure_spawn_offsets = Array[Vector2]([Vector2(0, 0), Vector2(16, 0)])
 
 [node name="OutsideFill" type="Node2D" parent="." unique_id=741485520]
 z_index = -10
 material = SubResource("ShaderMaterial_outside")
-script = ExtResource("10_outside")
+script = ExtResource("3_ju8q8")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
-tile_map_data = PackedByteArray("AAAGAAcAAAAQAAUAAAAHAAcAAAAQAAUAAAAIAAcAAAAQAAUAAAAJAAcAAAAQAAUAAAAKAAcAAAAQAAUAAAALAAcAAAAQAAUAAAAMAAcAAAAQAAUAAAANAAcAAAAQAAUAAAAOAAcAAAAQAAUAAAAPAAcAAAALAAYAAAAQAAcAAAAQAAUAAAARAAcAAAAQAAUAAAASAAcAAAAQAAYAAAATAAcAAAAQAAYAAAAPAAQAAAAQAAYAAAAPAAMAAAASAAcAAAAFAAgAAAAPAAcAAAAGAAgAAAAQAAcAAAAHAAgAAAAQAAcAAAAIAAgAAAAQAAcAAAAJAAgAAAAQAAcAAAAKAAgAAAAQAAcAAAALAAgAAAAQAAcAAAAMAAgAAAAQAAcAAAANAAgAAAAQAAcAAAAOAAgAAAAQAAcAAAAPAAgAAAAQAAcAAAAQAAgAAAAQAAcAAAARAAgAAAAQAAcAAAASAAgAAAAQAAcAAAATAAgAAAAQAAcAAAAUAAgAAAARAAcAAAAUAAcAAAARAAYAAAAUAAYAAAAMAAYAAAAUAAUAAAAMAAYAAAAUAAQAAAASAAoAAAAUAAMAAAASAAoAAAAUAAIAAAASAAoAAAAUAAEAAAARAAkAAAATAAEAAAAQAAwAAAASAAEAAAAQAAwAAAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAPAAwAAAANAAEAAAAQAAwAAAAMAAEAAAAQAAwAAAAPAAEAAAAQAAkAAAAPAAIAAAASAAYAAAALAAEAAAAQAAwAAAAKAAEAAAAPAAwAAAAJAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAARAAwAAAAGAAEAAAAQAAwAAAAFAAEAAAAPAAkAAAAFAAIAAAASAAoAAAAFAAMAAAASAAoAAAAFAAQAAAASAAoAAAAFAAUAAAASAAoAAAAFAAYAAAASAAoAAAAFAAcAAAAPAAYAAAASAAUAAAALAAYAAAATAAUAAAAPAAUAAAARAAYAAAALAAYAAAASAAYAAAAPAAUAAAATAAYAAAALAAYAAAAPAAYAAAASAAUAAAA=")
+tile_map_data = PackedByteArray("AAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAQAAwAAAANAAEAAAAQAAwAAAAMAAEAAAAQAAwAAAAPAAEAAAAQAAwAAAAKAAEAAAAQAAwAAAALAAEAAAAQAAwAAAAIAAEAAAAQAAwAAAAGAAEAAAAQAAwAAAAJAAEAAAAQAAwAAAAHAAEAAAAQAAwAAAAIAAkAAAAKAAYAAAAIAAoAAAAKAAcAAAAJAAkAAAAMAAUAAAAJAAoAAAAMAAcAAAATAAcAAAALAAUAAAATAAgAAAALAAcAAAAFAAsAAAAQAAUAAAAFAAwAAAAQAAcAAAAGAAsAAAAQAAUAAAAGAAwAAAAQAAcAAAAHAAsAAAAQAAUAAAAHAAwAAAAQAAcAAAAIAAcAAAAMAAYAAAAIAAgAAAANAAYAAAAIAAsAAAAQAAUAAAAIAAwAAAAQAAcAAAAJAAsAAAAQAAUAAAAJAAwAAAAQAAcAAAAKAAsAAAAQAAUAAAAKAAwAAAAQAAcAAAALAAsAAAAQAAUAAAALAAwAAAAQAAcAAAAMAAcAAAAKAAUAAAAMAAgAAAAKAAcAAAAMAAsAAAAQAAUAAAAMAAwAAAAQAAcAAAANAAcAAAALAAUAAAANAAgAAAALAAcAAAANAAsAAAAQAAUAAAANAAwAAAAQAAcAAAAOAAcAAAALAAUAAAAOAAgAAAALAAcAAAAOAAsAAAAQAAUAAAAOAAwAAAAQAAcAAAAPAAcAAAALAAUAAAAPAAgAAAALAAcAAAAPAAsAAAAQAAUAAAAPAAwAAAAQAAcAAAAQAAcAAAALAAUAAAAQAAgAAAALAAcAAAAQAAsAAAAQAAUAAAAQAAwAAAAQAAcAAAARAAcAAAALAAUAAAARAAgAAAALAAcAAAARAAsAAAAQAAUAAAARAAwAAAAQAAcAAAASAAcAAAALAAUAAAASAAgAAAALAAcAAAASAAsAAAAQAAUAAAASAAwAAAAQAAcAAAATAAsAAAAQAAUAAAATAAwAAAAQAAcAAAAUAAcAAAALAAUAAAAUAAgAAAALAAcAAAAUAAsAAAAQAAUAAAAUAAwAAAAQAAcAAAAVAAYAAAASAAYAAAAVAAcAAAASAAYAAAAVAAgAAAASAAYAAAAVAAkAAAASAAYAAAAVAAoAAAASAAYAAAAVAAsAAAARAAYAAAAVAAwAAAARAAcAAAAEAAsAAAAQAAUAAAAEAAwAAAAQAAcAAAABAAsAAAAPAAYAAAABAAwAAAAPAAcAAAADAAsAAAAQAAUAAAADAAwAAAAQAAcAAAACAAsAAAAQAAUAAAACAAwAAAAQAAcAAAAIAAUAAAAKAAUAAAACAAkAAAALAAUAAAADAAkAAAAMAAUAAAAGAAcAAAAKAAgAAAAHAAcAAAALAAgAAAADAAUAAAAMAAgAAAACAAUAAAALAAgAAAACAAEAAAAQAAwAAAACAAIAAAAGAAgAAAADAAEAAAAQAAwAAAAEAAEAAAAQAAwAAAABAAEAAAAPAAkAAAABAAIAAAASAAYAAAAEAAIAAAAGAAgAAAABAAoAAAASAAYAAAABAAkAAAASAAYAAAABAAgAAAASAAYAAAABAAcAAAASAAYAAAABAAYAAAASAAYAAAABAAUAAAASAAYAAAABAAQAAAASAAYAAAABAAMAAAASAAYAAAAIAAYAAAANAAYAAAANAAQAAAAKAAcAAAAUAAEAAAAQAAwAAAAUAAIAAAAGAAgAAAAVAAEAAAARAAkAAAAVAAIAAAASAAYAAAAOAAQAAAALAAgAAAANAAIAAAANAAYAAAANAAMAAAANAAYAAAAQAAQAAAAMAAgAAAAPAAQAAAALAAgAAAASAAEAAAAQAAwAAAATAAEAAAAQAAwAAAAVAAUAAAASAAYAAAAVAAQAAAASAAYAAAAVAAMAAAASAAYAAAAFAAEAAAAQAAwAAAADAAoAAAAMAAYAAAAJAAUAAAAMAAgAAAA=")
 tile_set = SubResource("TileSet_oi3di")
 
-[node name="Player" parent="." unique_id=1157283441 instance=ExtResource("2_vonw3")]
-position = Vector2(120, 104)
-floor_max_angle = 0.7853982
+[node name="Player" parent="." unique_id=1157283441 instance=ExtResource("5_q1n56")]
+position = Vector2(57, 136)
 
-[node name="Goal" parent="." unique_id=736253240 instance=ExtResource("4_goal")]
-position = Vector2(312, 72)
+[node name="Goal" parent="." unique_id=736253240 instance=ExtResource("6_34t5h")]
+position = Vector2(312, 168)
 
-[node name="Button" parent="." unique_id=556200501 instance=ExtResource("5_button")]
-position = Vector2(184, 104)
+[node name="Button" parent="." unique_id=556200501 instance=ExtResource("7_pwqgg")]
+position = Vector2(42, 72)
 
-[node name="Door" parent="." unique_id=1161385492 instance=ExtResource("6_door")]
-position = Vector2(248, 88)
+[node name="Button2" parent="." unique_id=1109644628 instance=ExtResource("7_pwqgg")]
+position = Vector2(118, 168)
+
+[node name="Button3" parent="." unique_id=593554100 instance=ExtResource("7_pwqgg")]
+position = Vector2(234, 56)
+
+[node name="Door" parent="." unique_id=1161385492 instance=ExtResource("8_lgdr6")]
+position = Vector2(216, 168)
+
+[node name="Door2" parent="." unique_id=1572381367 instance=ExtResource("8_lgdr6")]
+position = Vector2(248, 168)
+
+[node name="Door3" parent="." unique_id=1021199291 instance=ExtResource("8_lgdr6")]
+position = Vector2(280, 168)
 
 [node name="WorldCamera" type="Camera2D" parent="." unique_id=1563278812]
 position = Vector2(208, 80)
@@ -875,7 +883,7 @@ theme = SubResource("Theme_hud")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBox_timer_tile")
 
-[node name="TimerCenter" type="CenterContainer" parent="WorldUI/TimerDisplay" unique_id=1436242632]
+[node name="TimerCenter" type="CenterContainer" parent="WorldUI/TimerDisplay" unique_id=2093027161]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -884,11 +892,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TimerDigits" type="HBoxContainer" parent="WorldUI/TimerDisplay/TimerCenter" unique_id=920260363]
+[node name="TimerDigits" type="HBoxContainer" parent="WorldUI/TimerDisplay/TimerCenter" unique_id=311372846]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TimerTens" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=42355525]
+[node name="TimerTens" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=1523672482]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(6, 16)
 layout_mode = 2
@@ -897,7 +905,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerOnes" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=847197126]
+[node name="TimerOnes" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=2135347154]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(6, 16)
 layout_mode = 2
@@ -906,7 +914,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerDecimal" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=1797447088]
+[node name="TimerDecimal" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=1741051328]
 custom_minimum_size = Vector2(4, 16)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
@@ -914,7 +922,7 @@ text = "."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerTenths" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=743808312]
+[node name="TimerTenths" type="Label" parent="WorldUI/TimerDisplay/TimerCenter/TimerDigits" unique_id=1200457695]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(6, 16)
 layout_mode = 2
@@ -927,30 +935,14 @@ vertical_alignment = 1
 unique_name_in_owner = true
 position = Vector2(136, 24)
 
-[node name="MovementSign" parent="WorldUI" unique_id=1640671847 instance=ExtResource("8_sign")]
-position = Vector2(104, 104)
-instructions = "A / D
-MOVE
+[node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("10_aymtk")]
 
-SPACE
-JUMP"
-
-[node name="FreezeSign" parent="WorldUI" unique_id=2145279178 instance=ExtResource("8_sign")]
-position = Vector2(152, 104)
-instructions = "R
-Freeze Ghost"
-
-[node name="ResetSign" parent="WorldUI" unique_id=659495750 instance=ExtResource("8_sign")]
-position = Vector2(216, 104)
-instructions = "C
- Reset"
-
-[node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("9_complete")]
-
-[node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("12_touch_controls")]
-
-[node name="PauseScreen" parent="." instance=ExtResource("13_pause")]
+[node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("11_nscl2")]
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
+[connection signal="changed" from="Button2" to="Door" method="set_open"]
+[connection signal="changed" from="Button3" to="Door" method="set_open"]
 [connection signal="crushed" from="Door" to="." method="play_death"]
+[connection signal="crushed" from="Door2" to="." method="play_death"]
+[connection signal="crushed" from="Door3" to="." method="play_death"]

@@ -46,6 +46,18 @@ func apply_action(action: Dictionary, delta: float) -> void:
 	move_and_slide()
 	update_animation(move_axis)
 
+	if is_in_group(&"player"):
+		print(
+			"f=", Engine.get_physics_frames(),
+			" on_floor=", is_on_floor(),
+			" floor_n=", get_floor_normal(),
+			" vel=", velocity,
+			" grav=", get_gravity(),
+			" delta=", delta,
+			" grounded_var=", grounded,
+			" first_step=", first_step_after_reset,
+		)
+
 func reset_figure(spawn_position: Vector2) -> void:
 	ledge_timer = 0.0
 	buffer_timer = 0.0
