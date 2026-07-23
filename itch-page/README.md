@@ -34,7 +34,7 @@ Everything in this directory is intended for the `Chronost` itch.io edit page.
 - Click to play: enabled
 - Fullscreen button: enabled
 - Scrollbars: disabled
-- Mobile friendly: disabled until touch controls exist
+- Mobile friendly: enable after checking the on-screen controls on at least one portrait and one landscape phone
 
 The game adapts to other viewport sizes, but `960 × 540` gives the page a clear 16:9 presentation. itch.io documents these options in its [HTML5 game guide](https://itch.io/docs/creators/html5).
 
