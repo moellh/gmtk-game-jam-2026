@@ -5,18 +5,9 @@ const TILE_SIZE := 16.0
 const ATLAS_STRIDE := 17.0
 const LEVEL_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
 const ATLAS := preload("res://assets/monochrome_tilemap_transparent.png")
-
-const TILE_CHOICES: Array[Vector2i] = [
-	Vector2i(0, 0),
-	Vector2i(1, 0),
-	Vector2i(2, 0),
-	Vector2i(0, 1),
-	Vector2i(1, 1),
-	Vector2i(2, 1),
-	Vector2i(0, 2),
-	Vector2i(1, 2),
-	Vector2i(2, 2),
-]
+const ATLAS_MIN := Vector2i(15, 9)
+const ATLAS_COLUMNS := 5
+const ATLAS_ROWS := 4
 
 var visible_world_rect := LEVEL_RECT
 
@@ -54,9 +45,14 @@ func _draw() -> void:
 			if posmod(value, 4) == 0:
 				continue
 
-			var atlas_cell := TILE_CHOICES[
-				posmod(value >> 3, TILE_CHOICES.size())
-			]
+			var tile_index := posmod(
+				value >> 3,
+				ATLAS_COLUMNS * ATLAS_ROWS,
+			)
+			var atlas_cell := ATLAS_MIN + Vector2i(
+				tile_index % ATLAS_COLUMNS,
+				floori(tile_index / float(ATLAS_COLUMNS)),
+			)
 			var source := Rect2(
 				Vector2(atlas_cell) * ATLAS_STRIDE,
 				Vector2.ONE * TILE_SIZE,
