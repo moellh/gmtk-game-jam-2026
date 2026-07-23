@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
 [ext_resource type="FontFile" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
 [ext_resource type="PackedScene" path="res://src/control_sign.tscn" id="8_sign"]
+[ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="9_complete"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -873,6 +874,8 @@ instructions = "R  FREEZE LOOP / CREATE GHOST"
 position = Vector2(200, 104)
 instructions = "C  RESET TIMELINE / CLEAR GHOSTS"
 
-[connection signal="reached" from="Goal" to="." method="clear"]
+[node name="LevelComplete" parent="." instance=ExtResource("9_complete")]
+
+[connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
 [connection signal="crushed" from="Door" to="." method="next_round"]

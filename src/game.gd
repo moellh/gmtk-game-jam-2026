@@ -7,11 +7,15 @@ const LEVEL_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
 
 const LEVEL_SELECT := "res://src/level_select.tscn"
 
+@export var next_level: PackedScene
+
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
 @onready var timer_display: Label = %TimerDisplay
+@onready var level_complete: CanvasLayer = $LevelComplete
 
 var timer := ROUND_TIME
+var completed := false
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(update_world_camera)
@@ -61,3 +65,10 @@ func next_round() -> void:
 	get_tree().call_group("ghosts", "restart")
 
 	player.reset()
+
+
+func complete_level() -> void:
+	if completed:
+		return
+	completed = true
+	level_complete.open(next_level)
