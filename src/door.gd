@@ -3,7 +3,7 @@ extends StaticBody2D
 signal crushed
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var visual: Node2D = $Sprite2D
+@onready var visual: Node2D = $Visual
 
 func set_open(open: bool) -> void:
 	if not open and player_inside(): crushed.emit()

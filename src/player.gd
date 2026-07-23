@@ -54,10 +54,10 @@ func spawn_ghost() -> Node:
 	ghost.add_to_group("ghosts")
 	return ghost
 
-func reset() -> void:
+func reset(spawn_offset := Vector2.ZERO) -> void:
 	recording = []
 	velocity = Vector2.ZERO
-	global_position = spawn
+	global_position = spawn + spawn_offset
 
 func update_animation(dir: float) -> void:
 	if not is_on_floor(): sprite.play("jump")
