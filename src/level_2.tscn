@@ -1,0 +1,144 @@
+[gd_scene format=3]
+
+[ext_resource type="TileSet" path="res://src/level_tileset.tres" id="1_tileset"]
+[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://src/level_2.gd" id="3_level"]
+[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
+[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
+[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
+[ext_resource type="FontFile" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
+[ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="8_complete"]
+[ext_resource type="Script" path="res://src/outside_fill.gd" id="9_outside"]
+[ext_resource type="Shader" path="res://src/outside_fill.gdshader" id="10_outside_shader"]
+[ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="11_touch_controls"]
+
+[sub_resource type="Theme" id="Theme_hud"]
+default_font = ExtResource("7_font")
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_timer_tile"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.85, 0.85, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_outside"]
+shader = ExtResource("10_outside_shader")
+
+[node name="Level2" type="Node2D"]
+texture_filter = 1
+script = ExtResource("3_level")
+max_figures = 3
+figure_spawn_offsets = Array[Vector2]([Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)])
+
+[node name="OutsideFill" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = -10
+material = SubResource("ShaderMaterial_outside")
+script = ExtResource("9_outside")
+
+[node name="Course" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_tileset")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(104, 104)
+
+[node name="DoorA" parent="." instance=ExtResource("6_door")]
+position = Vector2(168, 104)
+
+[node name="ButtonA" parent="." instance=ExtResource("5_button")]
+position = Vector2(136, 104)
+
+[node name="DoorB" parent="." instance=ExtResource("6_door")]
+position = Vector2(248, 104)
+
+[node name="ButtonB" parent="." instance=ExtResource("5_button")]
+position = Vector2(216, 104)
+
+[node name="Goal" parent="." instance=ExtResource("4_goal")]
+position = Vector2(312, 104)
+
+[node name="WorldCamera" type="Camera2D" parent="."]
+position = Vector2(208, 80)
+
+[node name="WorldUI" type="Node2D" parent="."]
+
+[node name="LifeHearts" type="Node2D" parent="WorldUI"]
+unique_name_in_owner = true
+position = Vector2(136, 24)
+
+[node name="TimerDisplay" type="Label" parent="WorldUI"]
+unique_name_in_owner = true
+offset_left = 176.0
+offset_top = 16.0
+offset_right = 208.0
+offset_bottom = 32.0
+theme = SubResource("Theme_hud")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBox_timer_tile")
+text = "10.0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ButtonALabel" type="Label" parent="WorldUI"]
+offset_left = 128.0
+offset_top = 80.0
+offset_right = 144.0
+offset_bottom = 96.0
+theme = SubResource("Theme_hud")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 8
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GateALabel" type="Label" parent="WorldUI"]
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 176.0
+offset_bottom = 64.0
+theme = SubResource("Theme_hud")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 8
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonBLabel" type="Label" parent="WorldUI"]
+offset_left = 208.0
+offset_top = 80.0
+offset_right = 224.0
+offset_bottom = 96.0
+theme = SubResource("Theme_hud")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 8
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GateBLabel" type="Label" parent="WorldUI"]
+offset_left = 240.0
+offset_top = 48.0
+offset_right = 256.0
+offset_bottom = 64.0
+theme = SubResource("Theme_hud")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 8
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelComplete" parent="." instance=ExtResource("8_complete")]
+
+[node name="TouchControls" parent="." instance=ExtResource("11_touch_controls")]
+
+[connection signal="reached" from="Goal" to="." method="complete_level"]
+[connection signal="changed" from="ButtonA" to="DoorA" method="set_open"]
+[connection signal="changed" from="ButtonB" to="DoorB" method="set_open"]
+[connection signal="crushed" from="DoorA" to="." method="next_round"]
+[connection signal="crushed" from="DoorB" to="." method="next_round"]
