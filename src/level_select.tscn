@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ciko4lobbvpf7"]
+
+[ext_resource type="Script" uid="uid://dgrn6fgukot61" path="res://src/level_select.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dp7t1cvck55bt" path="res://src/level.tscn" id="2"]
+[ext_resource type="Script" path="res://src/level_info.gd" id="3"]
+[ext_resource type="Theme" path="res://src/ui_theme.tres" id="4"]
+
+[sub_resource type="Resource" id="LevelInfo_1"]
+script = ExtResource("3")
+name = "Level 1"
+scene = ExtResource("2")
+
+[node name="LevelSelect" type="Control" unique_id=24120411]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4")
+script = ExtResource("1")
+levels = Array[LevelInfo]([SubResource("LevelInfo_1")])
+
+[node name="Center" type="CenterContainer" parent="." unique_id=81011664]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=925807636]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Center/VBox" unique_id=572061570]
+layout_mode = 2
+text = "Select Level"
+horizontal_alignment = 1
+
+[node name="Levels" type="VBoxContainer" parent="Center/VBox" unique_id=1484019837]
+layout_mode = 2
+theme_override_constants/separation = 2
