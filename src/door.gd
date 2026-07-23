@@ -17,5 +17,7 @@ func player_inside() -> bool:
 	query.exclude = [get_rid()] # skip our own static body
 
 	for hit in get_world_2d().direct_space_state.intersect_shape(query):
-		if hit.collider is CharacterBody2D: return true
+		var collider := hit.collider as Node
+		if collider != null and collider.is_in_group(&"player"):
+			return true
 	return false
