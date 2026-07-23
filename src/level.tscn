@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_vonw3"]
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
+[ext_resource type="PackedScene" path="res://src/button.tscn" id="5_button"]
+[ext_resource type="PackedScene" path="res://src/door.tscn" id="6_door"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -822,9 +824,17 @@ tile_map_data = PackedByteArray("AAAKAAcAAAALABAAAAALAAcAAAALABAAAAAMAAcAAAALABA
 tile_set = SubResource("TileSet_oi3di")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("2_vonw3")]
-position = Vector2(106, 100)
+position = Vector2(109, 104)
 
 [node name="Goal" parent="." unique_id=736253240 instance=ExtResource("4_goal")]
 position = Vector2(296, 103)
 
+[node name="Button" parent="." unique_id=556200501 instance=ExtResource("5_button")]
+position = Vector2(170, 108)
+
+[node name="Door" parent="." unique_id=1161385492 instance=ExtResource("6_door")]
+position = Vector2(249, 95)
+
 [connection signal="reached" from="Goal" to="." method="clear"]
+[connection signal="changed" from="Button" to="Door" method="set_open"]
+[connection signal="crushed" from="Door" to="." method="clear"]
