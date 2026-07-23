@@ -16,7 +16,7 @@ const HEART_COLOR := Color(0.95, 0.0, 0.207, 1.0)
 const HEART_ANIMATION := &"default"
 
 const BASE_VIEWPORT_SIZE := Vector2(384.0, 216.0)
-const LEVEL_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
+const FALLBACK_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
 
 const LEVEL_SELECT := "res://src/level_select.tscn"
 
@@ -26,6 +26,7 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
+@onready var tile_map: TileMapLayer = $TileMapLayer
 @onready var timer_tens: Label = %TimerTens
 @onready var timer_ones: Label = %TimerOnes
 @onready var timer_tenths: Label = %TimerTenths
@@ -40,8 +41,10 @@ var completed := false
 var life_heart_icons: Array[AnimatedSprite2D] = []
 var accepting_input := false
 var dying := false
+var level_view_rect := FALLBACK_VIEW_RECT
 
 func _ready() -> void:
+	level_view_rect = compute_level_view_rect()
 	get_viewport().size_changed.connect(update_world_camera)
 	update_world_camera()
 	player.reset(live_attempt_spawn_offset(0))
@@ -49,6 +52,15 @@ func _ready() -> void:
 	update_life_hearts()
 	update_hud()
 	play_level_intro()
+
+func compute_level_view_rect() -> Rect2:
+	var used := tile_map.get_used_rect()
+	if used.size.x <= 0 or used.size.y <= 0:
+		return FALLBACK_VIEW_RECT
+	return Rect2(
+		Vector2(used.position) * TILE_SIZE,
+		Vector2(used.size) * TILE_SIZE,
+	)
 
 func update_world_camera() -> void:
 	var window_size := Vector2(get_window().size)
@@ -63,12 +75,12 @@ func update_world_camera() -> void:
 		visible_size.x,
 		maxf(
 			visible_size.y - touch_controls.reserved_bottom_height,
-			LEVEL_VIEW_RECT.size.y,
+			level_view_rect.size.y,
 		),
 	)
 	var level_zoom := minf(
-		gameplay_size.x / LEVEL_VIEW_RECT.size.x,
-		gameplay_size.y / LEVEL_VIEW_RECT.size.y,
+		gameplay_size.x / level_view_rect.size.x,
+		gameplay_size.y / level_view_rect.size.y,
 	)
 	var viewport_center := visible_size * 0.5
 	var gameplay_center := Vector2(
@@ -76,7 +88,7 @@ func update_world_camera() -> void:
 		gameplay_size.y * 0.5,
 	)
 	world_camera.position = (
-		LEVEL_VIEW_RECT.get_center()
+		level_view_rect.get_center()
 		- (gameplay_center - viewport_center) / level_zoom
 	)
 	world_camera.zoom = Vector2.ONE * level_zoom
