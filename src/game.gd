@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 	update_hud()
 
 func update_hud() -> void:
-	ghost_timer.text = "%.2f s" % maxf(timer, 0.0)
+	ghost_timer.text = "%.1f" % maxf(timer, 0.0)
 	for action: StringName in action_buttons:
 		action_buttons[action].button_pressed = Input.is_action_pressed(action)
 
