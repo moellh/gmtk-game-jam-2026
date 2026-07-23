@@ -17,6 +17,18 @@ Do not use [Conventional Commits](https://www.conventionalcommits.org) which usu
 When working on a checked-out branch other than `main`, commit and push cohesive progress regularly so collaborators and deployments can see the current state.
 Do not push branches created only for temporary worktrees. Integrate their changes into the intended persistent branch and push that branch instead.
 
+Persistent non-`main` branches should regularly fetch `origin` and rebase onto an updated `origin/main` so they remain close to the integration branch.
+After rebasing a published branch, validate it and push with `--force-with-lease`.
+This update rule does not apply to branches created only for temporary worktrees.
+
+When a persistent working branch reaches a coherent, validated milestone, periodically integrate that state into `main` and push `main` so the integration branch does not lag indefinitely.
+Fetch first, preserve collaborators' remote changes, and do not integrate an incomplete or failing state.
+
+## itch.io Page Kit
+
+During active development, refresh `itch-page/` at least hourly so its HTML description, screenshots, cover, credits, and setup notes match the current game.
+Use real game captures and existing assets only; the generative-art and generative-audio prohibition also applies to itch.io page assets.
+
 ## Maintaining This File
 
 Agents may add to or modify this file as needed, but must not alter or remove either existing rule above: the prohibition on generative AI for art and audio, and the scoped commit naming convention.
