@@ -11,6 +11,13 @@ Everything in this directory is intended for the `chronost` itch.io edit page.
 5. Copy the theme response from [`jam-submission.md`](jam-submission.md) when submitting to GMTK Game Jam 2026.
 6. Preview the public page once in a private browser window and verify that the game receives keyboard focus.
 
+## Image Set
+
+- `cover.png`: the complete room with a ghost holding the switch and the current player approaching the goal
+- `screenshots/01-countdown.png`: the opening view with the countdown and movement instructions
+- `screenshots/02-ghost-on-switch.png`: the first ghost holding the switch and opening the door
+- `screenshots/03-path-open.png`: the current player passing the open door while the ghost remains on the switch
+
 ## Project Settings
 
 - Classification: `Game`
