@@ -27,6 +27,7 @@ ITCH_STATE = STATE / "itch.json"
 COMPOSE = DEPLOY / "docker-compose.yml"
 MAX_AGE_SECONDS = 48 * 60 * 60
 FAILED_RETRY_SECONDS = 5 * 60
+CACHE_RETENTION_SECONDS = 48 * 60 * 60
 BUILDER_IMAGE = "gmtk-jam-builder:4.7.1"
 
 
@@ -226,6 +227,36 @@ def link_tree(source: Path, destination: Path) -> None:
     shutil.copytree(source, destination, copy_function=os.link, dirs_exist_ok=True)
 
 
+def branch_redirect(commit: str) -> str:
+    destination = f"/_commits/{commit}/"
+    return f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<meta http-equiv="refresh" content="0; url={destination}">
+<title>Loading game</title></head><body>
+<p>Loading <a href="{destination}">commit {commit[:12]}</a>…</p>
+<script>location.replace({json.dumps(destination)});</script>
+</body></html>
+"""
+
+
+def retained_cache_commits(active_commits: set[str], now: float) -> set[str]:
+    retained = set(active_commits)
+    if not CACHE.exists():
+        return retained
+    for entry in CACHE.iterdir():
+        metadata_file = entry / "build.json"
+        if not metadata_file.is_file():
+            continue
+        try:
+            metadata = json.loads(metadata_file.read_text())
+            built_at = dt.datetime.fromisoformat(metadata["built_at"]).timestamp()
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+            continue
+        if now - built_at <= CACHE_RETENTION_SECONDS:
+            retained.add(entry.name)
+    return retained
+
+
 def tree_size(path: Path) -> int:
     return sum(entry.stat().st_size for entry in path.rglob("*") if entry.is_file())
 
@@ -315,8 +346,18 @@ def publish(
     shutil.rmtree(next_www, ignore_errors=True)
     next_www.mkdir(parents=True)
 
+    retained_commits = retained_cache_commits(
+        set(active.values()),
+        time.time(),
+    )
+    for commit in retained_commits:
+        link_tree(CACHE / commit, next_www / "_commits" / commit)
+
     for branch, commit in active.items():
         link_tree(CACHE / commit, next_www / branch)
+        branch_index_file = next_www / branch / "index.html"
+        branch_index_file.unlink()
+        branch_index_file.write_text(branch_redirect(commit))
 
     listing = next_www / "_branches"
     listing.mkdir()
@@ -441,7 +482,7 @@ def main() -> int:
             details[commit] = commit_details(commit)
         publish(active, metadata, details, update_started_at)
         deploy_itch(active["main"], metadata[active["main"]])
-        cleanup(set(active.values()))
+        cleanup(retained_cache_commits(set(active.values()), time.time()))
         print("Published branch site", flush=True)
         return 0
     except (OSError, subprocess.SubprocessError, UpdateError, ValueError) as error:
