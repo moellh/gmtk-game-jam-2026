@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/outside_fill.gd" id="10_outside"]
 [ext_resource type="Shader" path="res://src/outside_fill.gdshader" id="11_outside_shader"]
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_touch_controls"]
+[ext_resource type="PackedScene" path="res://src/level_2.tscn" id="13_level_2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -833,6 +834,7 @@ shader = ExtResource("11_outside_shader")
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("3_game")
+next_level = ExtResource("13_level_2")
 max_figures = 2
 figure_spawn_offsets = Array[Vector2]([Vector2(0, 0), Vector2(16, 0)])
 
