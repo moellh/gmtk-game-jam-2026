@@ -26,7 +26,8 @@ Fetch first, preserve collaborators' remote changes, and do not integrate an inc
 
 ## itch.io Page Kit
 
-During active development, refresh `itch-page/` at least hourly so its HTML description, screenshots, cover, credits, and setup notes match the current game.
+During active development, refresh `itch-page/` no more than once per hour unless the user explicitly requests an earlier refresh.
+When refreshing, keep its HTML description, screenshots, cover, credits, and setup notes aligned with the current game.
 Use real game captures and existing assets only; the generative-art and generative-audio prohibition also applies to itch.io page assets.
 
 ## Maintaining This File
