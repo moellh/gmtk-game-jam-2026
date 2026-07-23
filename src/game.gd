@@ -13,6 +13,7 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 @onready var world_camera: Camera2D = $WorldCamera
 @onready var timer_display: Label = %TimerDisplay
 @onready var level_complete: CanvasLayer = $LevelComplete
+@onready var outside_fill: OutsideFill = $OutsideFill
 
 var timer := ROUND_TIME
 var completed := false
@@ -35,6 +36,13 @@ func update_world_camera() -> void:
 	)
 	world_camera.position = LEVEL_VIEW_RECT.get_center()
 	world_camera.zoom = Vector2.ONE * level_zoom
+	var visible_world_size := visible_size / level_zoom
+	outside_fill.set_visible_world_rect(
+		Rect2(
+			world_camera.position - visible_world_size * 0.5,
+			visible_world_size,
+		),
+	)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
