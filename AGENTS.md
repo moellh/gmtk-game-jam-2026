@@ -12,6 +12,11 @@ It is not enforced though strongly advised to, especially when auto-committing v
 Basically, the commit message consists of `scope: description`.
 Do not use [Conventional Commits](https://www.conventionalcommits.org) which usually prefix a `feat`, `fix`, `chore`, ...
 
+## Branch Publishing
+
+When working on a checked-out branch other than `main`, commit and push cohesive progress regularly so collaborators and deployments can see the current state.
+Do not push branches created only for temporary worktrees. Integrate their changes into the intended persistent branch and push that branch instead.
+
 ## Maintaining This File
 
 Agents may add to or modify this file as needed, but must not alter or remove either existing rule above: the prohibition on generative AI for art and audio, and the scoped commit naming convention.
