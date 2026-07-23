@@ -21,12 +21,14 @@ func _process(_delta: float) -> void:
 func _update_prompt_position() -> void:
 	var centered_x := player.global_position.x - prompt.size.x * 0.5
 	prompt.global_position = Vector2(
-		clampf(
-			centered_x,
-			prompt_horizontal_bounds.x,
-			prompt_horizontal_bounds.y - prompt.size.x,
+		roundf(
+			clampf(
+				centered_x,
+				prompt_horizontal_bounds.x,
+				prompt_horizontal_bounds.y - prompt.size.x,
+			),
 		),
-		player.global_position.y - 42.0,
+		roundf(player.global_position.y - 42.0),
 	)
 
 
