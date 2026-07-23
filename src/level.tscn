@@ -990,4 +990,4 @@ horizontal_alignment = 1
 
 [connection signal="reached" from="Goal" to="." method="clear"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
-[connection signal="crushed" from="Door" to="." method="clear"]
+[connection signal="crushed" from="Door" to="." method="next_round"]
