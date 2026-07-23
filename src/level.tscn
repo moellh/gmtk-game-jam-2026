@@ -947,4 +947,4 @@ instructions = "C\n Reset"
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
-[connection signal="crushed" from="Door" to="." method="next_round"]
+[connection signal="crushed" from="Door" to="." method="play_death"]

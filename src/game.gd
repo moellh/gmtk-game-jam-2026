@@ -3,6 +3,7 @@ extends Node2D
 const ROUND_TIME := 10.0
 const TILE_SIZE := 16.0
 const LEVEL_TRANSITION_TIME := 1.0
+const DEATH_SCALE := Vector2.ONE * 3.0
 
 const HEART_TEXTURE := preload("res://assets/monochrome_tilemap_transparent.png")
 const HEART_ATLAS_COORDS := [
@@ -38,6 +39,7 @@ var finished_figures := 0
 var completed := false
 var life_heart_icons: Array[AnimatedSprite2D] = []
 var accepting_input := false
+var dying := false
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(update_world_camera)
@@ -100,7 +102,13 @@ func _process(delta: float) -> void:
 		return
 
 	timer -= delta
-	if timer <= 0.0 or Input.is_action_just_pressed("restart"): next_round()
+	if Input.is_action_just_pressed("restart"):
+		next_round()
+	elif timer <= 0.0:
+		if remaining_figures() == 1:
+			play_death()
+		else:
+			next_round()
 
 	update_hud()
 
@@ -137,6 +145,44 @@ func play_level_intro() -> void:
 
 	accepting_input = true
 	player.set_physics_process(true)
+
+func play_death() -> void:
+	if dying or completed or not accepting_input:
+		return
+	dying = true
+	accepting_input = false
+	player.set_physics_process(false)
+	player.velocity = Vector2.ZERO
+	get_tree().paused = true
+
+	var normal_scale := player.scale
+	var opaque_modulate := player.modulate
+	var transparent_modulate := opaque_modulate
+	transparent_modulate.a = 0.0
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.set_parallel(true)
+	tween.tween_property(
+		player,
+		"scale",
+		normal_scale * DEATH_SCALE,
+		LEVEL_TRANSITION_TIME,
+	)
+	tween.tween_property(
+		player,
+		"modulate",
+		transparent_modulate,
+		LEVEL_TRANSITION_TIME,
+	)
+	await tween.finished
+
+	player.scale = normal_scale
+	player.modulate = opaque_modulate
+	get_tree().paused = false
+	next_round()
+	player.set_physics_process(true)
+	accepting_input = true
+	dying = false
 
 func clear() -> void:
 	timer = ROUND_TIME
@@ -210,7 +256,7 @@ func update_life_hearts() -> void:
 		life_heart_icons[index].visible = index < visible_hearts
 
 func complete_level(goal_position: Vector2) -> void:
-	if completed:
+	if completed or not accepting_input:
 		return
 	completed = true
 	accepting_input = false
