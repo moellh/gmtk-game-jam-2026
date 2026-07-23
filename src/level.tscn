@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_vonw3"]
+[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -813,6 +814,7 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
+script = ExtResource("3_game")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
 tile_map_data = PackedByteArray("AAAKAAcAAAALABAAAAALAAcAAAALABAAAAAMAAcAAAALABAAAAANAAcAAAALABAAAAAOAAcAAAALABAAAAAPAAcAAAALABAAAAAQAAcAAAALABAAAAARAAcAAAALABAAAAASAAcAAAALABAAAAAFAAcAAAAEAAYAAAAGAAcAAAAFAAYAAAAHAAcAAAAFAAYAAAAIAAcAAAAFAAYAAAAJAAcAAAAGAAYAAAA=")
