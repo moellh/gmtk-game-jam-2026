@@ -85,7 +85,7 @@ layout_mode = 0
 mouse_filter = 2
 theme = ExtResource("2_theme")
 theme_override_styles/normal = SubResource("StyleBox_touch")
-text = "LOOP"
+text = "FREEZE"
 horizontal_alignment = 1
 vertical_alignment = 1
 

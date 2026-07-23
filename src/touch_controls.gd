@@ -94,24 +94,33 @@ func layout_for_size(view_size: Vector2) -> void:
 		),
 	)
 
-	var auxiliary_y := (
-		view_size.y - reserved_bottom_height + 12.0
-		if portrait else view_size.y - 100.0
-	)
 	var auxiliary_width := auxiliary_size.x * 2.0 + 8.0
-	var auxiliary_x := (view_size.x - auxiliary_width) * 0.5
-
-	_set_button_rect(
-		&"Loop",
-		Rect2(Vector2(auxiliary_x, auxiliary_y), auxiliary_size),
-	)
-	_set_button_rect(
-		&"Reset",
-		Rect2(
-			Vector2(auxiliary_x + auxiliary_size.x + 8.0, auxiliary_y),
-			auxiliary_size,
-		),
-	)
+	if portrait:
+		var auxiliary_y := view_size.y - reserved_bottom_height + 12.0
+		var auxiliary_x := (view_size.x - auxiliary_width) * 0.5
+		_set_button_rect(
+			&"Loop",
+			Rect2(Vector2(auxiliary_x, auxiliary_y), auxiliary_size),
+		)
+		_set_button_rect(
+			&"Reset",
+			Rect2(
+				Vector2(auxiliary_x + auxiliary_size.x + 8.0, auxiliary_y),
+				auxiliary_size,
+			),
+		)
+	else:
+		_set_button_rect(
+			&"Loop",
+			Rect2(Vector2(margin, margin), auxiliary_size),
+		)
+		_set_button_rect(
+			&"Reset",
+			Rect2(
+				Vector2(view_size.x - margin - auxiliary_size.x, margin),
+				auxiliary_size,
+			),
+		)
 
 	_apply_visual_style(portrait)
 
