@@ -14,6 +14,7 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 @onready var timer_display: Label = %TimerDisplay
 @onready var level_complete: CanvasLayer = $LevelComplete
 @onready var outside_fill: OutsideFill = $OutsideFill
+@onready var touch_controls: TouchControls = $TouchControls
 
 var timer := ROUND_TIME
 var completed := false
@@ -30,11 +31,27 @@ func update_world_camera() -> void:
 	var height_scale := window_size.y / BASE_VIEWPORT_SIZE.y
 	var fit_scale := minf(width_scale, height_scale)
 	var visible_size := window_size / fit_scale
-	var level_zoom := minf(
-		visible_size.x / LEVEL_VIEW_RECT.size.x,
-		visible_size.y / LEVEL_VIEW_RECT.size.y,
+	touch_controls.layout_for_size(visible_size)
+	var gameplay_size := Vector2(
+		visible_size.x,
+		maxf(
+			visible_size.y - touch_controls.reserved_bottom_height,
+			LEVEL_VIEW_RECT.size.y,
+		),
 	)
-	world_camera.position = LEVEL_VIEW_RECT.get_center()
+	var level_zoom := minf(
+		gameplay_size.x / LEVEL_VIEW_RECT.size.x,
+		gameplay_size.y / LEVEL_VIEW_RECT.size.y,
+	)
+	var viewport_center := visible_size * 0.5
+	var gameplay_center := Vector2(
+		visible_size.x * 0.5,
+		gameplay_size.y * 0.5,
+	)
+	world_camera.position = (
+		LEVEL_VIEW_RECT.get_center()
+		- (gameplay_center - viewport_center) / level_zoom
+	)
 	world_camera.zoom = Vector2.ONE * level_zoom
 	var visible_world_size := visible_size / level_zoom
 	outside_fill.set_visible_world_rect(

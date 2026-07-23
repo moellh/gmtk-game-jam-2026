@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="9_complete"]
 [ext_resource type="Script" path="res://src/outside_fill.gd" id="10_outside"]
 [ext_resource type="Shader" path="res://src/outside_fill.gdshader" id="11_outside_shader"]
+[ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_touch_controls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -885,6 +886,8 @@ position = Vector2(200, 104)
 instructions = "C  RESET TIMELINE / CLEAR GHOSTS"
 
 [node name="LevelComplete" parent="." instance=ExtResource("9_complete")]
+
+[node name="TouchControls" parent="." instance=ExtResource("12_touch_controls")]
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
