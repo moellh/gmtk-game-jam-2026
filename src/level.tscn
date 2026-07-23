@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
 [ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
 [ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
-[ext_resource type="FontFile" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
+[ext_resource type="Theme" path="res://src/ui_theme.tres" id="7_theme"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -811,9 +811,6 @@ separation = Vector2i(1, 1)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vonw3")
 
-[sub_resource type="Theme" id="Theme_hud"]
-default_font = ExtResource("7_font")
-
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("3_game")
@@ -848,7 +845,7 @@ offset_top = -60.0
 offset_right = 68.0
 offset_bottom = -4.0
 grow_vertical = 0
-theme = SubResource("Theme_hud")
+theme = ExtResource("7_theme")
 theme_override_constants/separation = 4
 
 [node name="Directions" type="HBoxContainer" parent="HUD/Movement"]
@@ -890,7 +887,7 @@ offset_left = 148.0
 offset_top = 172.0
 offset_right = 236.0
 offset_bottom = 208.0
-theme = SubResource("Theme_hud")
+theme = ExtResource("7_theme")
 
 [node name="TimerDigits" type="HBoxContainer" parent="HUD/Timer"]
 custom_minimum_size = Vector2(80, 0)
@@ -941,7 +938,7 @@ offset_right = -8.0
 offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = SubResource("Theme_hud")
+theme = ExtResource("7_theme")
 theme_override_constants/separation = 4
 
 [node name="Restart" type="VBoxContainer" parent="HUD/Ghosts"]
