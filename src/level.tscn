@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="1_u52ul"]
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_vonw3"]
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
+[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -822,3 +823,8 @@ tile_set = SubResource("TileSet_oi3di")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("2_vonw3")]
 position = Vector2(106, 100)
+
+[node name="Goal" parent="." unique_id=736253240 instance=ExtResource("4_goal")]
+position = Vector2(296, 103)
+
+[connection signal="reached" from="Goal" to="." method="clear"]
