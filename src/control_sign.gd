@@ -37,7 +37,7 @@ func _update_prompt_position() -> void:
 			),
 		),
 		roundf(
-			player.global_position.y
+			global_position.y
 				- prompt.size.y
 				- PROMPT_VERTICAL_GAP
 		),
