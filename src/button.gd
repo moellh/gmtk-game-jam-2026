@@ -4,14 +4,14 @@ signal changed(is_pressed: bool)
 
 const COLOR_UP := Color(0.95, 0.0, 0.207, 1.0)
 const COLOR_DOWN := Color(0.0, 0.704, 0.152, 1.0)
-const POSITION_UP := Vector2(-8.0, -8.0)
-const POSITION_DOWN := Vector2(-8.0, -5.0)
+const POSITION_UP := Vector2.ZERO
+const POSITION_DOWN := Vector2(0.0, 1.5)
 
 var pressed := false
 var overlaps := 0
 
-@export var texture_up: Texture2D
-@export var texture_down: Texture2D
+@export var texture_up: AtlasTexture
+@export var texture_down: AtlasTexture
 
 @onready var visual: Sprite2D = $Sprite2D
 
