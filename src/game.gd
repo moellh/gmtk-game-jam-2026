@@ -22,7 +22,6 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @export var next_level: PackedScene
 @export_range(1, 10, 1) var max_figures := 2
-@export var figure_spawn_offsets: Array[Vector2] = []
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
@@ -44,7 +43,7 @@ var dying := false
 func _ready() -> void:
 	get_viewport().size_changed.connect(update_world_camera)
 	update_world_camera()
-	player.reset(live_attempt_spawn_offset(0))
+	player.reset()
 	build_life_hearts()
 	update_life_hearts()
 	update_hud()
@@ -188,7 +187,7 @@ func clear() -> void:
 	timer = ROUND_TIME
 	finished_figures = 0
 	get_tree().call_group("ghosts", "queue_free")
-	player.reset(live_attempt_spawn_offset(0))
+	player.reset()
 	update_life_hearts()
 
 func next_round() -> void:
@@ -202,16 +201,11 @@ func next_round() -> void:
 	add_child(player.spawn_ghost())
 	get_tree().call_group("ghosts", "restart")
 
-	player.reset(live_attempt_spawn_offset(finished_figures))
+	player.reset()
 	update_life_hearts()
 
 func remaining_figures() -> int:
 	return maxi(max_figures - finished_figures, 0)
-
-func live_attempt_spawn_offset(completed_figures: int) -> Vector2:
-	if completed_figures < figure_spawn_offsets.size():
-		return figure_spawn_offsets[completed_figures]
-	return Vector2.ZERO
 
 func build_life_hearts() -> void:
 	var frames := SpriteFrames.new()

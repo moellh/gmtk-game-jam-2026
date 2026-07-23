@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 		JUMP_PRESSED: Input.is_action_just_pressed("jump"),
 		JUMP_RELEASED: Input.is_action_just_released("jump"),
 	}
+	
 	apply_action(action, delta)
 	recording.append(action)
 
@@ -29,7 +30,7 @@ func spawn_ghost() -> Node:
 	ghost.add_to_group("ghosts")
 	return ghost
 
-func reset(spawn_offset := Vector2.ZERO) -> void:
+func reset() -> void:
 	recording = []
-	recording_start = spawn + spawn_offset
+	recording_start = spawn
 	reset_figure(recording_start)
