@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://da8qcbqxtbvjb"]
+[gd_scene load_steps=7 format=3 uid="uid://da8qcbqxtbvjb"]
 
 [ext_resource type="Script" uid="uid://diaejevtammsv" path="res://src/button.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="2"]
@@ -13,6 +13,12 @@ region = Rect2(51, 136, 16, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
 size = Vector2(16, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(16, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_step_assist"]
+size = Vector2(20, 13)
 
 [node name="Button" type="Area2D" unique_id=1109644628]
 collision_layer = 0
@@ -29,7 +35,25 @@ texture = SubResource("AtlasTexture_button_up")
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_zone")
 
+[node name="Platform" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="StepAssist" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StepAssist"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_step_assist")
+
 [connection signal="area_entered" from="." to="." method="_on_entered"]
 [connection signal="area_exited" from="." to="." method="_on_exited"]
 [connection signal="body_entered" from="." to="." method="_on_entered"]
 [connection signal="body_exited" from="." to="." method="_on_exited"]
+[connection signal="body_entered" from="StepAssist" to="." method="_on_step_body_entered"]

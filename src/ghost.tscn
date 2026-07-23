@@ -7,6 +7,7 @@
 size = Vector2(16, 15)
 
 [node name="Ghost" type="AnimatedSprite2D"]
+z_index = 1
 modulate = Color(0.62, 0.56, 0.72, 0.58)
 sprite_frames = ExtResource("2")
 script = ExtResource("1")
