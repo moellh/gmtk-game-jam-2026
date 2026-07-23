@@ -46,6 +46,10 @@ The Game Jam website recommends the following sources for art & audio:
 - [BeepBox](https://www.beepbox.co/) (Music)
 - [Lospec](https://lospec.com/palette-list) (Palettes)
 
+## Credits
+
+- [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke, licensed under the [SIL Open Font License 1.1](assets/fonts/Silkscreen-OFL.txt)
+
 ## Branch preview hosting
 
 [`deploy/`](deploy/) builds Godot Web exports and serves them as `gmtk-jam-web` on the external Docker network `app-net`.

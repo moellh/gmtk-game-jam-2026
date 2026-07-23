@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
 [ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
 [ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door.tscn" id="6_door"]
+[ext_resource type="FontFile" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -810,6 +811,9 @@ separation = Vector2i(1, 1)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vonw3")
 
+[sub_resource type="Theme" id="Theme_hud"]
+default_font = ExtResource("7_font")
+
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("3_game")
@@ -835,160 +839,152 @@ position = Vector2(192, 108)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Layout" type="HBoxContainer" parent="HUD"]
-anchors_preset = 12
+[node name="Movement" type="VBoxContainer" parent="HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -60.0
+offset_right = 68.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme = SubResource("Theme_hud")
+theme_override_constants/separation = 4
+
+[node name="Directions" type="HBoxContainer" parent="HUD/Movement"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MoveLeftButton" type="Button" parent="HUD/Movement/Directions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+text = "A"
+
+[node name="MoveRightButton" type="Button" parent="HUD/Movement/Directions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+toggle_mode = true
+text = "D"
+
+[node name="JumpButton" type="Button" parent="HUD/Movement"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 24)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+toggle_mode = true
+text = "Space"
+
+[node name="Timer" type="CenterContainer" parent="HUD"]
+offset_left = 148.0
+offset_top = 172.0
+offset_right = 236.0
+offset_bottom = 208.0
+theme = SubResource("Theme_hud")
+
+[node name="TimerDigits" type="HBoxContainer" parent="HUD/Timer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TimerTens" type="Label" parent="HUD/Timer/TimerDigits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1"
+horizontal_alignment = 1
+
+[node name="TimerOnes" type="Label" parent="HUD/Timer/TimerDigits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+
+[node name="TimerPoint" type="Label" parent="HUD/Timer/TimerDigits"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "."
+horizontal_alignment = 1
+
+[node name="TimerTenths" type="Label" parent="HUD/Timer/TimerDigits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 1
+
+[node name="Ghosts" type="HBoxContainer" parent="HUD"]
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -84.0
-grow_horizontal = 2
+offset_left = -132.0
+offset_top = -48.0
+offset_right = -8.0
+offset_bottom = -4.0
+grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 5
+theme = SubResource("Theme_hud")
+theme_override_constants/separation = 4
 
-[node name="MovementPanel" type="PanelContainer" parent="HUD/Layout"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="Movement" type="VBoxContainer" parent="HUD/Layout/MovementPanel"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="JumpCenter" type="CenterContainer" parent="HUD/Layout/MovementPanel/Movement"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Jump" type="VBoxContainer" parent="HUD/Layout/MovementPanel/Movement/JumpCenter"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="JumpButton" type="Button" parent="HUD/Layout/MovementPanel/Movement/JumpCenter/Jump"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(96, 22)
-layout_mode = 2
-mouse_filter = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 9
-toggle_mode = true
-text = "↑ / W / Space"
-
-[node name="Description" type="Label" parent="HUD/Layout/MovementPanel/Movement/JumpCenter/Jump"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Jump"
-horizontal_alignment = 1
-
-[node name="Directions" type="HBoxContainer" parent="HUD/Layout/MovementPanel/Movement"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 3
-
-[node name="MoveLeft" type="VBoxContainer" parent="HUD/Layout/MovementPanel/Movement/Directions"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="MoveLeftButton" type="Button" parent="HUD/Layout/MovementPanel/Movement/Directions/MoveLeft"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 22)
-layout_mode = 2
-mouse_filter = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 9
-toggle_mode = true
-text = "← / A"
-
-[node name="Description" type="Label" parent="HUD/Layout/MovementPanel/Movement/Directions/MoveLeft"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Move left"
-horizontal_alignment = 1
-
-[node name="MoveRight" type="VBoxContainer" parent="HUD/Layout/MovementPanel/Movement/Directions"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-
-[node name="MoveRightButton" type="Button" parent="HUD/Layout/MovementPanel/Movement/Directions/MoveRight"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 22)
-layout_mode = 2
-mouse_filter = 2
-focus_mode = 0
-theme_override_font_sizes/font_size = 9
-toggle_mode = true
-text = "→ / D"
-
-[node name="Description" type="Label" parent="HUD/Layout/MovementPanel/Movement/Directions/MoveRight"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Move right"
-horizontal_alignment = 1
-
-[node name="TimerPanel" type="PanelContainer" parent="HUD/Layout"]
-custom_minimum_size = Vector2(68, 0)
-layout_mode = 2
-
-[node name="TimerCenter" type="CenterContainer" parent="HUD/Layout/TimerPanel"]
-layout_mode = 2
-
-[node name="GhostTimer" type="Label" parent="HUD/Layout/TimerPanel/TimerCenter"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "10.0"
-horizontal_alignment = 1
-
-[node name="GhostPanel" type="PanelContainer" parent="HUD/Layout"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.35
-
-[node name="SecondaryActions" type="HBoxContainer" parent="HUD/Layout/GhostPanel"]
-layout_mode = 2
-theme_override_constants/separation = 3
-
-[node name="Restart" type="VBoxContainer" parent="HUD/Layout/GhostPanel/SecondaryActions"]
+[node name="Restart" type="VBoxContainer" parent="HUD/Ghosts"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 theme_override_constants/separation = 0
 
-[node name="RestartButton" type="Button" parent="HUD/Layout/GhostPanel/SecondaryActions/Restart"]
+[node name="RestartButton" type="Button" parent="HUD/Ghosts/Restart"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 24)
+custom_minimum_size = Vector2(60, 28)
 layout_mode = 2
 mouse_filter = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 11
 toggle_mode = true
 text = "R"
 
-[node name="Description" type="Label" parent="HUD/Layout/GhostPanel/SecondaryActions/Restart"]
+[node name="Description" type="Label" parent="HUD/Ghosts/Restart"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "Next ghost"
 horizontal_alignment = 1
 
-[node name="Clear" type="VBoxContainer" parent="HUD/Layout/GhostPanel/SecondaryActions"]
+[node name="Clear" type="VBoxContainer" parent="HUD/Ghosts"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 theme_override_constants/separation = 0
 
-[node name="ClearButton" type="Button" parent="HUD/Layout/GhostPanel/SecondaryActions/Clear"]
+[node name="ClearButton" type="Button" parent="HUD/Ghosts/Clear"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 24)
+custom_minimum_size = Vector2(60, 28)
 layout_mode = 2
 mouse_filter = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 11
 toggle_mode = true
 text = "C"
 
-[node name="Description" type="Label" parent="HUD/Layout/GhostPanel/SecondaryActions/Clear"]
+[node name="Description" type="Label" parent="HUD/Ghosts/Clear"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 7
 text = "Clear ghosts"
 horizontal_alignment = 1
 
