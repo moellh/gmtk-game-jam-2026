@@ -834,6 +834,7 @@ shader = ExtResource("11_outside_shader")
 texture_filter = 1
 script = ExtResource("3_game")
 max_figures = 2
+figure_spawn_offsets = Array[Vector2]([Vector2(0, 0), Vector2(16, 0)])
 
 [node name="OutsideFill" type="Node2D" parent="."]
 z_index = -10

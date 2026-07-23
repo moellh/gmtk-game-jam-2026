@@ -2,7 +2,6 @@ extends Node2D
 
 const ROUND_TIME := 10.0
 const TILE_SIZE := 16.0
-const INITIAL_ATTEMPT_SPAWN_OFFSET := Vector2(TILE_SIZE, 0.0)
 
 const HEART_TEXTURE := preload("res://assets/monochrome_tilemap_transparent.png")
 const HEART_ATLAS_COORDS := [
@@ -21,6 +20,7 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @export var next_level: PackedScene
 @export_range(1, 10, 1) var max_figures := 2
+@export var figure_spawn_offsets: Array[Vector2] = []
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
@@ -125,9 +125,9 @@ func next_round() -> void:
 func remaining_figures() -> int:
 	return maxi(max_figures - finished_figures, 0)
 
-func live_attempt_spawn_offset(completed_recordings: int) -> Vector2:
-	if completed_recordings == 0:
-		return INITIAL_ATTEMPT_SPAWN_OFFSET
+func live_attempt_spawn_offset(completed_figures: int) -> Vector2:
+	if completed_figures < figure_spawn_offsets.size():
+		return figure_spawn_offsets[completed_figures]
 	return Vector2.ZERO
 
 func build_life_hearts() -> void:
@@ -145,12 +145,26 @@ func build_life_hearts() -> void:
 		frames.add_frame(HEART_ANIMATION, texture)
 
 	for index in max_figures:
+		var slot := Node2D.new()
+		slot.position = Vector2(index * TILE_SIZE, 0.0)
+		life_hearts.add_child(slot)
+
+		var background := Polygon2D.new()
+		background.polygon = PackedVector2Array([
+			Vector2(-9.0, -9.0),
+			Vector2(9.0, -9.0),
+			Vector2(9.0, 9.0),
+			Vector2(-9.0, 9.0),
+		])
+		background.color = Color.BLACK
+		slot.add_child(background)
+
 		var heart := AnimatedSprite2D.new()
 		heart.sprite_frames = frames
-		heart.position = Vector2(index * TILE_SIZE, 0.0)
 		heart.modulate = HEART_COLOR
+		heart.z_index = 1
 		heart.play(HEART_ANIMATION)
-		life_hearts.add_child(heart)
+		slot.add_child(heart)
 		life_heart_icons.append(heart)
 
 func update_life_hearts() -> void:
