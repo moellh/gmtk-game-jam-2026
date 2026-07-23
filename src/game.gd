@@ -124,6 +124,11 @@ func _process(delta: float) -> void:
 
 	update_hud()
 
+
+func can_pause() -> bool:
+	return not dying and not completed
+
+
 func update_hud() -> void:
 	var displayed_tenths := roundi(maxf(timer, 0.0) * 10.0)
 	var displayed_seconds := mini(floori(displayed_tenths * 0.1), 99)
