@@ -46,7 +46,7 @@ func _draw() -> void:
 				^ cell.y * 19349663
 				^ 83492791
 			)
-			if posmod(value, 4) == 0:
+			if posmod(value, 4) != 0:
 				continue
 
 			var atlas_cell := ATLAS_CELLS[
