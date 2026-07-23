@@ -830,6 +830,133 @@ position = Vector2(168, 104)
 [node name="Door" parent="." unique_id=1161385492 instance=ExtResource("6_door")]
 position = Vector2(248, 104)
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_top = 157.0
+offset_right = 384.0
+offset_bottom = 216.0
+
+[node name="Layout" type="VBoxContainer" parent="HUD/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="GhostTimer" type="Label" parent="HUD/Panel/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Next ghost in 10.0 s"
+horizontal_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="HUD/Panel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="MoveLeft" type="VBoxContainer" parent="HUD/Panel/Layout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="MoveLeftButton" type="Button" parent="HUD/Panel/Layout/Actions/MoveLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+toggle_mode = true
+text = "← / A"
+
+[node name="Description" type="Label" parent="HUD/Panel/Layout/Actions/MoveLeft"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Move left"
+horizontal_alignment = 1
+
+[node name="MoveRight" type="VBoxContainer" parent="HUD/Panel/Layout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="MoveRightButton" type="Button" parent="HUD/Panel/Layout/Actions/MoveRight"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+toggle_mode = true
+text = "→ / D"
+
+[node name="Description" type="Label" parent="HUD/Panel/Layout/Actions/MoveRight"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Move right"
+horizontal_alignment = 1
+
+[node name="Jump" type="VBoxContainer" parent="HUD/Panel/Layout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="JumpButton" type="Button" parent="HUD/Panel/Layout/Actions/Jump"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+toggle_mode = true
+text = "↑ / W / Space"
+
+[node name="Description" type="Label" parent="HUD/Panel/Layout/Actions/Jump"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Jump"
+horizontal_alignment = 1
+
+[node name="Restart" type="VBoxContainer" parent="HUD/Panel/Layout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="RestartButton" type="Button" parent="HUD/Panel/Layout/Actions/Restart"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+toggle_mode = true
+text = "R"
+
+[node name="Description" type="Label" parent="HUD/Panel/Layout/Actions/Restart"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Next ghost"
+horizontal_alignment = 1
+
+[node name="Clear" type="VBoxContainer" parent="HUD/Panel/Layout/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="ClearButton" type="Button" parent="HUD/Panel/Layout/Actions/Clear"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 9
+toggle_mode = true
+text = "C"
+
+[node name="Description" type="Label" parent="HUD/Panel/Layout/Actions/Clear"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Clear ghosts"
+horizontal_alignment = 1
+
 [connection signal="reached" from="Goal" to="." method="clear"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
 [connection signal="crushed" from="Door" to="." method="clear"]
