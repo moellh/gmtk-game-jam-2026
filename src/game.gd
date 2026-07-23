@@ -20,27 +20,27 @@ const LEVEL_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
 const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @export var next_level: PackedScene
-@export_range(1, 10, 1) var max_recordings := 2
+@export_range(1, 10, 1) var max_figures := 2
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
 @onready var timer_display: Label = %TimerDisplay
-@onready var recording_hearts: Node2D = %RecordingHearts
+@onready var life_hearts: Node2D = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
 @onready var outside_fill: OutsideFill = $OutsideFill
 @onready var touch_controls: TouchControls = $TouchControls
 
 var timer := ROUND_TIME
-var recordings_used := 0
+var finished_figures := 0
 var completed := false
-var recording_heart_icons: Array[AnimatedSprite2D] = []
+var life_heart_icons: Array[AnimatedSprite2D] = []
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(update_world_camera)
 	update_world_camera()
 	player.reset(live_attempt_spawn_offset(0))
-	build_recording_hearts()
-	update_recording_hearts()
+	build_life_hearts()
+	update_life_hearts()
 	update_hud()
 
 func update_world_camera() -> void:
@@ -103,34 +103,34 @@ func update_hud() -> void:
 
 func clear() -> void:
 	timer = ROUND_TIME
-	recordings_used = 0
+	finished_figures = 0
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset(live_attempt_spawn_offset(0))
-	update_recording_hearts()
+	update_life_hearts()
 
 func next_round() -> void:
-	if recordings_used >= max_recordings:
+	finished_figures += 1
+	if finished_figures >= max_figures:
 		clear()
 		return
 
 	timer = ROUND_TIME
 
 	add_child(player.spawn_ghost())
-	recordings_used += 1
 	get_tree().call_group("ghosts", "restart")
 
-	player.reset(live_attempt_spawn_offset(recordings_used))
-	update_recording_hearts()
+	player.reset(live_attempt_spawn_offset(finished_figures))
+	update_life_hearts()
 
-func remaining_recordings() -> int:
-	return maxi(max_recordings - recordings_used, 0)
+func remaining_figures() -> int:
+	return maxi(max_figures - finished_figures, 0)
 
 func live_attempt_spawn_offset(completed_recordings: int) -> Vector2:
 	if completed_recordings == 0:
 		return INITIAL_ATTEMPT_SPAWN_OFFSET
 	return Vector2.ZERO
 
-func build_recording_hearts() -> void:
+func build_life_hearts() -> void:
 	var frames := SpriteFrames.new()
 	frames.set_animation_speed(HEART_ANIMATION, 6.0)
 	frames.set_animation_loop(HEART_ANIMATION, true)
@@ -144,19 +144,19 @@ func build_recording_hearts() -> void:
 		)
 		frames.add_frame(HEART_ANIMATION, texture)
 
-	for index in max_recordings:
+	for index in max_figures:
 		var heart := AnimatedSprite2D.new()
 		heart.sprite_frames = frames
 		heart.position = Vector2(index * TILE_SIZE, 0.0)
 		heart.modulate = HEART_COLOR
 		heart.play(HEART_ANIMATION)
-		recording_hearts.add_child(heart)
-		recording_heart_icons.append(heart)
+		life_hearts.add_child(heart)
+		life_heart_icons.append(heart)
 
-func update_recording_hearts() -> void:
-	var visible_hearts := remaining_recordings()
-	for index in recording_heart_icons.size():
-		recording_heart_icons[index].visible = index < visible_hearts
+func update_life_hearts() -> void:
+	var visible_hearts := remaining_figures()
+	for index in life_heart_icons.size():
+		life_heart_icons[index].visible = index < visible_hearts
 
 func complete_level() -> void:
 	if completed:
