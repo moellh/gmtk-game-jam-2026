@@ -880,15 +880,15 @@ position = Vector2(232, 24)
 
 [node name="MovementSign" parent="WorldUI" instance=ExtResource("8_sign")]
 position = Vector2(104, 104)
-instructions = "A / D  MOVE\nSPACE  JUMP"
+instructions = "A / D\nMOVE\n\nSPACE\nJUMP"
 
 [node name="FreezeSign" parent="WorldUI" instance=ExtResource("8_sign")]
 position = Vector2(152, 104)
-instructions = "R  FREEZE LOOP\nCREATE GHOST"
+instructions = "R\nFREEZE LOOP\n\nCREATE\nGHOST"
 
 [node name="ResetSign" parent="WorldUI" instance=ExtResource("8_sign")]
 position = Vector2(216, 104)
-instructions = "C  RESET TIMELINE\nCLEAR GHOSTS"
+instructions = "C\nRESET\nTIMELINE\n\nCLEAR\nGHOSTS"
 
 [node name="LevelComplete" parent="." instance=ExtResource("9_complete")]
 
