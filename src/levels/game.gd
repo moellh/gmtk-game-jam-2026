@@ -14,8 +14,6 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 
 var timer := ROUND_TIME
 var figures_used := 0
-var completed := false
-var dying := false
 
 func _ready() -> void:
 	player.reset()
@@ -24,8 +22,7 @@ func _ready() -> void:
 	play_level_intro()
 
 func _update_hearts() -> void:
-	if life_hearts != null:
-		life_hearts.set_remaining(remaining_figures())
+	if life_hearts != null: life_hearts.set_remaining(remaining_figures())
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -68,9 +65,7 @@ func play_level_intro() -> void:
 	get_tree().paused = false
 
 func play_death() -> void:
-	if dying or completed or get_tree().paused:
-		return
-	dying = true
+	if get_tree().paused: return
 
 	var normal_scale := player.scale
 	var opaque_modulate := player.modulate
@@ -83,7 +78,6 @@ func play_death() -> void:
 	player.modulate = opaque_modulate
 	get_tree().paused = false
 	next_round()
-	dying = false
 
 func clear() -> void:
 	timer = ROUND_TIME
@@ -110,9 +104,8 @@ func remaining_figures() -> int:
 	return maxi(max_figures - figures_used, 0)
 
 func complete_level(goal_position: Vector2) -> void:
-	if completed or get_tree().paused:
+	if get_tree().paused:
 		return
-	completed = true
 
 	var tween := _freeze_player()
 	tween.tween_property(player, "global_position", goal_position, LEVEL_TRANSITION_TIME)
