@@ -7,6 +7,8 @@ const ACCEL := 2000.0
 const FRICTION := 2500.0
 const LEDGE_TIME := 0.1
 const JUMP_BUFFER := 0.1
+const DROP_TIME := 0.2
+const PLATFORM_LAYER := 3
 
 const TRANSITION_TIME := 1.0
 const DEATH_SCALE := Vector2.ONE * 3.0
@@ -15,6 +17,7 @@ const GHOST_SCENE := preload("res://src/actors/ghost.tscn")
 
 var ledge_timer := 0.0
 var buffer_timer := 0.0
+var drop_timer := 0.0
 
 var spawn: Vector2
 var recording: Array[Dictionary] = []
@@ -26,9 +29,9 @@ func _ready() -> void:
 	spawn = global_position
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if not is_on_floor(): velocity += get_gravity() * delta
 
+	# Jump (Incl. ledge tolerance)
 	ledge_timer = LEDGE_TIME if is_on_floor() else ledge_timer - delta
 	buffer_timer = JUMP_BUFFER if Input.is_action_just_pressed("jump") else buffer_timer - delta
 	if buffer_timer > 0.0 and ledge_timer > 0.0:
@@ -36,15 +39,21 @@ func _physics_process(delta: float) -> void:
 		buffer_timer = 0.0
 		ledge_timer = 0.0
 
-	if Input.is_action_just_released("jump") and velocity.y < 0.0:
-		velocity.y *= 0.4
+	# Increase Jumpheight
+	if Input.is_action_just_released("jump") and velocity.y < 0.0: velocity.y *= 0.4
 
+	# XY Movement
 	var move_axis := Input.get_axis("move_left", "move_right")
 	if move_axis:
 		velocity.x = move_toward(velocity.x, move_axis * SPEED, 1.5 * ACCEL * delta)
 		sprite.flip_h = move_axis < 0.0
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
+
+	# Platform Fallthrough
+	if Input.is_action_just_pressed("drop") and is_on_floor(): drop_timer = DROP_TIME
+	drop_timer -= delta
+	set_collision_mask_value(PLATFORM_LAYER, drop_timer <= 0.0)
 
 	move_and_slide()
 	update_animation(move_axis)
