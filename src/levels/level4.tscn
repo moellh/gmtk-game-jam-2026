@@ -35,9 +35,11 @@ position = Vector2(118, 172)
 
 [node name="Button2" parent="." unique_id=556200501 instance=ExtResource("7_q3a5j")]
 position = Vector2(42, 76)
+COLOR_UP = Color(0.326832, 0.5862444, 0.22552186, 1)
 
 [node name="Button3" parent="." unique_id=593554100 instance=ExtResource("7_q3a5j")]
 position = Vector2(234, 60)
+COLOR_UP = Color(0.31939495, 0.48163897, 0.90145975, 1)
 
 [node name="Door1" parent="." unique_id=1161385492 instance=ExtResource("8_7wyut")]
 position = Vector2(216, 168)
