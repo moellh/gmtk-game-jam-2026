@@ -6,6 +6,7 @@
 [ext_resource type="Theme" path="res://src/ui_theme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://cvri1lanjb2a7" path="res://src/levels/level2.tscn" id="5_uwu4p"]
 [ext_resource type="PackedScene" uid="uid://nuxebdxga02e" path="res://src/levels/level4.tscn" id="6_s888k"]
+[ext_resource type="PackedScene" uid="uid://ixgmdug8p711" path="res://src/levels/level6.tscn" id="7_nipju"]
 
 [sub_resource type="Resource" id="LevelInfo_1"]
 script = ExtResource("3")
@@ -24,6 +25,12 @@ name = "Level 4"
 scene = ExtResource("6_s888k")
 metadata/_custom_type_script = "uid://bx5ssfotac8vt"
 
+[sub_resource type="Resource" id="Resource_rv1bo"]
+script = ExtResource("3")
+name = "Level 6"
+scene = ExtResource("7_nipju")
+metadata/_custom_type_script = "uid://bx5ssfotac8vt"
+
 [node name="LevelSelect" type="Control" unique_id=24120411]
 layout_mode = 3
 anchors_preset = 15
@@ -33,7 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4")
 script = ExtResource("1")
-levels = Array[ExtResource("3")]([SubResource("LevelInfo_1"), SubResource("Resource_s888k"), SubResource("Resource_i8buq")])
+levels = Array[ExtResource("3")]([SubResource("LevelInfo_1"), SubResource("Resource_s888k"), SubResource("Resource_i8buq"), SubResource("Resource_rv1bo")])
 
 [node name="Center" type="CenterContainer" parent="." unique_id=81011664]
 layout_mode = 1
