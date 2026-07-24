@@ -41,6 +41,13 @@ func _ready() -> void:
 		target.pressed.connect(_set_pressed.bind(button_name, true))
 		target.released.connect(_set_pressed.bind(button_name, false))
 
+	get_viewport().size_changed.connect(_relayout)
+	_relayout.call_deferred()
+
+
+func _relayout() -> void:
+	layout_for_size(get_viewport().get_visible_rect().size)
+
 
 func layout_for_size(view_size: Vector2) -> void:
 	if not touch_enabled:

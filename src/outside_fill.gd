@@ -16,6 +16,16 @@ const ATLAS_CELLS: Array[Vector2i] = [
 var visible_world_rect := LEVEL_RECT
 
 
+func _ready() -> void:
+	get_viewport().size_changed.connect(_update_visible_rect)
+	_update_visible_rect.call_deferred()
+
+func _update_visible_rect() -> void:
+	var camera := get_viewport().get_camera_2d()
+	if camera == null: return
+	var world_size := get_viewport_rect().size / camera.zoom
+	set_visible_world_rect(Rect2(camera.get_screen_center_position() - world_size * 0.5, world_size))
+
 func set_visible_world_rect(rect: Rect2) -> void:
 	visible_world_rect = rect
 	var shader_material := material as ShaderMaterial

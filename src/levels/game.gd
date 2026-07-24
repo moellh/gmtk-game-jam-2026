@@ -7,21 +7,15 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 
 const LIFE_HEART := preload("res://src/levels/life_heart.tscn")
 
-const BASE_VIEWPORT_SIZE := Vector2(384.0, 216.0)
-const LEVEL_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
-
 const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @export var next_level: PackedScene
 @export_range(1, 10, 1) var max_figures := 2
 
 @onready var player: CharacterBody2D = $Player
-@onready var world_camera: Camera2D = $WorldCamera
 @onready var timer_label: Label = %TimerDisplay
 @onready var life_hearts: Node2D = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
-@onready var outside_fill: OutsideFill = $OutsideFill
-@onready var touch_controls: TouchControls = $TouchControls
 
 var timer := ROUND_TIME
 var finished_figures := 0
@@ -31,30 +25,11 @@ var accepting_input := false
 var dying := false
 
 func _ready() -> void:
-	get_viewport().size_changed.connect(update_world_camera)
-	update_world_camera()
 	player.reset()
 	build_life_hearts()
 	update_life_hearts()
 	update_hud()
 	play_level_intro()
-
-func update_world_camera() -> void:
-	var window_size := Vector2(get_window().size)
-	if window_size.x <= 0.0 or window_size.y <= 0.0: return
-
-	var fit_scale := minf(window_size.x / BASE_VIEWPORT_SIZE.x, window_size.y / BASE_VIEWPORT_SIZE.y)
-	var visible_size := window_size / fit_scale
-	touch_controls.layout_for_size(visible_size)
-	var gameplay_height := maxf(visible_size.y - touch_controls.reserved_bottom_height, LEVEL_VIEW_RECT.size.y)
-	var gameplay_size := Vector2(visible_size.x, gameplay_height)
-	var level_zoom := minf(gameplay_size.x / LEVEL_VIEW_RECT.size.x, gameplay_size.y / LEVEL_VIEW_RECT.size.y)
-	var viewport_center := visible_size * 0.5
-	var gameplay_center := Vector2(visible_size.x * 0.5, gameplay_size.y * 0.5)
-	world_camera.position = LEVEL_VIEW_RECT.get_center() - (gameplay_center - viewport_center) / level_zoom
-	world_camera.zoom = Vector2.ONE * level_zoom
-	var visible_world_size := visible_size / level_zoom
-	outside_fill.set_visible_world_rect(Rect2(world_camera.position - visible_world_size * 0.5, visible_world_size))
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
