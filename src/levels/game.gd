@@ -3,19 +3,15 @@ extends Node2D
 const LEVEL_TRANSITION_TIME := 1.0
 const DEATH_SCALE := Vector2.ONE * 3.0
 
-@export var round_time: float
 @export var next_level: PackedScene
 
 @onready var player: CharacterBody2D = $Player
-@onready var timer_label: Label = %TimerDisplay
+@onready var round_timer: RoundTimer = %RoundTimer
 @onready var life_hearts: LifeHearts = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
 
-@export var timer := round_time
-
 func _ready() -> void:
 	player.reset()
-	update_hud()
 	play_level_intro()
 
 func _process(delta: float) -> void:
@@ -25,24 +21,13 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("clear"):
 		clear()
-		update_hud()
 		return
 
-	timer -= delta
-	if Input.is_action_just_pressed("restart"):
-		next_round()
-	elif timer <= 0.0:
-		if life_hearts.remaining() == 1:
-			play_death()
-		else:
-			next_round()
-
-	update_hud()
-
-func update_hud() -> void:
-	var displayed_tenths := roundi(maxf(timer, 0.0) * 10.0)
-	var displayed_seconds := mini(floori(displayed_tenths * 0.1), 99)
-	timer_label.text = "%d.%d" % [displayed_seconds, displayed_tenths % 10]
+	round_timer.advance(delta)
+	if Input.is_action_just_pressed("restart"): next_round()
+	elif round_timer.is_expired():
+		if life_hearts.remaining() == 1: play_death()
+		else: next_round()
 
 func play_level_intro() -> void:
 	get_tree().paused = true
@@ -74,7 +59,7 @@ func play_death() -> void:
 	next_round()
 
 func clear() -> void:
-	timer = round_time
+	round_timer.reset()
 	life_hearts.reset()
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset()
@@ -85,7 +70,7 @@ func next_round() -> void:
 		clear()
 		return
 
-	timer = round_time
+	round_timer.reset()
 
 	add_child(player.spawn_ghost())
 	get_tree().call_group("ghosts", "restart")
@@ -93,8 +78,7 @@ func next_round() -> void:
 	player.reset()
 
 func complete_level(goal_position: Vector2) -> void:
-	if get_tree().paused:
-		return
+	if get_tree().paused: return
 
 	var tween := _freeze_player()
 	tween.tween_property(player, "global_position", goal_position, LEVEL_TRANSITION_TIME)
