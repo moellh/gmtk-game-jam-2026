@@ -13,7 +13,7 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 @onready var max_figures: int = life_hearts.lives if life_hearts != null else 2
 
 var timer := ROUND_TIME
-var finished_figures := 0
+var figures_used := 0
 var completed := false
 var dying := false
 
@@ -87,14 +87,14 @@ func play_death() -> void:
 
 func clear() -> void:
 	timer = ROUND_TIME
-	finished_figures = 0
+	figures_used = 0
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset()
 	_update_hearts()
 
 func next_round() -> void:
-	finished_figures += 1
-	if finished_figures >= max_figures:
+	figures_used += 1
+	if figures_used >= max_figures:
 		clear()
 		return
 
@@ -107,7 +107,7 @@ func next_round() -> void:
 	_update_hearts()
 
 func remaining_figures() -> int:
-	return maxi(max_figures - finished_figures, 0)
+	return maxi(max_figures - figures_used, 0)
 
 func complete_level(goal_position: Vector2) -> void:
 	if completed or get_tree().paused:
