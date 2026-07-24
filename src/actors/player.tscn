@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bwssvvbtnicof" path="res://src/actors/player_frames.tres" id="2_frames"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_606se"]
-size = Vector2(14, 12)
+size = Vector2(12, 11)
 
 [node name="Player" type="CharacterBody2D" unique_id=1157283441]
 z_index = 2
@@ -18,5 +18,5 @@ animation = &"run"
 frame_progress = 0.81196177
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=174984366]
-position = Vector2(0, 2)
+position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_606se")
