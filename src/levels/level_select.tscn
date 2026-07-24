@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://ciko4lobbvpf7"]
 
 [ext_resource type="Script" uid="uid://dgrn6fgukot61" path="res://src/levels/level_select.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://dp7t1cvck55bt" path="res://src/levels/level.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dp7t1cvck55bt" path="res://src/levels/level1.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bx5ssfotac8vt" path="res://src/levels/level_info.gd" id="3"]
 [ext_resource type="Theme" path="res://src/ui_theme.tres" id="4"]
-[ext_resource type="PackedScene" uid="uid://cvri1lanjb2a7" path="res://src/level2.tscn" id="5_uwu4p"]
-[ext_resource type="PackedScene" uid="uid://nuxebdxga02e" path="res://src/level4.tscn" id="6_s888k"]
+[ext_resource type="PackedScene" uid="uid://cvri1lanjb2a7" path="res://src/levels/level2.tscn" id="5_uwu4p"]
+[ext_resource type="PackedScene" uid="uid://nuxebdxga02e" path="res://src/levels/level4.tscn" id="6_s888k"]
 
 [sub_resource type="Resource" id="LevelInfo_1"]
 script = ExtResource("3")
