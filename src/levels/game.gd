@@ -20,6 +20,9 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://src/levels/level_select.tscn")
 	elif Input.is_action_just_pressed("clear"):
 		clear()
+	elif Input.is_action_just_pressed("freeze"):
+		if life_hearts.remaining() == 1: play_death()
+		else: next_round(true)
 	elif Input.is_action_just_pressed("restart") or round_timer.is_expired():
 		if life_hearts.remaining() == 1: play_death()
 		else: next_round()
@@ -43,11 +46,11 @@ func clear() -> void:
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset()
 
-func next_round() -> void:
+func next_round(solid: bool = false) -> void:
 	life_hearts.use_figure()
 	round_timer.reset()
 
-	add_child(player.spawn_ghost(false))
+	add_child(player.spawn_ghost(solid))
 	get_tree().call_group("ghosts", "restart")
 
 	player.reset()
