@@ -38,8 +38,7 @@ func play_death() -> void:
 	get_tree().paused = true
 	await player.play_death()
 	get_tree().paused = false
-	if life_hearts.remaining() > 1: next_round()
-	else: clear()
+	clear()
 
 func clear() -> void:
 	round_timer.reset()
