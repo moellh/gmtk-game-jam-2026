@@ -25,7 +25,6 @@ window/stretch/aspect="expand"
 
 [gui]
 
-theme/default_font_antialiasing=1
 theme/default_font_subpixel_positioning=0
 
 [input]
@@ -71,8 +70,8 @@ menu={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.018, 0.018, 0.022, 1)
-textures/canvas_textures/default_texture_filter=0
