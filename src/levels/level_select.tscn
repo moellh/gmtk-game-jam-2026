@@ -5,8 +5,10 @@
 [ext_resource type="Script" uid="uid://bx5ssfotac8vt" path="res://src/levels/level_info.gd" id="3"]
 [ext_resource type="Theme" path="res://src/ui_theme.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://cvri1lanjb2a7" path="res://src/levels/level2.tscn" id="5_uwu4p"]
+[ext_resource type="PackedScene" uid="uid://dajfc1wf8xl1x" path="res://src/levels/level3.tscn" id="6_rv1bo"]
 [ext_resource type="PackedScene" uid="uid://nuxebdxga02e" path="res://src/levels/level4.tscn" id="6_s888k"]
 [ext_resource type="PackedScene" uid="uid://ixgmdug8p711" path="res://src/levels/level6.tscn" id="7_nipju"]
+[ext_resource type="PackedScene" uid="uid://c5uya36oc53mp" path="res://src/levels/level5.tscn" id="7_rv1bo"]
 [ext_resource type="PackedScene" uid="uid://b5y1jkor3erq5" path="res://src/levels/level8.tscn" id="9_jc6pm"]
 
 [sub_resource type="Resource" id="LevelInfo_1"]
@@ -18,6 +20,12 @@ scene = ExtResource("2")
 script = ExtResource("3")
 name = "Level 2"
 scene = ExtResource("5_uwu4p")
+metadata/_custom_type_script = "uid://bx5ssfotac8vt"
+
+[sub_resource type="Resource" id="Resource_2377k"]
+script = ExtResource("3")
+name = "Level 3"
+scene = ExtResource("6_rv1bo")
 metadata/_custom_type_script = "uid://bx5ssfotac8vt"
 
 [sub_resource type="Resource" id="Resource_i8buq"]
@@ -53,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4")
 script = ExtResource("1")
-levels = Array[ExtResource("3")]([SubResource("LevelInfo_1"), SubResource("Resource_s888k"), SubResource("Resource_jc6pm"), SubResource("Resource_i8buq"), SubResource("Resource_rv1bo"), SubResource("Resource_uhaqb")])
+levels = Array[ExtResource("3")]([SubResource("LevelInfo_1"), SubResource("Resource_s888k"), SubResource("Resource_2377k"), SubResource("Resource_i8buq"), SubResource("Resource_jc6pm"), SubResource("Resource_rv1bo"), SubResource("Resource_uhaqb")])
 
 [node name="Center" type="CenterContainer" parent="." unique_id=81011664]
 layout_mode = 1
