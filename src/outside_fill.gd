@@ -2,6 +2,8 @@
 class_name OutsideFill
 extends Node2D
 
+signal player_outside
+
 const HASH_X := 73856093
 const HASH_Y := 19349663
 const HASH_SEED := 83492791
@@ -49,6 +51,18 @@ func _ready() -> void:
 	visible_world_rect = level_rect
 	get_viewport().size_changed.connect(_update_visible_rect)
 	_update_visible_rect.call_deferred()
+
+func _physics_process(_delta: float) -> void:
+	var player := get_tree().get_first_node_in_group(&"player") as CollisionObject2D
+	if player == null: return
+
+	var collision_shape := player.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if collision_shape == null or collision_shape.shape == null: return
+
+	var shape_transform := global_transform.affine_inverse() * collision_shape.global_transform
+	var player_rect := shape_transform * collision_shape.shape.get_rect()
+	if not level_rect.encloses(player_rect):
+		player_outside.emit()
 
 func _update_visible_rect() -> void:
 	var camera := get_viewport().get_camera_2d()

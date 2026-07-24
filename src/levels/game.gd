@@ -3,11 +3,13 @@ extends Node2D
 @export var next_level: PackedScene
 
 @onready var player: Player = $Player
+@onready var outside_fill: OutsideFill = $OutsideFill
 @onready var round_timer: RoundTimer = %RoundTimer
 @onready var life_hearts: LifeHearts = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
 
 func _ready() -> void:
+	outside_fill.player_outside.connect(play_death)
 	player.reset()
 	play_level_intro()
 
