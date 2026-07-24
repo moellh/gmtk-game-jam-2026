@@ -25,20 +25,20 @@ tile_map_data = PackedByteArray("AAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAQAAw
 tile_set = ExtResource("3_ji7uo")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("5_nrlxc")]
-position = Vector2(57, 136)
+position = Vector2(56, 136)
 
 [node name="Goal" parent="." unique_id=736253240 instance=ExtResource("6_wggor")]
 position = Vector2(312, 168)
 
 [node name="Button1" parent="." unique_id=1109644628 instance=ExtResource("7_q3a5j")]
-position = Vector2(118, 172)
+position = Vector2(112, 171)
 
 [node name="Button2" parent="." unique_id=556200501 instance=ExtResource("7_q3a5j")]
-position = Vector2(42, 76)
+position = Vector2(48, 75)
 COLOR_UP = Color(0.326832, 0.5862444, 0.22552186, 1)
 
 [node name="Button3" parent="." unique_id=593554100 instance=ExtResource("7_q3a5j")]
-position = Vector2(234, 60)
+position = Vector2(248, 59)
 COLOR_UP = Color(0.31939495, 0.48163897, 0.90145975, 1)
 
 [node name="Door1" parent="." unique_id=1161385492 instance=ExtResource("8_7wyut")]
@@ -64,7 +64,8 @@ offset_left = 192.0
 offset_top = 16.0
 offset_right = 224.0
 offset_bottom = 32.0
-round_time = 20.0
+text = "12.5"
+round_time = 12.5
 
 [node name="LifeHearts" parent="WorldUI" unique_id=2002497606 instance=ExtResource("9_ji7uo")]
 unique_name_in_owner = true
