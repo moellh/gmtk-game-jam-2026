@@ -2,10 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="1_qn62n"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0"]
-atlas = ExtResource("1_qn62n")
-region = Rect2(0, 34, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_h1"]
 atlas = ExtResource("1_qn62n")
 region = Rect2(17, 34, 16, 16)
@@ -18,9 +14,6 @@ region = Rect2(34, 34, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h0")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_h1")
 }, {
 "duration": 1.0,
@@ -28,10 +21,10 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 6.0
+"speed": 2.0
 }]
 
 [node name="LifeHeart" type="AnimatedSprite2D" unique_id=1741137320]
 modulate = Color(0.95, 0, 0.207, 1)
 sprite_frames = SubResource("SpriteFrames_heart")
-autoplay = "default"
+frame_progress = 0.9956352

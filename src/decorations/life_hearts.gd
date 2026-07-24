@@ -27,15 +27,25 @@ func reset() -> void:
 	_refresh()
 
 func _refresh() -> void:
+	var beating_index := remaining() - 1
 	for index in get_child_count():
-		(get_child(index) as AnimatedSprite2D).visible = index < remaining()
+		var heart := get_child(index) as AnimatedSprite2D
+		heart.visible = index <= beating_index
+		if index == beating_index:
+			heart.play()
+		else:
+			heart.stop()
 
 func _rebuild() -> void:
 	if not is_inside_tree(): return
 
-	for child in get_children(): child.queue_free()
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
 
 	for index in lives:
 		var heart := LIFE_HEART.instantiate() as Node2D
 		heart.position = Vector2(index * SPACING, 0.0)
 		add_child(heart)
+
+	_refresh()
