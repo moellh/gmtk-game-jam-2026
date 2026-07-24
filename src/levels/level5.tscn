@@ -1,0 +1,94 @@
+[gd_scene format=4 uid="uid://c5uya36oc53mp"]
+
+[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="1_fhu77"]
+[ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="2_23ay3"]
+[ext_resource type="TileSet" uid="uid://c55wi8wsxfvw6" path="res://assets/world.tres" id="3_piim0"]
+[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="4_28rxj"]
+[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/interactables/goal.tscn" id="5_y13qy"]
+[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/interactables/button.tscn" id="6_6hd6h"]
+[ext_resource type="PackedScene" uid="uid://drt1mersc3ne0" path="res://src/decorations/round_timer.tscn" id="8_8ec55"]
+[ext_resource type="Curve" uid="uid://cpf60p3mkmx28" path="res://src/effects/glitch_curve.tres" id="9_t4noc"]
+[ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="10_ovxt2"]
+[ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="11_duhk2"]
+[ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_ga44s"]
+[ext_resource type="PackedScene" uid="uid://bd1x1oork07jg" path="res://src/interactables/door1x1.tscn" id="13_fhu77"]
+[ext_resource type="PackedScene" uid="uid://dtatbaoqly2pe" path="res://src/pause_screen.tscn" id="13_tj56q"]
+
+[node name="Main" type="Node2D" unique_id=908013008]
+texture_filter = 1
+script = ExtResource("1_fhu77")
+
+[node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_23ay3")]
+level_rect = Rect2(16, 16, 336, 192)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
+tile_map_data = PackedByteArray("AAAFAAsAAAAQAAUAAAAFAAwAAAAQAAcAAAAGAAsAAAAQAAUAAAAGAAwAAAAQAAcAAAAHAAsAAAAQAAUAAAAHAAwAAAAQAAcAAAAIAAsAAAAQAAUAAAAIAAwAAAAQAAcAAAAJAAsAAAAQAAUAAAAJAAwAAAAQAAcAAAAKAAsAAAARAAYAAAAEAAsAAAAQAAUAAAAEAAwAAAAQAAcAAAABAAsAAAAPAAYAAAABAAwAAAAPAAcAAAADAAsAAAAQAAUAAAADAAwAAAAQAAcAAAACAAsAAAAQAAUAAAACAAwAAAAQAAcAAAABAAoAAAASAAYAAAABAAkAAAASAAYAAAABAAgAAAASAAYAAAAGAAYAAAAQAAwAAAAHAAYAAAAQAAwAAAAIAAYAAAAQAAwAAAAJAAYAAAAQAAwAAAAGAAkAAAAPABAAAAAHAAkAAAAQABAAAAAIAAkAAAAQABAAAAAKAAoAAAASAAYAAAAKAAkAAAARAAYAAAAKAAgAAAASAAYAAAAJAAkAAAAQAAwAAAAGAAcAAAAHAA0AAAAHAAcAAAAIAAsAAAAIAAcAAAAIAAsAAAAJAAcAAAAIAAsAAAAKAAcAAAASAAoAAAABAAcAAAASAAYAAAADAAgAAAAHAAcAAAAEAAgAAAAJAAcAAAAKAAwAAAARAAcAAAAFAAYAAAAPAAwAAAACAAYAAAARAAwAAAABAAUAAAASAAYAAAABAAYAAAAPAAYAAAABAAQAAAAPAAkAAAACAAQAAAAQAAwAAAADAAQAAAALAAcAAAAEAAQAAAALAAcAAAAFAAQAAAALAAcAAAAGAAQAAAAQAAwAAAAHAAQAAAAQAAwAAAAIAAQAAAAQAAwAAAAJAAQAAAAQAAwAAAAKAAQAAAARAAkAAAAKAAUAAAASAA4AAAAKAAYAAAARAAoAAAAEAAoAAAASAAAAAAACAAoAAAAQAAAAAAAHAAUAAAAOAAIAAAADAAUAAAATAAAAAAADAAYAAAATAAEAAAACAAcAAAAGAAgAAAA=")
+tile_set = ExtResource("3_piim0")
+
+[node name="Player" parent="." unique_id=1157283441 instance=ExtResource("4_28rxj")]
+position = Vector2(49, 168)
+
+[node name="Goal" parent="." unique_id=736253240 instance=ExtResource("5_y13qy")]
+position = Vector2(152, 88)
+
+[node name="Button1" parent="." unique_id=1109644628 instance=ExtResource("6_6hd6h")]
+position = Vector2(146, 172)
+COLOR_UP = Color(0, 0.41568628, 0.36862746, 1)
+
+[node name="Button2" parent="." unique_id=556200501 instance=ExtResource("6_6hd6h")]
+position = Vector2(146, 140)
+COLOR_UP = Color(0.42352942, 0.24705882, 0.6392157, 1)
+
+[node name="WorldCamera" type="Camera2D" parent="." unique_id=1563278812]
+position = Vector2(96, 133)
+
+[node name="WorldUI" type="Node2D" parent="." unique_id=1905097379]
+
+[node name="RoundTimer" parent="WorldUI" unique_id=1658685448 instance=ExtResource("8_8ec55")]
+unique_name_in_owner = true
+offset_left = 112.0
+offset_top = 64.0
+offset_right = 144.0
+offset_bottom = 80.0
+text = "12.5"
+round_time = 5.0
+danger_curve = ExtResource("9_t4noc")
+
+[node name="LifeHearts" parent="WorldUI" unique_id=2002497606 instance=ExtResource("10_ovxt2")]
+unique_name_in_owner = true
+position = Vector2(56, 71)
+lives = 3
+
+[node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("11_duhk2")]
+
+[node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("12_ga44s")]
+
+[node name="PauseScreen" parent="." unique_id=13150382 instance=ExtResource("13_tj56q")]
+
+[node name="Door11" parent="." unique_id=1179420651 instance=ExtResource("13_fhu77")]
+position = Vector2(120, 136)
+color = Color(0, 0.41694596, 0.3705476, 1)
+inverted = true
+
+[node name="Door21" parent="." unique_id=959543760 instance=ExtResource("13_fhu77")]
+position = Vector2(120, 168)
+color = Color(0.42352942, 0.24705882, 0.6392157, 1)
+inverted = true
+
+[node name="Door12" parent="." unique_id=1293617365 instance=ExtResource("13_fhu77")]
+position = Vector2(88, 88)
+color = Color(0, 0.41568628, 0.36862746, 1)
+
+[node name="Door22" parent="." unique_id=623004825 instance=ExtResource("13_fhu77")]
+position = Vector2(104, 88)
+color = Color(0.42352942, 0.24705882, 0.6392157, 1)
+
+[connection signal="reached" from="Goal" to="." method="complete_level"]
+[connection signal="changed" from="Button1" to="Door11" method="set_open"]
+[connection signal="changed" from="Button1" to="Door12" method="set_open"]
+[connection signal="changed" from="Button2" to="Door21" method="set_open"]
+[connection signal="changed" from="Button2" to="Door22" method="set_open"]
+[connection signal="crushed" from="Door11" to="." method="play_death"]
+[connection signal="crushed" from="Door21" to="." method="play_death"]
+[connection signal="crushed" from="Door12" to="." method="play_death"]
+[connection signal="crushed" from="Door22" to="." method="play_death"]
