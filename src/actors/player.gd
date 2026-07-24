@@ -59,9 +59,10 @@ func update_animation(move_axis: float) -> void:
 	else:
 		sprite.play(&"idle")
 
-func spawn_ghost() -> Node:
+func spawn_ghost(solid: bool) -> Node:
 	var ghost := GHOST_SCENE.instantiate()
 	ghost.setup(recording)
+	ghost.solid_at_rest = solid
 	ghost.global_position = spawn
 	ghost.add_to_group(&"ghosts")
 	return ghost
