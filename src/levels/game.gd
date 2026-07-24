@@ -1,43 +1,39 @@
 extends Node2D
 
 const ROUND_TIME := 10.0
-const TILE_SIZE := 16.0
 const LEVEL_TRANSITION_TIME := 1.0
 const DEATH_SCALE := Vector2.ONE * 3.0
 
-const LIFE_HEART := preload("res://src/levels/life_heart.tscn")
-
-const LEVEL_SELECT := "res://src/level_select.tscn"
-
 @export var next_level: PackedScene
-@export_range(1, 10, 1) var max_figures := 2
 
 @onready var player: CharacterBody2D = $Player
 @onready var timer_label: Label = %TimerDisplay
-@onready var life_hearts: Node2D = %LifeHearts
+@onready var life_hearts: LifeHearts = get_node_or_null(^"%LifeHearts")
 @onready var level_complete: CanvasLayer = $LevelComplete
+@onready var max_figures: int = life_hearts.lives if life_hearts != null else 2
 
 var timer := ROUND_TIME
 var finished_figures := 0
 var completed := false
-var life_heart_icons: Array[AnimatedSprite2D] = []
 var accepting_input := false
 var dying := false
 
 func _ready() -> void:
 	player.reset()
-	build_life_hearts()
-	update_life_hearts()
+	_update_hearts()
 	update_hud()
 	play_level_intro()
 
+func _update_hearts() -> void:
+	if life_hearts != null:
+		life_hearts.set_remaining(remaining_figures())
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
-		get_tree().change_scene_to_file(LEVEL_SELECT)
+		get_tree().change_scene_to_file("res://src/levels/level_select.tscn")
 		return
 
-	if not accepting_input:
-		return
+	if not accepting_input: return
 
 	if Input.is_action_just_pressed("clear"):
 		clear()
@@ -100,7 +96,7 @@ func clear() -> void:
 	finished_figures = 0
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset()
-	update_life_hearts()
+	_update_hearts()
 
 func next_round() -> void:
 	finished_figures += 1
@@ -114,22 +110,10 @@ func next_round() -> void:
 	get_tree().call_group("ghosts", "restart")
 
 	player.reset()
-	update_life_hearts()
+	_update_hearts()
 
 func remaining_figures() -> int:
 	return maxi(max_figures - finished_figures, 0)
-
-func build_life_hearts() -> void:
-	for index in max_figures:
-		var slot := LIFE_HEART.instantiate()
-		slot.position = Vector2(index * TILE_SIZE, 0.0)
-		life_hearts.add_child(slot)
-		life_heart_icons.append(slot.get_node(^"Heart") as AnimatedSprite2D)
-
-func update_life_hearts() -> void:
-	var visible_hearts := remaining_figures()
-	for index in life_heart_icons.size():
-		life_heart_icons[index].visible = index < visible_hearts
 
 func complete_level(goal_position: Vector2) -> void:
 	if completed or not accepting_input:

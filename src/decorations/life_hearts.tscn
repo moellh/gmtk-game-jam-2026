@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dl1fh3artssc0"]
+
+[ext_resource type="Script" uid="uid://bqx3l1fehe4rt" path="res://src/decorations/life_hearts.gd" id="1"]
+
+[node name="LifeHearts" type="Node2D" unique_id=2002497606]
+script = ExtResource("1")
