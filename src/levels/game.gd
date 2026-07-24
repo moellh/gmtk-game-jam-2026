@@ -15,7 +15,6 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 var timer := ROUND_TIME
 var finished_figures := 0
 var completed := false
-var accepting_input := false
 var dying := false
 
 func _ready() -> void:
@@ -32,8 +31,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		get_tree().change_scene_to_file("res://src/levels/level_select.tscn")
 		return
-
-	if not accepting_input: return
 
 	if Input.is_action_just_pressed("clear"):
 		clear()
@@ -57,22 +54,21 @@ func update_hud() -> void:
 	timer_label.text = "%d.%d" % [displayed_seconds, displayed_tenths % 10]
 
 func play_level_intro() -> void:
-	accepting_input = false
-	player.set_physics_process(false)
+	get_tree().paused = true
 
 	var opaque_modulate := player.modulate
 	opaque_modulate.a = 1.0
 	player.modulate = _faded(opaque_modulate)
 
 	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(player, "modulate", opaque_modulate, LEVEL_TRANSITION_TIME)
 	await tween.finished
 
-	accepting_input = true
-	player.set_physics_process(true)
+	get_tree().paused = false
 
 func play_death() -> void:
-	if dying or completed or not accepting_input:
+	if dying or completed or get_tree().paused:
 		return
 	dying = true
 
@@ -87,8 +83,6 @@ func play_death() -> void:
 	player.modulate = opaque_modulate
 	get_tree().paused = false
 	next_round()
-	player.set_physics_process(true)
-	accepting_input = true
 	dying = false
 
 func clear() -> void:
@@ -116,7 +110,7 @@ func remaining_figures() -> int:
 	return maxi(max_figures - finished_figures, 0)
 
 func complete_level(goal_position: Vector2) -> void:
-	if completed or not accepting_input:
+	if completed or get_tree().paused:
 		return
 	completed = true
 
@@ -128,8 +122,6 @@ func complete_level(goal_position: Vector2) -> void:
 	level_complete.open(next_level)
 
 func _freeze_player() -> Tween:
-	accepting_input = false
-	player.set_physics_process(false)
 	player.velocity = Vector2.ZERO
 	get_tree().paused = true
 	var tween := create_tween()
