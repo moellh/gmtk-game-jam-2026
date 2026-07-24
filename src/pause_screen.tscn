@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/pause_screen.gd" id="1_script"]
+[ext_resource type="Theme" path="res://src/ui_theme.tres" id="2_theme"]
+
+[node name="PauseScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 110
+script = ExtResource("1_script")
+
+[node name="Screen" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+theme = ExtResource("2_theme")
+
+[node name="Center" type="CenterContainer" parent="Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Screen/Center"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Screen/Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="Screen/Center/VBox"]
+layout_mode = 2
+text = "Press ESC to continue"
+horizontal_alignment = 1
