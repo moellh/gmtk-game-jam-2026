@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dhjpoxx70p30a"]
 
 [ext_resource type="Script" uid="uid://1ixxgubyn2fl" path="res://src/interactables/control_sign.gd" id="1_sign"]
 [ext_resource type="FontFile" uid="uid://dkstoc421nmrg" path="res://assets/fonts/Silkscreen-Regular.ttf" id="2_font"]
@@ -11,31 +11,35 @@ size = Vector2(36, 36)
 atlas = ExtResource("3_tiles")
 region = Rect2(289, 51, 16, 16)
 
-[node name="ControlSign" type="Area2D"]
+[node name="ControlSign" type="Area2D" unique_id=263880704]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 script = ExtResource("1_sign")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=27825484]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_sign")
 
-[node name="InfoPanel" type="Sprite2D" parent="."]
+[node name="InfoPanel" type="Sprite2D" parent="." unique_id=117987620]
 texture = SubResource("AtlasTexture_info_panel")
 
-[node name="Prompt" type="Label" parent="."]
-top_level = true
-visible = false
+[node name="Prompt" type="Label" parent="." unique_id=1253276017]
 z_index = 10
-offset_right = 128.0
-offset_bottom = 56.0
+offset_left = -27.0
+offset_top = -21.0
+offset_right = 27.0
+offset_bottom = -11.0
 theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
 theme_override_constants/line_spacing = -1
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
+text = "Controls"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

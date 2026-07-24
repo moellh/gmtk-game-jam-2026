@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/interactables/button.tscn" id="5_button"]
 [ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/interactables/door1x2.tscn" id="6_door"]
 [ext_resource type="FontFile" uid="uid://dkstoc421nmrg" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
-[ext_resource type="PackedScene" path="res://src/interactables/control_sign.tscn" id="8_sign"]
+[ext_resource type="PackedScene" uid="uid://dhjpoxx70p30a" path="res://src/interactables/control_sign.tscn" id="8_sign"]
 [ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="9_complete"]
 [ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="10_outside"]
 [ext_resource type="Shader" uid="uid://c2tp42fm8nojd" path="res://src/outside_fill.gdshader" id="11_outside_shader"]
@@ -846,7 +846,7 @@ tile_map_data = PackedByteArray("AAAGAAcAAAAQAAUAAAAHAAcAAAAQAAUAAAAIAAcAAAAQAAU
 tile_set = SubResource("TileSet_oi3di")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("2_vonw3")]
-position = Vector2(120, 104)
+position = Vector2(105, 104)
 
 [node name="Goal" parent="." unique_id=736253240 instance=ExtResource("4_goal")]
 position = Vector2(312, 72)
@@ -925,22 +925,16 @@ unique_name_in_owner = true
 position = Vector2(136, 24)
 
 [node name="MovementSign" parent="WorldUI" unique_id=1640671847 instance=ExtResource("8_sign")]
-position = Vector2(104, 104)
-instructions = "A / D
-MOVE
-
-SPACE
-JUMP"
+position = Vector2(125, 104)
+text = "Left/Right to move"
 
 [node name="FreezeSign" parent="WorldUI" unique_id=2145279178 instance=ExtResource("8_sign")]
-position = Vector2(152, 104)
-instructions = "R
-Freeze Ghost"
+position = Vector2(174, 104)
+text = "'R' to die early"
 
 [node name="ResetSign" parent="WorldUI" unique_id=659495750 instance=ExtResource("8_sign")]
-position = Vector2(216, 104)
-instructions = "C
- Reset"
+position = Vector2(230, 104)
+text = "Space to jump"
 
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("9_complete")]
 
