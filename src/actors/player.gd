@@ -7,7 +7,7 @@ const FRICTION := 2500.0
 const LEDGE_TIME := 0.1
 const JUMP_BUFFER := 0.1
 
-const GHOST_SCENE := preload("res://src/ghost.tscn")
+const GHOST_SCENE := preload("res://src/actors/ghost.tscn")
 
 var ledge_timer := 0.0
 var buffer_timer := 0.0

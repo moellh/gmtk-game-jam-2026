@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://dp7t1cvck55bt"]
 
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="1_u52ul"]
-[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/player.tscn" id="2_vonw3"]
-[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/game.gd" id="3_game"]
-[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/goal.tscn" id="4_goal"]
-[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/button.tscn" id="5_button"]
-[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/door1x2.tscn" id="6_door"]
+[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="2_vonw3"]
+[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="3_game"]
+[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/interactables/goal.tscn" id="4_goal"]
+[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/interactables/button.tscn" id="5_button"]
+[ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/interactables/door1x2.tscn" id="6_door"]
 [ext_resource type="FontFile" uid="uid://dkstoc421nmrg" path="res://assets/fonts/Silkscreen-Regular.ttf" id="7_font"]
-[ext_resource type="PackedScene" path="res://src/control_sign.tscn" id="8_sign"]
+[ext_resource type="PackedScene" path="res://src/interactables/control_sign.tscn" id="8_sign"]
 [ext_resource type="PackedScene" path="res://src/level_complete.tscn" id="9_complete"]
 [ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="10_outside"]
 [ext_resource type="Shader" uid="uid://c2tp42fm8nojd" path="res://src/outside_fill.gdshader" id="11_outside_shader"]
@@ -835,7 +835,6 @@ border_color = Color(0.85, 0.85, 0.85, 1)
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("3_game")
-figure_spawn_offsets = Array[Vector2]([Vector2(0, 0), Vector2(16, 0)])
 
 [node name="OutsideFill" type="Node2D" parent="." unique_id=741485520]
 z_index = -10

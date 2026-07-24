@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b34jpqw0gv0ag"]
 
-[ext_resource type="Script" uid="uid://bxew76nll1mab" path="res://src/goal.gd" id="1"]
+[ext_resource type="Script" uid="uid://bxew76nll1mab" path="res://src/interactables/goal.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_goal"]

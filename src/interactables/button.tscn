@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://da8qcbqxtbvjb"]
 
-[ext_resource type="Script" uid="uid://diaejevtammsv" path="res://src/button.gd" id="1"]
+[ext_resource type="Script" uid="uid://diaejevtammsv" path="res://src/interactables/button.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_button_up"]
