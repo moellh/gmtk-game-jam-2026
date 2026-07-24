@@ -1,9 +1,9 @@
 extends Node2D
 
-const ROUND_TIME := 10.0
 const LEVEL_TRANSITION_TIME := 1.0
 const DEATH_SCALE := Vector2.ONE * 3.0
 
+@export var round_time: float
 @export var next_level: PackedScene
 
 @onready var player: CharacterBody2D = $Player
@@ -11,7 +11,7 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 @onready var life_hearts: LifeHearts = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
 
-var timer := ROUND_TIME
+@export var timer := round_time
 
 func _ready() -> void:
 	player.reset()
@@ -74,7 +74,7 @@ func play_death() -> void:
 	next_round()
 
 func clear() -> void:
-	timer = ROUND_TIME
+	timer = round_time
 	life_hearts.reset()
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset()
@@ -85,7 +85,7 @@ func next_round() -> void:
 		clear()
 		return
 
-	timer = ROUND_TIME
+	timer = round_time
 
 	add_child(player.spawn_ghost())
 	get_tree().call_group("ghosts", "restart")
