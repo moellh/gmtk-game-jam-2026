@@ -22,6 +22,7 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_sign")
 
 [node name="InfoPanel" type="Sprite2D" parent="." unique_id=117987620]
+self_modulate = Color(0.89270526, 0.7756468, 0.41174197, 1)
 texture = SubResource("AtlasTexture_info_panel")
 
 [node name="Prompt" type="Label" parent="." unique_id=1253276017]
