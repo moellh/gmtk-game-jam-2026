@@ -1,11 +1,8 @@
 extends Node2D
 
-const LEVEL_TRANSITION_TIME := 1.0
-const DEATH_SCALE := Vector2.ONE * 3.0
-
 @export var next_level: PackedScene
 
-@onready var player: CharacterBody2D = $Player
+@onready var player: Player = $Player
 @onready var round_timer: RoundTimer = %RoundTimer
 @onready var life_hearts: LifeHearts = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
@@ -15,48 +12,27 @@ func _ready() -> void:
 	play_level_intro()
 
 func _process(delta: float) -> void:
+	round_timer.advance(delta)
+
 	if Input.is_action_just_pressed("menu"):
 		get_tree().change_scene_to_file("res://src/levels/level_select.tscn")
-		return
-
-	if Input.is_action_just_pressed("clear"):
+	elif Input.is_action_just_pressed("clear"):
 		clear()
-		return
-
-	round_timer.advance(delta)
-	if Input.is_action_just_pressed("restart"): next_round()
-	elif round_timer.is_expired():
+	elif Input.is_action_just_pressed("restart") or round_timer.is_expired():
 		if life_hearts.remaining() == 1: play_death()
 		else: next_round()
 
 func play_level_intro() -> void:
 	get_tree().paused = true
-
-	var opaque_modulate := player.modulate
-	opaque_modulate.a = 1.0
-	player.modulate = _faded(opaque_modulate)
-
-	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property(player, "modulate", opaque_modulate, LEVEL_TRANSITION_TIME)
-	await tween.finished
-
+	await player.play_spawn()
 	get_tree().paused = false
 
 func play_death() -> void:
 	if get_tree().paused: return
-
-	var normal_scale := player.scale
-	var opaque_modulate := player.modulate
-	var tween := _freeze_player()
-	tween.tween_property(player, "scale", normal_scale * DEATH_SCALE, LEVEL_TRANSITION_TIME)
-	tween.tween_property(player, "modulate", _faded(opaque_modulate), LEVEL_TRANSITION_TIME)
-	await tween.finished
-
-	player.scale = normal_scale
-	player.modulate = opaque_modulate
+	get_tree().paused = true
+	await player.play_death()
 	get_tree().paused = false
-	next_round()
+	clear()
 
 func clear() -> void:
 	round_timer.reset()
@@ -66,10 +42,6 @@ func clear() -> void:
 
 func next_round() -> void:
 	life_hearts.use_figure()
-	if life_hearts.remaining() == 0:
-		clear()
-		return
-
 	round_timer.reset()
 
 	add_child(player.spawn_ghost())
@@ -79,22 +51,6 @@ func next_round() -> void:
 
 func complete_level(goal_position: Vector2) -> void:
 	if get_tree().paused: return
-
-	var tween := _freeze_player()
-	tween.tween_property(player, "global_position", goal_position, LEVEL_TRANSITION_TIME)
-	tween.tween_property(player, "modulate", _faded(player.modulate), LEVEL_TRANSITION_TIME)
-	await tween.finished
-
-	level_complete.open(next_level)
-
-func _freeze_player() -> Tween:
-	player.velocity = Vector2.ZERO
 	get_tree().paused = true
-	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.set_parallel(true)
-	return tween
-
-func _faded(base: Color) -> Color:
-	base.a = 0.0
-	return base
+	await player.play_goal(goal_position)
+	level_complete.open(next_level)

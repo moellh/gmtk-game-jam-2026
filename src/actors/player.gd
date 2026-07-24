@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 const SPEED := 200.0
@@ -6,6 +7,9 @@ const ACCEL := 2000.0
 const FRICTION := 2500.0
 const LEDGE_TIME := 0.1
 const JUMP_BUFFER := 0.1
+
+const TRANSITION_TIME := 1.0
+const DEATH_SCALE := Vector2.ONE * 3.0
 
 const GHOST_SCENE := preload("res://src/actors/ghost.tscn")
 
@@ -66,3 +70,40 @@ func reset() -> void:
 	recording = []
 	velocity = Vector2.ZERO
 	global_position = spawn
+
+func play_spawn() -> void:
+	var opaque := modulate
+	opaque.a = 1.0
+	modulate = _faded(opaque)
+	var tween := _transition_tween()
+	tween.tween_property(self, "modulate", opaque, TRANSITION_TIME)
+	await tween.finished
+
+func play_death() -> void:
+	velocity = Vector2.ZERO
+	var normal_scale := scale
+	var opaque := modulate
+	var tween := _transition_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "scale", normal_scale * DEATH_SCALE, TRANSITION_TIME)
+	tween.tween_property(self, "modulate", _faded(opaque), TRANSITION_TIME)
+	await tween.finished
+	scale = normal_scale
+	modulate = opaque
+
+func play_goal(goal_position: Vector2) -> void:
+	velocity = Vector2.ZERO
+	var tween := _transition_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "global_position", goal_position, TRANSITION_TIME)
+	tween.tween_property(self, "modulate", _faded(modulate), TRANSITION_TIME)
+	await tween.finished
+
+func _transition_tween() -> Tween:
+	var tween := create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	return tween
+
+func _faded(base: Color) -> Color:
+	base.a = 0.0
+	return base
