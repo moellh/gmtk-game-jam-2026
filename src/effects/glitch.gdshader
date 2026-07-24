@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform float strength : hint_range(0.0, 1.0) = 0.0;
+uniform float red : hint_range(0.0, 1.0) = 0.0;
 uniform sampler2D screen_tex : hint_screen_texture, filter_nearest;
 
 float rand(vec2 c) {
@@ -17,8 +18,16 @@ void fragment() {
 	uv.x += shift;
 
 	float sep = 0.01 * strength;
-	float r = texture(screen_tex, uv + vec2(sep, 0.0)).r;
-	float g = texture(screen_tex, uv).g;
-	float b = texture(screen_tex, uv - vec2(sep, 0.0)).b;
-	COLOR = vec4(r, g, b, 1.0);
+	vec3 col = vec3(
+		texture(screen_tex, uv + vec2(sep, 0.0)).r,
+		texture(screen_tex, uv).g,
+		texture(screen_tex, uv - vec2(sep, 0.0)).b
+	);
+
+	// red corruption: boost red channel, drain green/blue
+	col.r = min(1.0, col.r + red * 0.4);
+	col.g *= 1.0 - red * 0.7;
+	col.b *= 1.0 - red * 0.7;
+
+	COLOR = vec4(col, 1.0);
 }
