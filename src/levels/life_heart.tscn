@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bl1feh3art0jg"]
+
+[ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0"]
+atlas = ExtResource("1")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1"]
+atlas = ExtResource("1")
+region = Rect2(17, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2"]
+atlas = ExtResource("1")
+region = Rect2(34, 34, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_heart"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="LifeHeart" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+
+[node name="Heart" type="AnimatedSprite2D" parent="."]
+z_index = 1
+modulate = Color(0.95, 0, 0.207, 1)
+sprite_frames = SubResource("SpriteFrames_heart")
+autoplay = "default"

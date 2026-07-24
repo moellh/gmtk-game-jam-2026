@@ -5,15 +5,7 @@ const TILE_SIZE := 16.0
 const LEVEL_TRANSITION_TIME := 1.0
 const DEATH_SCALE := Vector2.ONE * 3.0
 
-const HEART_TEXTURE := preload("res://assets/monochrome_tilemap_transparent.png")
-const HEART_ATLAS_COORDS := [
-	Vector2i(0, 2),
-	Vector2i(1, 2),
-	Vector2i(2, 2),
-]
-const HEART_ATLAS_PITCH := 17.0
-const HEART_COLOR := Color(0.95, 0.0, 0.207, 1.0)
-const HEART_ANIMATION := &"default"
+const LIFE_HEART := preload("res://src/levels/life_heart.tscn")
 
 const BASE_VIEWPORT_SIZE := Vector2(384.0, 216.0)
 const LEVEL_VIEW_RECT := Rect2(80.0, 16.0, 256.0, 128.0)
@@ -25,9 +17,7 @@ const LEVEL_SELECT := "res://src/level_select.tscn"
 
 @onready var player: CharacterBody2D = $Player
 @onready var world_camera: Camera2D = $WorldCamera
-@onready var timer_tens: Label = %TimerTens
-@onready var timer_ones: Label = %TimerOnes
-@onready var timer_tenths: Label = %TimerTenths
+@onready var timer_label: Label = %TimerDisplay
 @onready var life_hearts: Node2D = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
 @onready var outside_fill: OutsideFill = $OutsideFill
@@ -53,39 +43,18 @@ func update_world_camera() -> void:
 	var window_size := Vector2(get_window().size)
 	if window_size.x <= 0.0 or window_size.y <= 0.0: return
 
-	var width_scale := window_size.x / BASE_VIEWPORT_SIZE.x
-	var height_scale := window_size.y / BASE_VIEWPORT_SIZE.y
-	var fit_scale := minf(width_scale, height_scale)
+	var fit_scale := minf(window_size.x / BASE_VIEWPORT_SIZE.x, window_size.y / BASE_VIEWPORT_SIZE.y)
 	var visible_size := window_size / fit_scale
 	touch_controls.layout_for_size(visible_size)
-	var gameplay_size := Vector2(
-		visible_size.x,
-		maxf(
-			visible_size.y - touch_controls.reserved_bottom_height,
-			LEVEL_VIEW_RECT.size.y,
-		),
-	)
-	var level_zoom := minf(
-		gameplay_size.x / LEVEL_VIEW_RECT.size.x,
-		gameplay_size.y / LEVEL_VIEW_RECT.size.y,
-	)
+	var gameplay_height := maxf(visible_size.y - touch_controls.reserved_bottom_height, LEVEL_VIEW_RECT.size.y)
+	var gameplay_size := Vector2(visible_size.x, gameplay_height)
+	var level_zoom := minf(gameplay_size.x / LEVEL_VIEW_RECT.size.x, gameplay_size.y / LEVEL_VIEW_RECT.size.y)
 	var viewport_center := visible_size * 0.5
-	var gameplay_center := Vector2(
-		visible_size.x * 0.5,
-		gameplay_size.y * 0.5,
-	)
-	world_camera.position = (
-		LEVEL_VIEW_RECT.get_center()
-		- (gameplay_center - viewport_center) / level_zoom
-	)
+	var gameplay_center := Vector2(visible_size.x * 0.5, gameplay_size.y * 0.5)
+	world_camera.position = LEVEL_VIEW_RECT.get_center() - (gameplay_center - viewport_center) / level_zoom
 	world_camera.zoom = Vector2.ONE * level_zoom
 	var visible_world_size := visible_size / level_zoom
-	outside_fill.set_visible_world_rect(
-		Rect2(
-			world_camera.position - visible_world_size * 0.5,
-			visible_world_size,
-		),
-	)
+	outside_fill.set_visible_world_rect(Rect2(world_camera.position - visible_world_size * 0.5, visible_world_size))
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -114,14 +83,7 @@ func _process(delta: float) -> void:
 func update_hud() -> void:
 	var displayed_tenths := roundi(maxf(timer, 0.0) * 10.0)
 	var displayed_seconds := mini(floori(displayed_tenths * 0.1), 99)
-	timer_tens.visible = displayed_seconds >= 10
-	timer_tens.text = (
-		str(floori(displayed_seconds * 0.1))
-		if timer_tens.visible
-		else "0"
-	)
-	timer_ones.text = str(displayed_seconds % 10)
-	timer_tenths.text = str(displayed_tenths % 10)
+	timer_label.text = "%d.%d" % [displayed_seconds, displayed_tenths % 10]
 
 func play_level_intro() -> void:
 	accepting_input = false
@@ -129,17 +91,10 @@ func play_level_intro() -> void:
 
 	var opaque_modulate := player.modulate
 	opaque_modulate.a = 1.0
-	var transparent_modulate := opaque_modulate
-	transparent_modulate.a = 0.0
-	player.modulate = transparent_modulate
+	player.modulate = _faded(opaque_modulate)
 
 	var tween := create_tween()
-	tween.tween_property(
-		player,
-		"modulate",
-		opaque_modulate,
-		LEVEL_TRANSITION_TIME,
-	)
+	tween.tween_property(player, "modulate", opaque_modulate, LEVEL_TRANSITION_TIME)
 	await tween.finished
 
 	accepting_input = true
@@ -149,30 +104,12 @@ func play_death() -> void:
 	if dying or completed or not accepting_input:
 		return
 	dying = true
-	accepting_input = false
-	player.set_physics_process(false)
-	player.velocity = Vector2.ZERO
-	get_tree().paused = true
 
 	var normal_scale := player.scale
 	var opaque_modulate := player.modulate
-	var transparent_modulate := opaque_modulate
-	transparent_modulate.a = 0.0
-	var tween := create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.set_parallel(true)
-	tween.tween_property(
-		player,
-		"scale",
-		normal_scale * DEATH_SCALE,
-		LEVEL_TRANSITION_TIME,
-	)
-	tween.tween_property(
-		player,
-		"modulate",
-		transparent_modulate,
-		LEVEL_TRANSITION_TIME,
-	)
+	var tween := _freeze_player()
+	tween.tween_property(player, "scale", normal_scale * DEATH_SCALE, LEVEL_TRANSITION_TIME)
+	tween.tween_property(player, "modulate", _faded(opaque_modulate), LEVEL_TRANSITION_TIME)
 	await tween.finished
 
 	player.scale = normal_scale
@@ -208,41 +145,11 @@ func remaining_figures() -> int:
 	return maxi(max_figures - finished_figures, 0)
 
 func build_life_hearts() -> void:
-	var frames := SpriteFrames.new()
-	frames.set_animation_speed(HEART_ANIMATION, 6.0)
-	frames.set_animation_loop(HEART_ANIMATION, true)
-
-	for atlas_coordinates in HEART_ATLAS_COORDS:
-		var texture := AtlasTexture.new()
-		texture.atlas = HEART_TEXTURE
-		texture.region = Rect2(
-			Vector2(atlas_coordinates) * HEART_ATLAS_PITCH,
-			Vector2.ONE * TILE_SIZE,
-		)
-		frames.add_frame(HEART_ANIMATION, texture)
-
 	for index in max_figures:
-		var slot := Node2D.new()
+		var slot := LIFE_HEART.instantiate()
 		slot.position = Vector2(index * TILE_SIZE, 0.0)
 		life_hearts.add_child(slot)
-
-		var background := Polygon2D.new()
-		background.polygon = PackedVector2Array([
-			Vector2(-9.0, -9.0),
-			Vector2(9.0, -9.0),
-			Vector2(9.0, 9.0),
-			Vector2(-9.0, 9.0),
-		])
-		background.color = Color.BLACK
-		slot.add_child(background)
-
-		var heart := AnimatedSprite2D.new()
-		heart.sprite_frames = frames
-		heart.modulate = HEART_COLOR
-		heart.z_index = 1
-		heart.play(HEART_ANIMATION)
-		slot.add_child(heart)
-		life_heart_icons.append(heart)
+		life_heart_icons.append(slot.get_node(^"Heart") as AnimatedSprite2D)
 
 func update_life_hearts() -> void:
 	var visible_hearts := remaining_figures()
@@ -253,28 +160,24 @@ func complete_level(goal_position: Vector2) -> void:
 	if completed or not accepting_input:
 		return
 	completed = true
+
+	var tween := _freeze_player()
+	tween.tween_property(player, "global_position", goal_position, LEVEL_TRANSITION_TIME)
+	tween.tween_property(player, "modulate", _faded(player.modulate), LEVEL_TRANSITION_TIME)
+	await tween.finished
+
+	level_complete.open(next_level)
+
+func _freeze_player() -> Tween:
 	accepting_input = false
 	player.set_physics_process(false)
 	player.velocity = Vector2.ZERO
 	get_tree().paused = true
-
-	var transparent_modulate := player.modulate
-	transparent_modulate.a = 0.0
 	var tween := create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel(true)
-	tween.tween_property(
-		player,
-		"global_position",
-		goal_position,
-		LEVEL_TRANSITION_TIME,
-	)
-	tween.tween_property(
-		player,
-		"modulate",
-		transparent_modulate,
-		LEVEL_TRANSITION_TIME,
-	)
-	await tween.finished
+	return tween
 
-	level_complete.open(next_level)
+func _faded(base: Color) -> Color:
+	base.a = 0.0
+	return base
