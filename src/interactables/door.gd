@@ -4,10 +4,8 @@ extends StaticBody2D
 signal crushed
 
 @export var color := Color(0.5, 0.3, 0.15, 1.0):
-	set(value):
-		color = value
-		if is_node_ready():
-			set_color(value)
+	set(value): color = value; if is_node_ready(): set_color(value)
+@export var inverted := false
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var visual: Node2D = $Visual
@@ -16,9 +14,14 @@ signal crushed
 
 func _ready() -> void:
 	set_color(color)
+	if not Engine.is_editor_hint(): _apply_open(inverted)
 
-func set_open(open: bool) -> void:
+func set_open(pressed: bool) -> void:
+	var open := pressed != inverted
 	if not open and player_inside(): crushed.emit()
+	_apply_open(open)
+
+func _apply_open(open: bool) -> void:
 	collision.set_deferred("disabled", open)
 	visual.visible = not open
 
