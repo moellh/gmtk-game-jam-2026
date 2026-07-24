@@ -10,27 +10,31 @@ var solid_at_rest := false
 var _is_solid := false
 
 @onready var solid_shape: CollisionShape2D = $Solid/CollisionShape2D
+@onready var trail: CPUParticles2D = $Trail
 
 func setup(rec: Array) -> void:
 	recording = rec
 
 func restart() -> void:
 	playback = 0
+	trail.emitting = true
 	_is_solid = false
-	modulate = ghost_color
+	self_modulate = ghost_color
 	solid_shape.set_deferred("disabled", true)
 
 func _physics_process(_delta: float) -> void:
 	if playback >= recording.size():
 		if solid_at_rest: _frozen()
 		return
+
 	_advance_recording()
 
 func _frozen() -> void:
 	if _is_solid: return
 	_is_solid = true
+	trail.emitting = false
 	solid_shape.set_deferred("disabled", false)
-	modulate = frozen_color
+	self_modulate = frozen_color
 	pause()
 
 func _advance_recording():
