@@ -9,8 +9,6 @@ signal crushed
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var visual: Node2D = $Visual
-@onready var bottom: Sprite2D = $Visual/Bottom
-@onready var top: Sprite2D = $Visual/Top
 
 func _ready() -> void:
 	set_color(color)
@@ -41,5 +39,4 @@ func player_inside() -> bool:
 	return false
 
 func set_color(c: Color) -> void:
-	bottom.modulate = c
-	top.modulate = c
+	for sprite: CanvasItem in visual.get_children(): sprite.modulate = c

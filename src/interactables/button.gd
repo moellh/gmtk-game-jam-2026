@@ -8,13 +8,10 @@ extends Area2D
 
 signal changed(is_pressed: bool)
 
-@export var COLOR_UP := Color(0.95, 0.0, 0.207, 1.0):
-	set(value):
-		COLOR_UP = value
-		if is_node_ready():
-			set_color(value)
 const COLOR_DOWN := Color(0.0, 0.704, 0.152, 1.0)
 
+@export var COLOR_UP := Color(0.95, 0.0, 0.207, 1.0):
+	set(value): COLOR_UP = value; if is_node_ready(): set_color(value)
 @export var texture_up: AtlasTexture
 @export var texture_down: AtlasTexture
 
