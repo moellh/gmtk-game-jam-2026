@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="3_26lc3"]
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="4_20men"]
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/interactables/goal.tscn" id="5_wnkab"]
+[ext_resource type="Curve" uid="uid://cpf60p3mkmx28" path="res://src/effects/glitch_curve.tres" id="7_0acge"]
 [ext_resource type="PackedScene" uid="uid://drt1mersc3ne0" path="res://src/decorations/round_timer.tscn" id="8_bngp3"]
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="9_yp6te"]
 [ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="10_a2foc"]
@@ -844,6 +845,7 @@ offset_top = -16.0
 offset_right = 208.0
 offset_bottom = 0.0
 round_time = 20.0
+danger_curve = ExtResource("7_0acge")
 
 [node name="LifeHearts" parent="WorldUI" unique_id=2002497606 instance=ExtResource("9_yp6te")]
 unique_name_in_owner = true

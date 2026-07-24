@@ -4,7 +4,7 @@ extends Label
 const DANGER_COLOR := Color(1.0, 0.25, 0.25)
 
 @export var round_time := 10.0
-@export var danger_curve := 5.0
+@export var danger_curve: Curve # maps elapsed fraction (0..1) -> glitch danger (0..1)
 
 var _time_left := 0.0
 
@@ -28,7 +28,8 @@ func is_expired() -> bool:
 	return _time_left <= 0.0
 
 func _refresh() -> void:
-	var danger := pow(1.0 - _time_left / round_time, danger_curve)
+	var elapsed := 1.0 - _time_left / round_time
+	var danger := clampf(danger_curve.sample(elapsed), 0.0, 1.0) if danger_curve else elapsed
 	Glitch.set_danger(danger)
 
 	var tenths := roundi(_time_left * 10.0)
