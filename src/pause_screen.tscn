@@ -1,24 +1,24 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://dtatbaoqly2pe"]
 
-[ext_resource type="Script" path="res://src/pause_screen.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://do8vhxvidr3aj" path="res://src/pause_screen.gd" id="1_script"]
 [ext_resource type="Theme" path="res://src/ui_theme.tres" id="2_theme"]
 
-[node name="PauseScreen" type="CanvasLayer"]
+[node name="PauseScreen" type="CanvasLayer" unique_id=1659425859]
 process_mode = 3
 layer = 110
 script = ExtResource("1_script")
 
-[node name="Screen" type="ColorRect" parent="."]
+[node name="Screen" type="ColorRect" parent="." unique_id=1663673482]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.7)
 theme = ExtResource("2_theme")
+color = Color(0, 0, 0, 0.7)
 
-[node name="Center" type="CenterContainer" parent="Screen"]
+[node name="Center" type="CenterContainer" parent="Screen" unique_id=1282717059]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,17 +26,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Screen/Center"]
+[node name="VBox" type="VBoxContainer" parent="Screen/Center" unique_id=660520437]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Screen/Center/VBox"]
+[node name="Title" type="Label" parent="Screen/Center/VBox" unique_id=1939085487]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Pause"
 horizontal_alignment = 1
 
-[node name="Prompt" type="Label" parent="Screen/Center/VBox"]
+[node name="Prompt" type="Label" parent="Screen/Center/VBox" unique_id=364273508]
 layout_mode = 2
 text = "Press ESC to continue"
 horizontal_alignment = 1

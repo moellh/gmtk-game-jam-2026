@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="9_ji7uo"]
 [ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="10_2vp04"]
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="11_2bo5g"]
+[ext_resource type="PackedScene" path="res://src/pause_screen.tscn" id="12_pause"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("4_b615d")
@@ -872,6 +873,8 @@ position = Vector2(136, 24)
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("10_2vp04")]
 
 [node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("11_2bo5g")]
+
+[node name="PauseScreen" parent="." instance=ExtResource("12_pause")]
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]

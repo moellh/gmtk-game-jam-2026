@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_touch_controls"]
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="13_hearts"]
 [ext_resource type="PackedScene" uid="uid://drt1mersc3ne0" path="res://src/decorations/round_timer.tscn" id="14_timer"]
+[ext_resource type="PackedScene" path="res://src/pause_screen.tscn" id="15_pause"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -869,6 +870,8 @@ text = "Space to jump"
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("9_complete")]
 
 [node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("12_touch_controls")]
+
+[node name="PauseScreen" parent="." unique_id=1733926468 instance=ExtResource("15_pause")]
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door" method="set_open"]
