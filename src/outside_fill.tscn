@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dangpjatpcv2i"]
+
+[ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="2"]
+
+[node name="OutsideFill" type="Node2D"]
+z_index = -10
+script = ExtResource("1")
+atlas = ExtResource("2")

@@ -8,16 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/interactables/door1x2.tscn" id="6_door"]
 [ext_resource type="PackedScene" uid="uid://dhjpoxx70p30a" path="res://src/interactables/control_sign.tscn" id="8_sign"]
 [ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="9_complete"]
-[ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="10_outside"]
-[ext_resource type="Shader" uid="uid://c2tp42fm8nojd" path="res://src/outside_fill.gdshader" id="11_outside_shader"]
+[ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="10_outside"]
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_touch_controls"]
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="13_hearts"]
 [ext_resource type="PackedScene" uid="uid://drt1mersc3ne0" path="res://src/decorations/round_timer.tscn" id="14_timer"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_outside"]
-shader = ExtResource("11_outside_shader")
-shader_parameter/level_rect = Vector4(80, 16, 336, 144)
-shader_parameter/visible_rect = Vector4(80, 16, 336, 144)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("1_u52ul")
@@ -826,10 +820,7 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 texture_filter = 1
 script = ExtResource("3_game")
 
-[node name="OutsideFill" type="Node2D" parent="." unique_id=741485520]
-z_index = -10
-material = SubResource("ShaderMaterial_outside")
-script = ExtResource("10_outside")
+[node name="OutsideFill" parent="." unique_id=741485520 instance=ExtResource("10_outside")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
 tile_map_data = PackedByteArray("AAAGAAcAAAAQAAUAAAAHAAcAAAAQAAUAAAAIAAcAAAAQAAUAAAAJAAcAAAAQAAUAAAAKAAcAAAAQAAUAAAALAAcAAAAQAAUAAAAMAAcAAAAQAAUAAAANAAcAAAAQAAUAAAAOAAcAAAAQAAUAAAAPAAcAAAALAAYAAAAQAAcAAAAQAAUAAAARAAcAAAAQAAUAAAASAAcAAAAQAAYAAAATAAcAAAAQAAYAAAAPAAMAAAASAAcAAAAFAAgAAAAPAAcAAAAGAAgAAAAQAAcAAAAHAAgAAAAQAAcAAAAIAAgAAAAQAAcAAAAJAAgAAAAQAAcAAAAKAAgAAAAQAAcAAAALAAgAAAAQAAcAAAAMAAgAAAAQAAcAAAANAAgAAAAQAAcAAAAOAAgAAAAQAAcAAAAPAAgAAAAQAAcAAAAQAAgAAAAQAAcAAAARAAgAAAAQAAcAAAASAAgAAAAQAAcAAAATAAgAAAAQAAcAAAAUAAgAAAARAAcAAAAUAAcAAAARAAYAAAAUAAYAAAAMAAYAAAAUAAUAAAAMAAYAAAAUAAQAAAASAAoAAAAUAAMAAAASAAoAAAAUAAIAAAASAAoAAAAUAAEAAAARAAkAAAATAAEAAAAQAAwAAAASAAEAAAAQAAwAAAARAAEAAAAQAAwAAAAQAAEAAAAQAAwAAAAOAAEAAAAPAAwAAAANAAEAAAAQAAwAAAAMAAEAAAAQAAwAAAAPAAEAAAAQAAkAAAAPAAIAAAASAAYAAAALAAEAAAAQAAwAAAAKAAEAAAAPAAwAAAAJAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAARAAwAAAAGAAEAAAAQAAwAAAAFAAEAAAAPAAkAAAAFAAIAAAASAAoAAAAFAAMAAAASAAoAAAAFAAQAAAASAAoAAAAFAAUAAAASAAoAAAAFAAYAAAASAAoAAAAFAAcAAAAPAAYAAAATAAUAAAAPAAUAAAASAAYAAAAPAAUAAAATAAYAAAALAAYAAAAPAAYAAAASAAUAAAA=")
