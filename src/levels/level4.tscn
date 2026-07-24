@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="9_ji7uo"]
 [ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="10_2vp04"]
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="11_2bo5g"]
-[ext_resource type="PackedScene" path="res://src/pause_screen.tscn" id="12_pause"]
+[ext_resource type="PackedScene" uid="uid://dtatbaoqly2pe" path="res://src/pause_screen.tscn" id="12_pause"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vonw3"]
 texture = ExtResource("4_b615d")
@@ -832,16 +832,16 @@ position = Vector2(57, 136)
 [node name="Goal" parent="." unique_id=736253240 instance=ExtResource("6_wggor")]
 position = Vector2(312, 168)
 
-[node name="Button" parent="." unique_id=556200501 instance=ExtResource("7_q3a5j")]
-position = Vector2(42, 76)
-
-[node name="Button2" parent="." unique_id=1109644628 instance=ExtResource("7_q3a5j")]
+[node name="Button1" parent="." unique_id=1109644628 instance=ExtResource("7_q3a5j")]
 position = Vector2(118, 172)
+
+[node name="Button2" parent="." unique_id=556200501 instance=ExtResource("7_q3a5j")]
+position = Vector2(42, 76)
 
 [node name="Button3" parent="." unique_id=593554100 instance=ExtResource("7_q3a5j")]
 position = Vector2(234, 60)
 
-[node name="Door" parent="." unique_id=1161385492 instance=ExtResource("8_7wyut")]
+[node name="Door1" parent="." unique_id=1161385492 instance=ExtResource("8_7wyut")]
 position = Vector2(216, 168)
 color = Color(0.6665866, 0.072001316, 0.10197238, 1)
 
@@ -874,12 +874,12 @@ position = Vector2(136, 24)
 
 [node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("11_2bo5g")]
 
-[node name="PauseScreen" parent="." instance=ExtResource("12_pause")]
+[node name="PauseScreen" parent="." unique_id=13150382 instance=ExtResource("12_pause")]
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
-[connection signal="changed" from="Button" to="Door" method="set_open"]
-[connection signal="changed" from="Button2" to="Door" method="set_open"]
-[connection signal="changed" from="Button3" to="Door" method="set_open"]
-[connection signal="crushed" from="Door" to="." method="play_death"]
+[connection signal="changed" from="Button1" to="Door1" method="set_open"]
+[connection signal="changed" from="Button2" to="Door2" method="set_open"]
+[connection signal="changed" from="Button3" to="Door3" method="set_open"]
+[connection signal="crushed" from="Door1" to="." method="play_death"]
 [connection signal="crushed" from="Door2" to="." method="play_death"]
 [connection signal="crushed" from="Door3" to="." method="play_death"]
