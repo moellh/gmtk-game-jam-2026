@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dajfc1wf8xl1x"]
 
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="1_rp3sw"]
+[ext_resource type="PackedScene" uid="uid://nuxebdxga02e" path="res://src/levels/level4.tscn" id="2_vio1i"]
 [ext_resource type="Script" uid="uid://cgfxrcy8cumy0" path="res://src/outside_fill.gd" id="3_ju8q8"]
 [ext_resource type="TileSet" uid="uid://c55wi8wsxfvw6" path="res://assets/world.tres" id="4_jtqkm"]
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="4_qjn4j"]
@@ -12,10 +13,13 @@
 [ext_resource type="Curve" uid="uid://cpf60p3mkmx28" path="res://src/effects/glitch_curve.tres" id="9_jtqkm"]
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="10_vio1i"]
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="11_nscl2"]
+[ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="14_wuq67"]
+[ext_resource type="PackedScene" uid="uid://dtatbaoqly2pe" path="res://src/pause_screen.tscn" id="15_d61mw"]
 
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("1_rp3sw")
+next_level = ExtResource("2_vio1i")
 
 [node name="OutsideFill" type="Node2D" parent="." unique_id=741485520]
 z_index = -10
@@ -74,6 +78,10 @@ unique_name_in_owner = true
 position = Vector2(120, 55)
 
 [node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("11_nscl2")]
+
+[node name="LevelComplete" parent="." unique_id=575847970 instance=ExtResource("14_wuq67")]
+
+[node name="PauseScreen" parent="." unique_id=1659425859 instance=ExtResource("15_d61mw")]
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button" to="Door2" method="set_open"]
