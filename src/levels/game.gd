@@ -8,21 +8,15 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 
 @onready var player: CharacterBody2D = $Player
 @onready var timer_label: Label = %TimerDisplay
-@onready var life_hearts: LifeHearts = get_node_or_null(^"%LifeHearts")
+@onready var life_hearts: LifeHearts = %LifeHearts
 @onready var level_complete: CanvasLayer = $LevelComplete
-@onready var max_figures: int = life_hearts.lives if life_hearts != null else 2
 
 var timer := ROUND_TIME
-var figures_used := 0
 
 func _ready() -> void:
 	player.reset()
-	_update_hearts()
 	update_hud()
 	play_level_intro()
-
-func _update_hearts() -> void:
-	if life_hearts != null: life_hearts.set_remaining(remaining_figures())
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -38,7 +32,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
 		next_round()
 	elif timer <= 0.0:
-		if remaining_figures() == 1:
+		if life_hearts.remaining() == 1:
 			play_death()
 		else:
 			next_round()
@@ -81,14 +75,13 @@ func play_death() -> void:
 
 func clear() -> void:
 	timer = ROUND_TIME
-	figures_used = 0
+	life_hearts.reset()
 	get_tree().call_group("ghosts", "queue_free")
 	player.reset()
-	_update_hearts()
 
 func next_round() -> void:
-	figures_used += 1
-	if figures_used >= max_figures:
+	life_hearts.use_figure()
+	if life_hearts.remaining() == 0:
 		clear()
 		return
 
@@ -98,10 +91,6 @@ func next_round() -> void:
 	get_tree().call_group("ghosts", "restart")
 
 	player.reset()
-	_update_hearts()
-
-func remaining_figures() -> int:
-	return maxi(max_figures - figures_used, 0)
 
 func complete_level(goal_position: Vector2) -> void:
 	if get_tree().paused:

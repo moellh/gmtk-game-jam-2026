@@ -10,11 +10,25 @@ const SPACING := 16.0
 		lives = value
 		_rebuild()
 
+var _used := 0
+
 func _ready() -> void:
 	_rebuild()
 
-func set_remaining(count: int) -> void:
-	for index in get_child_count(): (get_child(index) as AnimatedSprite2D).visible = index < count
+func remaining() -> int:
+	return maxi(lives - _used, 0)
+
+func use_figure() -> void:
+	_used += 1
+	_refresh()
+
+func reset() -> void:
+	_used = 0
+	_refresh()
+
+func _refresh() -> void:
+	for index in get_child_count():
+		(get_child(index) as AnimatedSprite2D).visible = index < remaining()
 
 func _rebuild() -> void:
 	if not is_inside_tree(): return
