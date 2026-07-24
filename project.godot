@@ -15,6 +15,10 @@ run/main_scene="res://src/levels/level_select.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icon.png"
 
+[autoload]
+
+Glitch="*res://src/glitch.tscn"
+
 [display]
 
 window/size/viewport_width=384

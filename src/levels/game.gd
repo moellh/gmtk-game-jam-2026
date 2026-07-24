@@ -19,13 +19,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		get_tree().change_scene_to_file("res://src/levels/level_select.tscn")
 	elif Input.is_action_just_pressed("clear"):
+		Glitch.play()
 		clear()
 	elif Input.is_action_just_pressed("freeze"):
 		if life_hearts.remaining() == 1: play_death()
-		else: next_round(true)
+		else: Glitch.play(); next_round(true)
 	elif Input.is_action_just_pressed("restart") or round_timer.is_expired():
 		if life_hearts.remaining() == 1: play_death()
-		else: next_round()
+		else: Glitch.play(); next_round()
 
 func play_level_intro() -> void:
 	get_tree().paused = true
