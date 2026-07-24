@@ -37,6 +37,6 @@ func player_inside() -> bool:
 			return true
 	return false
 
-func set_color(color: Color) -> void:
-	bottom.modulate = color
-	top.modulate = color
+func set_color(c: Color) -> void:
+	bottom.modulate = c
+	top.modulate = c
