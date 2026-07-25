@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bqkj7wspkoene"]
+
+[ext_resource type="Theme" path="res://src/ui_theme.tres" id="1_guuao"]
+[ext_resource type="Script" uid="uid://dywpk0ckwglfi" path="res://src/main_menu.gd" id="2_bq8pk"]
+
+[node name="MainMenu" type="Control" unique_id=1819378232]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_guuao")
+script = ExtResource("2_bq8pk")
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1798230012]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=1547626767]
+layout_mode = 2
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="Title" type="Label" parent="Center/VBox" unique_id=476434940]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Chronost"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="Center/VBox" unique_id=780657328]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LevelSelection" type="Button" parent="Center/VBox/Buttons" unique_id=267180740]
+layout_mode = 2
+text = "Select Level"
+
+[connection signal="pressed" from="Center/VBox/Buttons/LevelSelection" to="." method="_level_selection"]
