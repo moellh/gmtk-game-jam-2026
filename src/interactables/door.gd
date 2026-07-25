@@ -3,6 +3,8 @@ extends StaticBody2D
 
 signal crushed
 
+const OPEN_ALPHA := 0.2
+
 @export var color := Color(0.5, 0.3, 0.15, 1.0):
 	set(value): color = value; if is_node_ready(): set_color(value)
 @export var inverted := false
@@ -21,7 +23,7 @@ func set_open(pressed: bool) -> void:
 
 func _apply_open(open: bool) -> void:
 	collision.set_deferred("disabled", open)
-	visual.visible = not open
+	visual.modulate.a = OPEN_ALPHA if open else 1.0
 
 func player_inside() -> bool:
 	var world := get_world_2d()
