@@ -1,14 +1,18 @@
 class_name Player
 extends CharacterBody2D
 
-const SPEED := 200.0
-const JUMP_VELOCITY := -300.0
-const ACCEL := 2000.0
+const SPEED := 150.0
+const JUMP_VELOCITY := -270.0
+const ACCEL := 900.0
 const FRICTION := 2500.0
 const LEDGE_TIME := 0.1
 const JUMP_BUFFER := 0.1
 const DROP_TIME := 0.2
 const PLATFORM_LAYER := 3
+
+const RISE_GRAVITY_SCALE := 0.8
+const FALL_GRAVITY_SCALE := 1.5
+const MAX_FALL_SPEED := 450.0
 
 const TRANSITION_TIME := 1.0
 const DEATH_SCALE := Vector2.ONE * 3.0
@@ -29,7 +33,11 @@ func _ready() -> void:
 	spawn = global_position
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor(): velocity += get_gravity() * delta
+	# Gravity (falls harder than it rises, so jumps feel less floaty)
+	if not is_on_floor():
+		var gravity_scale := FALL_GRAVITY_SCALE if velocity.y > 0.0 else RISE_GRAVITY_SCALE
+		velocity += get_gravity() * gravity_scale * delta
+		velocity.y = minf(velocity.y, MAX_FALL_SPEED)
 
 	# Jump (Incl. ledge tolerance)
 	ledge_timer = LEDGE_TIME if is_on_floor() else ledge_timer - delta
