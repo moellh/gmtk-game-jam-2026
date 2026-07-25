@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bploxl0nhyf4" path="res://src/levels/level7.tscn" id="10_2377k"]
 [ext_resource type="PackedScene" uid="uid://cl6po4cho80em" path="res://src/levels/level9.tscn" id="12_chwow"]
 [ext_resource type="PackedScene" uid="uid://t1wpndf0lkny" path="res://src/levels/level10.tscn" id="13_h6b8r"]
+[ext_resource type="Shader" uid="uid://blt3dvn1dtqfu" path="res://src/effects/glitch.gdshader" id="14_glitch"]
 
 [sub_resource type="Resource" id="LevelInfo_1"]
 script = ExtResource("3")
@@ -108,6 +109,11 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.23, 0.94, 0.48, 1)
 
+[sub_resource type="ShaderMaterial" id="glitch_mat"]
+shader = ExtResource("14_glitch")
+shader_parameter/strength = 0.5
+shader_parameter/red = 0.3
+
 [sub_resource type="StyleBoxFlat" id="preview_frame"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -195,6 +201,17 @@ theme_override_colors/font_color = Color(0.45, 0.82, 0.56, 1)
 theme_override_font_sizes/font_size = 10
 text = "[<] [>] BROWSE     [ENTER] PLAY"
 horizontal_alignment = 1
+
+[node name="Glitch" type="ColorRect" parent="." unique_id=925807639]
+visible = false
+material = SubResource("glitch_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="pressed" from="Window/VBox/Row/Left" to="." method="_step" binds= [-1]]
 [connection signal="pressed" from="Window/VBox/Row/Right" to="." method="_step" binds= [1]]

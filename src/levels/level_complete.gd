@@ -7,15 +7,14 @@ extends CanvasLayer
 var next_scene: PackedScene
 
 func open(scene: PackedScene) -> void:
+	Progress.mark_completed(get_tree().current_scene.scene_file_path)
 	next_scene = scene
 	next_button.visible = next_scene != null
 	screen.show()
 	get_tree().paused = true
 
-	if next_button.visible:
-		next_button.grab_focus()
-	else:
-		selection_button.grab_focus()
+	if next_button.visible: next_button.grab_focus()
+	else: selection_button.grab_focus()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if screen.visible and event.is_action_pressed("menu"):
@@ -23,8 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_level_selection()
 
 func _next_level() -> void:
-	if next_scene == null:
-		return
+	if next_scene == null: return
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(next_scene)
 
