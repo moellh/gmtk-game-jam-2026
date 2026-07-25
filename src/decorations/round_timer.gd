@@ -1,16 +1,19 @@
+@tool
 class_name RoundTimer
 extends Label
 
 const DANGER_COLOR := Color(1.0, 0.25, 0.25)
 
-@export var round_time := 10.0
-@export var danger_curve: Curve # maps elapsed fraction (0..1) -> glitch danger (0..1)
+@export var round_time := 10.0:
+	set(value): round_time = value; text = "%d.%d" % [mini(int(value), 99), int(value * 10.0) % 10]
+@export var danger_curve: Curve
 
 var _time_left := 0.0
 
 @onready var _base_position := position
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	reset()
 
 func _exit_tree() -> void:
