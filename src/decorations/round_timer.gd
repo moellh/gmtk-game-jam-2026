@@ -17,6 +17,7 @@ func _ready() -> void:
 	reset()
 
 func _exit_tree() -> void:
+	if Engine.is_editor_hint(): return
 	Glitch.set_danger(0.0)
 
 func reset() -> void:
