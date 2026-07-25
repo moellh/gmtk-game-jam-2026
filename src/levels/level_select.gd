@@ -15,6 +15,7 @@ var _thumbs := {}
 @onready var _capture: SubViewport = $Capture
 
 func _ready() -> void:
+	_index = _frontier()
 	_refresh()
 
 func _input(event: InputEvent) -> void:
@@ -22,6 +23,10 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_right"): _step(1)
 	elif event.is_action_pressed("ui_accept") and not levels.is_empty():
 		if _is_unlocked(_index): get_tree().change_scene_to_packed(levels[_index].scene)
+
+func _frontier() -> int:
+	for i in levels.size(): if not Progress.is_completed(levels[i].scene.resource_path): return i
+	return maxi(levels.size() - 1, 0)
 
 func _step(dir: int) -> void:
 	if levels.is_empty(): return
