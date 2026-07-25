@@ -15,3 +15,8 @@
 - Selection Screen:
     - after leaving level, selection should be on played level
     - locked/glitched levels if not previous levels done 
+
+## Credits
+- Button: https://freesound.org/people/kickhat/sounds/264447/
+- Sprites: https://kenney.nl/assets/1-bit-platformer-pack
+- Font: https://github.com/googlefonts/silkscreen
