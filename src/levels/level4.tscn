@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="1_iy2wa"]
 [ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="2_1nn37"]
+[ext_resource type="PackedScene" uid="uid://c5uya36oc53mp" path="res://src/levels/level5.tscn" id="2_n5ra1"]
 [ext_resource type="TileSet" uid="uid://c55wi8wsxfvw6" path="res://assets/world.tres" id="3_ji7uo"]
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="5_nrlxc"]
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/interactables/goal.tscn" id="6_wggor"]
@@ -17,6 +18,7 @@
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("1_iy2wa")
+next_level = ExtResource("2_n5ra1")
 
 [node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_1nn37")]
 level_rect = Rect2(16, 16, 336, 192)

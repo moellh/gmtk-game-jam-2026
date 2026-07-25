@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="1_jd5ss"]
 [ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="2_dr1c0"]
+[ext_resource type="PackedScene" uid="uid://cl6po4cho80em" path="res://src/levels/level9.tscn" id="2_lvrir"]
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="3_xjneo"]
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="4_lvrir"]
 [ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/interactables/goal.tscn" id="5_1yq4s"]
@@ -819,6 +820,7 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("1_jd5ss")
+next_level = ExtResource("2_lvrir")
 
 [node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_dr1c0")]
 level_rect = Rect2(0, 16, 240, 200)

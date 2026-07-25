@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cl6po4cho80em"]
 
 [ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="1_hqf1q"]
+[ext_resource type="PackedScene" uid="uid://t1wpndf0lkny" path="res://src/levels/level10.tscn" id="2_q80s1"]
 [ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="2_yelhk"]
 [ext_resource type="Texture2D" uid="uid://bhqhrt7nncgvb" path="res://assets/monochrome_tilemap_transparent.png" id="3_xfypo"]
 [ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="4_q80s1"]
@@ -820,6 +821,7 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 texture_filter = 1
 position = Vector2(4, 4)
 script = ExtResource("1_hqf1q")
+next_level = ExtResource("2_q80s1")
 
 [node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_yelhk")]
 position = Vector2(-4, -4)
