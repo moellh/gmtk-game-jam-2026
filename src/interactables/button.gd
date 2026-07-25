@@ -19,6 +19,8 @@ var pressed := false
 var overlaps := 0
 
 @onready var visual: Sprite2D = $Sprite2D
+@onready var press_sound: AudioStreamPlayer2D = $PressSound
+@onready var release_sound: AudioStreamPlayer2D = $ReleaseSound
 
 func _ready() -> void:
 	set_color(COLOR_UP)
@@ -37,6 +39,8 @@ func set_pressed(value: bool) -> void:
 	pressed = value
 	visual.texture = texture_down if value else texture_up
 	visual.modulate = COLOR_DOWN if value else COLOR_UP
+	if value: press_sound.play()
+	else: release_sound.play()
 	changed.emit(value)
 	
 func set_color(c: Color) -> void:
