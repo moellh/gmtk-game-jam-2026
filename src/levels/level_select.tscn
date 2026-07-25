@@ -60,11 +60,52 @@ name = "Level 8"
 scene = ExtResource("9_jc6pm")
 metadata/_custom_type_script = "uid://bx5ssfotac8vt"
 
-[sub_resource type="Resource" id="Resource_h6b8r"]
-script = ExtResource("3")
-name = "Level 9"
-scene = ExtResource("12_chwow")
-metadata/_custom_type_script = "uid://bx5ssfotac8vt"
+[sub_resource type="StyleBoxFlat" id="row_highlight"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.23, 0.94, 0.48, 1)
+
+[sub_resource type="StyleBoxEmpty" id="row_normal"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+
+[sub_resource type="Theme" id="terminal"]
+Button/colors/font_color = Color(0.45, 0.82, 0.56, 1)
+Button/colors/font_focus_color = Color(0.043, 0.071, 0.055, 1)
+Button/colors/font_hover_color = Color(0.043, 0.071, 0.055, 1)
+Button/colors/font_pressed_color = Color(0.043, 0.071, 0.055, 1)
+Button/styles/focus = SubResource("row_highlight")
+Button/styles/hover = SubResource("row_highlight")
+Button/styles/normal = SubResource("row_normal")
+Button/styles/pressed = SubResource("row_highlight")
+
+[sub_resource type="StyleBoxFlat" id="window"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.043, 0.071, 0.055, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.23, 0.94, 0.48, 1)
+
+[sub_resource type="StyleBoxFlat" id="preview_frame"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.016, 0.035, 0.024, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.23, 0.94, 0.48, 0.6)
 
 [node name="LevelSelect" type="Control" unique_id=24120411]
 layout_mode = 3
@@ -77,23 +118,70 @@ theme = ExtResource("4")
 script = ExtResource("1")
 levels = Array[ExtResource("3")]([SubResource("LevelInfo_1"), SubResource("Resource_s888k"), SubResource("Resource_2377k"), SubResource("Resource_i8buq"), SubResource("Resource_jc6pm"), SubResource("Resource_rv1bo"), SubResource("Resource_chwow"), SubResource("Resource_uhaqb"), SubResource("Resource_h6b8r")])
 
-[node name="Center" type="CenterContainer" parent="." unique_id=81011664]
+[node name="Capture" type="SubViewport" parent="." unique_id=925807638]
+disable_3d = true
+size = Vector2i(384, 216)
+render_target_update_mode = 4
+
+[node name="Window" type="PanelContainer" parent="." unique_id=925807637]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("terminal")
+theme_override_styles/panel = SubResource("window")
 
-[node name="VBox" type="VBoxContainer" parent="Center" unique_id=925807636]
+[node name="VBox" type="VBoxContainer" parent="Window" unique_id=925807636]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 12
+alignment = 1
 
-[node name="Title" type="Label" parent="Center/VBox" unique_id=572061570]
+[node name="Name" type="Label" parent="Window/VBox" unique_id=572061570]
 layout_mode = 2
-text = "Select Level"
+theme_override_colors/font_color = Color(0.23, 0.94, 0.48, 1)
+theme_override_font_sizes/font_size = 28
+text = "Level 1"
 horizontal_alignment = 1
 
-[node name="Levels" type="VBoxContainer" parent="Center/VBox" unique_id=1484019837]
+[node name="Row" type="HBoxContainer" parent="Window/VBox" unique_id=1484019839]
 layout_mode = 2
-theme_override_constants/separation = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Left" type="Button" parent="Window/VBox/Row" unique_id=1484019840]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="PreviewFrame" type="PanelContainer" parent="Window/VBox/Row" unique_id=1484019841]
+custom_minimum_size = Vector2(200, 112)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("preview_frame")
+
+[node name="Preview" type="TextureRect" parent="Window/VBox/Row/PreviewFrame" unique_id=1484019842]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Right" type="Button" parent="Window/VBox/Row" unique_id=1484019843]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="Hint" type="Label" parent="Window/VBox" unique_id=1484019844]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.82, 0.56, 1)
+theme_override_font_sizes/font_size = 10
+text = "[<] [>] BROWSE     [ENTER] PLAY"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Window/VBox/Row/Left" to="." method="_step" binds= [-1]]
+[connection signal="pressed" from="Window/VBox/Row/Right" to="." method="_step" binds= [1]]
