@@ -1,0 +1,89 @@
+[gd_scene format=4 uid="uid://t1wpndf0lkny"]
+
+[ext_resource type="Script" uid="uid://dcw2moosicjon" path="res://src/levels/game.gd" id="1_0pntn"]
+[ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="2_3fnwy"]
+[ext_resource type="TileSet" uid="uid://c55wi8wsxfvw6" path="res://assets/world.tres" id="3_3fnwy"]
+[ext_resource type="PackedScene" uid="uid://cypbttuu8jxd6" path="res://src/actors/player.tscn" id="4_qbqem"]
+[ext_resource type="PackedScene" uid="uid://b34jpqw0gv0ag" path="res://src/interactables/goal.tscn" id="5_aw062"]
+[ext_resource type="PackedScene" uid="uid://da8qcbqxtbvjb" path="res://src/interactables/button.tscn" id="6_fw4ye"]
+[ext_resource type="PackedScene" uid="uid://drt1mersc3ne0" path="res://src/decorations/round_timer.tscn" id="8_nhvbe"]
+[ext_resource type="Curve" uid="uid://cpf60p3mkmx28" path="res://src/effects/glitch_curve.tres" id="9_wqmaj"]
+[ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="10_6iumv"]
+[ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="11_g5oh2"]
+[ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_i502o"]
+[ext_resource type="PackedScene" uid="uid://bd1x1oork07jg" path="res://src/interactables/door1x1.tscn" id="13_0pntn"]
+[ext_resource type="PackedScene" uid="uid://dtatbaoqly2pe" path="res://src/pause_screen.tscn" id="13_0smqc"]
+
+[node name="Main" type="Node2D" unique_id=908013008]
+texture_filter = 1
+script = ExtResource("1_0pntn")
+
+[node name="OutsideFill" parent="." unique_id=741485520 instance=ExtResource("2_3fnwy")]
+level_rect = Rect2(0, 0, 384, 208)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1408577092]
+tile_map_data = PackedByteArray("AAAAAAAAAAAIAAUAAAABAAAAAAAIAAUAAAACAAAAAAAIAAUAAAADAAAAAAAIAAUAAAAEAAAAAAAIAAUAAAAFAAAAAAAIAAUAAAAGAAAAAAAIAAUAAAAHAAAAAAAIAAUAAAAIAAAAAAAIAAUAAAAJAAAAAAAIAAUAAAAKAAAAAAALAAcAAAALAAAAAAALAAcAAAAMAAAAAAALAAcAAAANAAAAAAALAAcAAAAOAAAAAAALAAcAAAAPAAAAAAAIAAUAAAAQAAAAAAAIAAUAAAARAAAAAAAIAAUAAAASAAAAAAAIAAUAAAATAAAAAAAIAAUAAAAUAAAAAAAIAAUAAAAVAAAAAAAIAAUAAAAWAAAAAAAIAAUAAAAXAAAAAAAIAAUAAAAXAAEAAAAIAAUAAAAXAAIAAAAIAAUAAAAXAAMAAAAIAAUAAAAXAAQAAAAIAAUAAAAXAAUAAAAIAAUAAAAXAAYAAAAIAAUAAAAXAAcAAAAIAAUAAAAXAAgAAAAIAAUAAAAXAAkAAAAIAAUAAAAXAAoAAAAIAAUAAAAXAAsAAAAIAAUAAAAXAAwAAAAIAAUAAAAWAAwAAAAIAAUAAAAVAAwAAAAIAAUAAAAUAAwAAAAIAAUAAAATAAwAAAAIAAUAAAASAAwAAAAIAAUAAAARAAwAAAAIAAUAAAAQAAwAAAAIAAUAAAAPAAwAAAAIAAUAAAAOAAwAAAAIAAUAAAANAAwAAAAIAAUAAAAMAAwAAAAIAAUAAAALAAwAAAAIAAUAAAAKAAwAAAAIAAUAAAAJAAwAAAAIAAUAAAAIAAwAAAAIAAUAAAAHAAwAAAAJAAwAAAAGAAwAAAALAAwAAAAFAAwAAAAKAAsAAAADAAwAAAAMAAoAAAACAAwAAAAKAAoAAAABAAwAAAAIAAUAAAAAAAwAAAAIAAUAAAAAAAsAAAAIAAUAAAAAAAoAAAAIAAUAAAAAAAkAAAAIAAUAAAAAAAgAAAAIAAUAAAAAAAcAAAAIAAUAAAAAAAYAAAAIAAUAAAAAAAUAAAAIAAUAAAAAAAQAAAAIAAUAAAAAAAMAAAAIAAUAAAAAAAIAAAAIAAUAAAAAAAEAAAAIAAUAAAAFAAEAAAAIAAUAAAAGAAEAAAAIAAUAAAAHAAEAAAAIAAUAAAAIAAEAAAAIAAUAAAATAAEAAAAIAAUAAAAVAAIAAAAIAAUAAAAUAAIAAAAIAAUAAAATAAIAAAAIAAUAAAASAAIAAAAIAAUAAAAQAAIAAAAIAAUAAAAPAAIAAAAIAAUAAAAOAAIAAAALAAgAAAANAAIAAAALAAgAAAAMAAIAAAALAAgAAAALAAIAAAALAAgAAAAKAAIAAAAKAAgAAAAIAAIAAAAIAAUAAAAHAAIAAAAIAAUAAAAGAAIAAAAIAAUAAAAFAAIAAAAIAAUAAAADAAIAAAAIAAUAAAACAAIAAAAIAAUAAAABAAIAAAAIAAUAAAADAAMAAAAIAAUAAAANAAMAAAAIAAUAAAAOAAMAAAAIAAUAAAAPAAMAAAAIAAUAAAAQAAMAAAAIAAUAAAASAAMAAAAIAAUAAAATAAMAAAAIAAUAAAAUAAMAAAAIAAUAAAAWAAQAAAAIAAUAAAAUAAQAAAAIAAUAAAATAAQAAAAIAAUAAAASAAQAAAAIAAUAAAAQAAQAAAAIAAUAAAALAAQAAAAIAAUAAAAKAAQAAAAIAAUAAAAIAAQAAAAIAAUAAAAHAAQAAAAIAAUAAAAGAAQAAAAIAAUAAAAFAAQAAAAIAAUAAAADAAQAAAAIAAUAAAACAAQAAAAIAAUAAAACAAUAAAAIAAUAAAADAAUAAAAIAAUAAAAFAAUAAAAIAAUAAAAGAAUAAAAIAAUAAAAHAAUAAAAIAAUAAAAIAAUAAAAIAAUAAAAJAAUAAAAIAAUAAAAKAAUAAAAIAAUAAAALAAUAAAAIAAUAAAANAAUAAAAIAAUAAAAOAAUAAAAIAAUAAAAPAAUAAAAIAAUAAAAQAAUAAAAIAAUAAAASAAUAAAAIAAUAAAAWAAUAAAAIAAUAAAAWAAYAAAAIAAUAAAAUAAYAAAAIAAUAAAATAAYAAAAIAAUAAAASAAYAAAAIAAUAAAAQAAYAAAAIAAUAAAAPAAYAAAAIAAUAAAAOAAYAAAAIAAUAAAANAAYAAAAIAAUAAAALAAYAAAAIAAUAAAAKAAYAAAAIAAUAAAAJAAYAAAAIAAUAAAADAAYAAAAIAAUAAAACAAYAAAAIAAUAAAACAAcAAAAIAAUAAAADAAcAAAAIAAUAAAAFAAcAAAALABEAAAAHAAcAAAAJAAsAAAANAAcAAAAIAAUAAAAWAAgAAAAIAAUAAAAVAAgAAAAIAAUAAAAUAAgAAAAIAAUAAAATAAgAAAAIAAUAAAASAAgAAAAIAAUAAAAQAAgAAAAIAAUAAAAPAAgAAAAIAAUAAAANAAgAAAAIAAUAAAALAAgAAAAIAAUAAAAKAAgAAAAIAAUAAAAJAAgAAAAIAAUAAAAHAAgAAAAJAAwAAAAFAAgAAAALABMAAAADAAgAAAAIAAUAAAACAAgAAAAIAAUAAAAHAAkAAAAJAAwAAAALAAkAAAAIAAUAAAANAAkAAAAIAAUAAAAPAAkAAAAIAAUAAAAQAAkAAAAIAAUAAAASAAkAAAAIAAUAAAATAAkAAAAIAAUAAAAUAAkAAAAIAAUAAAAVAAkAAAAIAAUAAAAWAAkAAAAIAAUAAAAWAAoAAAAIAAUAAAALAAoAAAAIAAUAAAAJAAoAAAAIAAUAAAAIAAoAAAAIAAUAAAAHAAoAAAAJAAwAAAAFAAoAAAAMAAkAAAAEAAoAAAALAAwAAAADAAoAAAALAAkAAAACAAoAAAAKAAkAAAACAAsAAAAKAAoAAAADAAsAAAAMAAoAAAAFAAsAAAANAAoAAAAHAAsAAAAJAAwAAAAIAAsAAAAIAAUAAAAJAAsAAAAIAAUAAAALAAsAAAAIAAUAAAAMAAsAAAAIAAUAAAANAAsAAAAIAAUAAAAPAAsAAAAIAAUAAAAQAAsAAAAIAAUAAAARAAsAAAAIAAUAAAASAAsAAAAIAAUAAAAUAAsAAAAIAAUAAAAVAAsAAAAIAAUAAAAWAAsAAAAIAAUAAAAQAAcAAAAIAAUAAAABAAgAAAAJAAgAAAABAAYAAAAJAAcAAAABAAQAAAAHAAcAAAARAAkAAAAJAAgAAAAOAAkAAAAHAAkAAAAMAAkAAAAIAAgAAAAMAAYAAAAJAAgAAAAEAAUAAAAIAAcAAAAEAAgAAAAHAAkAAAARAAYAAAAJAAcAAAARAAMAAAAIAAcAAAAEAAkAAAAOAAQAAAAGAAYAAAANAAQAAAAKAAcAAAANAAQAAAAMAAoAAAANAAQAAAARAAoAAAAOAAQAAAATAAcAAAANAAQAAAAVAAcAAAAOAAQAAAAVAAEAAAAMAAQAAAAGAAgAAAANABMAAAAGAAcAAAANABEAAAAEAAsAAAAAAAMAAAAEAAwAAAAAAAQAAAAEAA0AAAAAAAQAAAAVAAUAAAAHAAkAAAA=")
+tile_set = ExtResource("3_3fnwy")
+
+[node name="Player" parent="." unique_id=1157283441 instance=ExtResource("4_qbqem")]
+position = Vector2(55, 152)
+
+[node name="Goal" parent="." unique_id=736253240 instance=ExtResource("5_aw062")]
+position = Vector2(328, 24)
+
+[node name="Button1" parent="." unique_id=556200501 instance=ExtResource("6_fw4ye")]
+position = Vector2(40, 60)
+
+[node name="Button2" parent="." unique_id=1109644628 instance=ExtResource("6_fw4ye")]
+position = Vector2(168, 188)
+
+[node name="Button3" parent="." unique_id=1558093548 instance=ExtResource("6_fw4ye")]
+position = Vector2(248, 124)
+
+[node name="Button4" parent="." unique_id=947239801 instance=ExtResource("6_fw4ye")]
+position = Vector2(296, 28)
+
+[node name="WorldCamera" type="Camera2D" parent="." unique_id=1563278812]
+position = Vector2(192, 108)
+
+[node name="WorldUI" type="Node2D" parent="." unique_id=1905097379]
+
+[node name="RoundTimer" parent="WorldUI" unique_id=2120446955 instance=ExtResource("8_nhvbe")]
+unique_name_in_owner = true
+offset_left = 240.0
+offset_right = 272.0
+danger_curve = ExtResource("9_wqmaj")
+
+[node name="LifeHearts" parent="WorldUI" unique_id=1593281 instance=ExtResource("10_6iumv")]
+unique_name_in_owner = true
+position = Vector2(168, 8)
+lives = 5
+
+[node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("11_g5oh2")]
+
+[node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("12_i502o")]
+visible = false
+
+[node name="PauseScreen" parent="." unique_id=1733926468 instance=ExtResource("13_0smqc")]
+
+[node name="Door1" parent="." unique_id=1179420651 instance=ExtResource("13_0pntn")]
+position = Vector2(344, 104)
+
+[node name="Door2" parent="." unique_id=617042484 instance=ExtResource("13_0pntn")]
+position = Vector2(344, 88)
+
+[node name="Door3" parent="." unique_id=1170597459 instance=ExtResource("13_0pntn")]
+position = Vector2(344, 72)
+
+[node name="Door4" parent="." unique_id=948735200 instance=ExtResource("13_0pntn")]
+position = Vector2(344, 56)
+
+[connection signal="reached" from="Goal" to="." method="complete_level"]
+[connection signal="changed" from="Button1" to="Door1" method="set_open"]
+[connection signal="changed" from="Button2" to="Door2" method="set_open"]
+[connection signal="changed" from="Button3" to="Door3" method="set_open"]
+[connection signal="changed" from="Button4" to="Door4" method="set_open"]
+[connection signal="crushed" from="Door1" to="." method="play_death"]
+[connection signal="crushed" from="Door2" to="." method="play_death"]
+[connection signal="crushed" from="Door3" to="." method="play_death"]
+[connection signal="crushed" from="Door4" to="." method="play_death"]
