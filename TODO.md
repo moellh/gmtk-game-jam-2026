@@ -16,3 +16,6 @@
     - Also show the medall table for each level 
 - Level visual design updates
 - Movement Update of Character, still to fast and floaty
+- Add Modes: (Add replayability with different dificulty without implementing new levels)
+    - 'Haunting Mode', if you touch your previous ghost you die instantly.
+- Change position of the function keys for the right hand
