@@ -26,13 +26,13 @@ tile_map_data = PackedByteArray("AAAFAAsAAAAQAAUAAAAFAAwAAAAQAAcAAAAGAAsAAAAQAAU
 tile_set = ExtResource("3_piim0")
 
 [node name="Player" parent="." unique_id=1157283441 instance=ExtResource("4_28rxj")]
-position = Vector2(104, 168)
+position = Vector2(118, 168)
 
 [node name="Goal" parent="." unique_id=736253240 instance=ExtResource("5_y13qy")]
 position = Vector2(152, 88)
 
 [node name="Button1" parent="." unique_id=1109644628 instance=ExtResource("6_6hd6h")]
-position = Vector2(146, 172)
+position = Vector2(152, 172)
 COLOR_UP = Color(0, 0.41568628, 0.36862746, 1)
 
 [node name="Button2" parent="." unique_id=556200501 instance=ExtResource("6_6hd6h")]
@@ -50,7 +50,7 @@ offset_left = 112.0
 offset_top = 64.0
 offset_right = 144.0
 offset_bottom = 80.0
-text = "12.5"
+text = "5.0"
 round_time = 5.0
 danger_curve = ExtResource("9_t4noc")
 
@@ -62,33 +62,30 @@ lives = 3
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("11_duhk2")]
 
 [node name="TouchControls" parent="." unique_id=873846028 instance=ExtResource("12_ga44s")]
+visible = false
 
 [node name="PauseScreen" parent="." unique_id=13150382 instance=ExtResource("13_tj56q")]
 
 [node name="Door11" parent="." unique_id=1179420651 instance=ExtResource("13_fhu77")]
 position = Vector2(120, 136)
-color = Color(0, 0.41694596, 0.3705476, 1)
 inverted = true
 
 [node name="Door12" parent="." unique_id=1293617365 instance=ExtResource("13_fhu77")]
 position = Vector2(88, 88)
-color = Color(0, 0.41568628, 0.36862746, 1)
 
 [node name="Door22" parent="." unique_id=623004825 instance=ExtResource("13_fhu77")]
 position = Vector2(104, 88)
-color = Color(0.42352942, 0.24705882, 0.6392157, 1)
 
 [node name="Door21" parent="." unique_id=1523341007 instance=ExtResource("13_fhu77")]
-position = Vector2(120, 168)
-color = Color(0.42352942, 0.24705882, 0.6392157, 1)
+position = Vector2(136, 168)
 inverted = true
 
 [connection signal="reached" from="Goal" to="." method="complete_level"]
 [connection signal="changed" from="Button1" to="Door11" method="set_open"]
 [connection signal="changed" from="Button1" to="Door12" method="set_open"]
+[connection signal="changed" from="Button1" to="Door21" method="set_open"]
 [connection signal="changed" from="Button2" to="Door22" method="set_open"]
 [connection signal="changed" from="Button2" to="Door21" method="set_open"]
 [connection signal="crushed" from="Door11" to="." method="play_death"]
 [connection signal="crushed" from="Door12" to="." method="play_death"]
 [connection signal="crushed" from="Door22" to="." method="play_death"]
-[connection signal="crushed" from="Door21" to="." method="play_death"]
