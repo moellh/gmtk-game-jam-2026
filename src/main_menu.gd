@@ -2,8 +2,8 @@ extends Control
 
 @onready var buttons: VBoxContainer = %Buttons
 
-const NORMAL_INFO := "Ghosts are harmless."
-const HAUNTING_INFO := "Touching your ghost kills you."
+const NORMAL_INFO := "Ghosts are harmless.\n"
+const HAUNTING_INFO := "Touching your ghost\nkills you."
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
