@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_accept") and not levels.is_empty():
 		if _is_unlocked(_index): get_tree().change_scene_to_packed(levels[_index].scene)
 	elif event.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://src/main_menu.tscn")
+		get_tree().change_scene_to_scene("src\main_menu.tscn")
 
 func _frontier() -> int:
 	for i in levels.size(): if not Progress.is_completed(levels[i].scene.resource_path): return i
