@@ -13,6 +13,10 @@ func _ready() -> void:
 	
 func _level_selection() -> void:
 	get_tree().change_scene_to_file("res://src/levels/level_select.tscn")
+
+func _mode_toggle(pressed: bool) -> void:
+	GameMode.haunting_enabled = pressed
+	%ModeToggle.text = "Haunting Mode" if pressed else "Normal Mode"
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

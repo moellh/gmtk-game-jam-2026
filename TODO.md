@@ -11,7 +11,6 @@
 - Add Modes: (Add replayability with different dificulty without implementing new levels)
     - 'Haunting Mode', if you touch your previous ghost you die instantly.
 - Change position of the function keys for the right hand
-- Freeze button available after completing level 5
 
 
 ## Credits
