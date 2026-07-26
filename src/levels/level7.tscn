@@ -819,6 +819,7 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 texture_filter = 1
 script = ExtResource("1_kiltu")
 next_level = ExtResource("2_c6r2c")
+freeze_unlocked = true
 
 [node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_nq00x")]
 level_rect = Rect2(0, 16, 258, 200)

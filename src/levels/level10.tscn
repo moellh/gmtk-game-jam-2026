@@ -17,6 +17,7 @@
 [node name="Main" type="Node2D" unique_id=908013008]
 texture_filter = 1
 script = ExtResource("1_0pntn")
+freeze_unlocked = true
 
 [node name="OutsideFill" parent="." unique_id=741485520 instance=ExtResource("2_3fnwy")]
 level_rect = Rect2(0, 0, 384, 208)

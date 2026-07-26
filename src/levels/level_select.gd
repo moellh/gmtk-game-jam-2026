@@ -1,7 +1,7 @@
 extends Control
 
 const HINT_PLAY := "[<] [>] BROWSE     [ENTER] PLAY\n[ESC] MENU"
-const HINT_LOCKED := "[<] [>] BROWSE     LOCKED\n[ESCAPE] MAIN MENU"
+const HINT_LOCKED := "[<] [>] BROWSE     LOCKED\n[ESC] MENU"
 
 @export var levels: Array[LevelInfo] = []
 
