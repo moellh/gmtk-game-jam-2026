@@ -70,11 +70,11 @@ func _physics_process(delta: float) -> void:
 
 func update_animation(move_axis: float) -> void:
 	if not is_on_floor():
-		sprite.play(&"jump")
+		sprite.play(&"ghost_jump")
 	elif move_axis != 0.0:
-		sprite.play(&"run")
+		sprite.play(&"ghost_run")
 	else:
-		sprite.play(&"idle")
+		sprite.play(&"ghost_idle")
 
 func spawn_ghost(solid: bool) -> Node:
 	var ghost := GHOST_SCENE.instantiate()
