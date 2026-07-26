@@ -19,6 +19,7 @@ config/icon="res://assets/icon.png"
 
 Glitch="*res://src/effects/glitch.tscn"
 Progress="*res://src/progress.gd"
+MusicPlayer="*res://src/music_player.tscn"
 
 [display]
 
