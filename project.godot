@@ -19,7 +19,7 @@ config/icon="res://assets/icon.png"
 
 Glitch="*res://src/effects/glitch.tscn"
 Progress="*res://src/progress.gd"
-GameMode="*res://src/game_mode.gd" ;for the game mode (normal or haunting)
+GameMode="*res://src/game_mode.gd" 
 
 [display]
 
