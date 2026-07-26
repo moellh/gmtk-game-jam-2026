@@ -1,24 +1,24 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dlsq3o8cnaor5"]
 
 [ext_resource type="Script" uid="uid://sa8fx7sob4e1" path="res://src/levels/level_complete.gd" id="1_script"]
-[ext_resource type="Theme" path="res://src/ui_theme.tres" id="2_theme"]
+[ext_resource type="Theme" uid="uid://hlteppub6ywy" path="res://src/ui_theme.tres" id="2_theme"]
 
-[node name="LevelComplete" type="CanvasLayer"]
+[node name="LevelComplete" type="CanvasLayer" unique_id=1508584451]
 process_mode = 3
 layer = 100
 script = ExtResource("1_script")
 
-[node name="Screen" type="ColorRect" parent="."]
+[node name="Screen" type="ColorRect" parent="." unique_id=678879754]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 theme = ExtResource("2_theme")
+color = Color(0, 0, 0, 1)
 
-[node name="Center" type="CenterContainer" parent="Screen"]
+[node name="Center" type="CenterContainer" parent="Screen" unique_id=1815776868]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,24 +26,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="Screen/Center"]
+[node name="VBox" type="VBoxContainer" parent="Screen/Center" unique_id=1057877579]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Screen/Center/VBox"]
+[node name="Title" type="Label" parent="Screen/Center/VBox" unique_id=902878529]
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "Level complete!"
 horizontal_alignment = 1
 
-[node name="NextLevel" type="Button" parent="Screen/Center/VBox"]
-unique_name_in_owner = true
+[node name="VBox" type="VBoxContainer" parent="Screen/Center/VBox" unique_id=312595938]
 layout_mode = 2
-text = "Next level"
+size_flags_horizontal = 4
 
-[node name="LevelSelection" type="Button" parent="Screen/Center/VBox"]
+[node name="LevelSelection" type="Button" parent="Screen/Center/VBox/VBox" unique_id=1843334193]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Level selection"
 
-[connection signal="pressed" from="Screen/Center/VBox/NextLevel" to="." method="_next_level"]
-[connection signal="pressed" from="Screen/Center/VBox/LevelSelection" to="." method="_level_selection"]
+[node name="NextLevel" type="Button" parent="Screen/Center/VBox/VBox" unique_id=433145264]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Next level"
+
+[connection signal="pressed" from="Screen/Center/VBox/VBox/LevelSelection" to="." method="_level_selection"]
+[connection signal="pressed" from="Screen/Center/VBox/VBox/NextLevel" to="." method="_next_level"]
