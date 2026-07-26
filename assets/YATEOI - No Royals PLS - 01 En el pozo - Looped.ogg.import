@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dnpnffxe0xdtr"
+path="res://.godot/imported/YATEOI - No Royals PLS - 01 En el pozo - Looped.ogg-060ebf8bd7424e5ed633e1cb0f94a8b5.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/YATEOI - No Royals PLS - 01 En el pozo - Looped.ogg"
+dest_files=["res://.godot/imported/YATEOI - No Royals PLS - 01 En el pozo - Looped.ogg-060ebf8bd7424e5ed633e1cb0f94a8b5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

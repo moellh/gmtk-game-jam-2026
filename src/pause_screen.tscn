@@ -1,7 +1,30 @@
-[gd_scene format=3 uid="uid://dtatbaoqly2pe"]
+[gd_scene load_steps=5 format=3 uid="uid://dtatbaoqly2pe"]
 
 [ext_resource type="Script" uid="uid://do8vhxvidr3aj" path="res://src/pause_screen.gd" id="1_script"]
 [ext_resource type="Theme" path="res://src/ui_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="slider_style"]
+bg_color = Color(0.25, 0.25, 0.25, 1)
+content_margin_top = 2
+content_margin_bottom = 2
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[sub_resource type="StyleBoxFlat" id="grabber_area_style"]
+bg_color = Color(0.45, 0.45, 0.45, 1)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+[sub_resource type="StyleBoxFlat" id="grabber_area_hl_style"]
+bg_color = Color(0.55, 0.55, 0.55, 1)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
 
 [node name="PauseScreen" type="CanvasLayer" unique_id=1659425859]
 process_mode = 3
@@ -36,6 +59,22 @@ theme_override_font_sizes/font_size = 24
 text = "Pause"
 horizontal_alignment = 1
 
+[node name="VolumeLabel" type="Label" parent="Screen/Center/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="Screen/Center/VBox"]
+layout_mode = 2
+min_value = -40.0
+max_value = -6.0
+step = 1.0
+value = 0.0
+theme_override_styles/slider = SubResource("slider_style")
+theme_override_styles/grabber_area = SubResource("grabber_area_style")
+theme_override_styles/grabber_area_highlight = SubResource("grabber_area_hl_style")
+
 [node name="Buttons" type="VBoxContainer" parent="Screen/Center/VBox" unique_id=1086578164]
 unique_name_in_owner = true
 layout_mode = 2
@@ -54,3 +93,4 @@ text = "Select Level"
 
 [connection signal="pressed" from="Screen/Center/VBox/Buttons/Continue" to="." method="_continue"]
 [connection signal="pressed" from="Screen/Center/VBox/Buttons/Return" to="." method="_return_to_level_selection"]
+[connection signal="value_changed" from="Screen/Center/VBox/VolumeSlider" to="." method="_on_volume_changed"]

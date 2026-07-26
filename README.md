@@ -49,6 +49,7 @@ The Game Jam website recommends the following sources for art & audio:
 ## Credits
 
 - [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke, licensed under the [SIL Open Font License 1.1](assets/fonts/Silkscreen-OFL.txt)
+- Music: "En el pozo" by Santiago "YATEOI" Iurissevich from [No Royals PLS](https://yateoi.bandcamp.com/album/no-royals-pls) (see [itch.io](https://yateoi.itch.io/no-royals-pls))
 
 ## Branch preview hosting
 

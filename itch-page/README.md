@@ -57,11 +57,13 @@ No background image is needed. The black page lets the game, cover, and screensh
 - `cover.png` and every screenshot are direct captures of the game. No generated artwork is used.
 - The tile and character art comes from Kenney's [1-Bit Platformer Pack](https://kenney.nl/assets/1-bit-platformer-pack), licensed under CC0 1.0.
 - The UI uses [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke, licensed under the SIL Open Font License 1.1.
+- Music: "En el pozo" by Santiago "YATEOI" Iurissevich from [No Royals PLS](https://yateoi.bandcamp.com/album/no-royals-pls) (see [itch.io](https://yateoi.itch.io/no-royals-pls))
 
 ## Team
 
 - [moellh](https://github.com/moellh)
 - [floppyMike](https://github.com/floppyMike)
 - [robat28](https://github.com/robat28)
+- [LianSec](https://github.com/LianSec)
 
 itch.io recommends a 315:250 cover ratio, preferably `630 × 500`, and three to five screenshots in its [project page guide](https://itch.io/docs/creators/getting-started).

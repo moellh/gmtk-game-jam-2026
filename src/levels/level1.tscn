@@ -61,14 +61,17 @@ position = Vector2(136, 24)
 [node name="MovementSign" parent="WorldUI" unique_id=1640671847 instance=ExtResource("8_sign")]
 position = Vector2(125, 104)
 text = "Left/Right to move"
+prompt_offset = Vector2(0, -4)
 
 [node name="FreezeSign" parent="WorldUI" unique_id=2145279178 instance=ExtResource("8_sign")]
-position = Vector2(174, 104)
+position = Vector2(152, 57)
 text = "'R' to die early"
+prompt_offset = Vector2(0, -4)
 
 [node name="ResetSign" parent="WorldUI" unique_id=659495750 instance=ExtResource("8_sign")]
-position = Vector2(230, 104)
+position = Vector2(168, 104)
 text = "Space to jump"
+prompt_offset = Vector2(0, -4)
 
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("9_complete")]
 
