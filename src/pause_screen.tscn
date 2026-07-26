@@ -59,6 +59,11 @@ theme_override_font_sizes/font_size = 24
 text = "Pause"
 horizontal_alignment = 1
 
+[node name="MusicVolumeLabel" type="Label" parent="Screen/Center/VBox"]
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
 [node name="VolumeControls" type="HBoxContainer" parent="Screen/Center/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 6
