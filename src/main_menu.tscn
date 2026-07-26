@@ -41,4 +41,22 @@ theme_override_constants/separation = 2
 layout_mode = 2
 text = "Start Game"
 
+[node name="ModeToggle" type="Button" parent="Center/VBox/Buttons" unique_id=267180741]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+text = "Normal Mode"
+
+[node name="ModeInfo" type="Label" parent="Center/VBox/Buttons" unique_id=267180742]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 28)
+layout_mode = 2
+modulate = Color(1, 1, 1, 0.5)
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 2
+horizontal_alignment = 1
+text = "Ghosts are harmless."
+
 [connection signal="pressed" from="Center/VBox/Buttons/LevelSelection" to="." method="_level_selection"]
+
+[connection signal="toggled" from="Center/VBox/Buttons/ModeToggle" to="." method="_mode_toggle"]
