@@ -35,16 +35,20 @@ position = Vector2(104, 152)
 position = Vector2(248, 120)
 
 [node name="Button" parent="." unique_id=1109644628 instance=ExtResource("6_xfypo")]
-position = Vector2(40, 59)
+position = Vector2(41, 155)
+COLOR_UP = Color(0.9490196, 0, 0.20784314, 1)
 
 [node name="Button2" parent="." unique_id=1594291560 instance=ExtResource("6_xfypo")]
-position = Vector2(39, 155)
+position = Vector2(40, 59)
+COLOR_UP = Color(0, 0.6156863, 0.21176471, 1)
 
 [node name="Door" parent="." unique_id=1572381367 instance=ExtResource("7_q80s1")]
 position = Vector2(184, 120)
+color = Color(0.9490196, 0, 0.20784314, 1)
 
 [node name="Door2" parent="." unique_id=994418532 instance=ExtResource("7_q80s1")]
 position = Vector2(216, 120)
+color = Color(0, 0.6156863, 0.21176471, 1)
 
 [node name="WorldCamera" type="Camera2D" parent="." unique_id=1563278812]
 position = Vector2(144, 96)
