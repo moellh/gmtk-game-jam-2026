@@ -4,7 +4,6 @@
 ## Feature ideas from robat:
 - Some kind of replayability (e.g. Medalls based on how fast you completted the levels with a highest speed score?)
 - Add Modes: (Add replayability with different dificulty without implementing new levels)
-    - 'Haunting Mode', if you touch your previous ghost you die instantly.
 - Audio
 - Main Menu:
     - (Background)
