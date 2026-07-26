@@ -20,8 +20,8 @@ func _ready() -> void:
 	_refresh()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_left"): _step(-1)
-	elif event.is_action_pressed("ui_right"): _step(1)
+	if event.is_action_pressed("ui_left") or event.is_action_pressed("move_left"): _step(-1)
+	elif event.is_action_pressed("ui_right") or event.is_action_pressed("move_right"): _step(1)
 	elif event.is_action_pressed("ui_accept"): _play()
 	elif event.is_action_pressed("ui_cancel"):
 		get_tree().change_scene_to_file("res://src/main_menu.tscn")

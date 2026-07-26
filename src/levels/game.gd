@@ -37,6 +37,7 @@ func play_level_intro() -> void:
 
 func play_death() -> void:
 	if get_tree().paused: return
+	Glitch.set_danger(0.0)
 	get_tree().paused = true
 	await player.play_death()
 	get_tree().paused = false
