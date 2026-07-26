@@ -185,6 +185,7 @@ theme_override_styles/panel = SubResource("preview_frame")
 
 [node name="Preview" type="TextureRect" parent="Window/VBox/Row/PreviewFrame" unique_id=1484019842]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -215,4 +216,5 @@ grow_vertical = 2
 mouse_filter = 2
 
 [connection signal="pressed" from="Window/VBox/Row/Left" to="." method="_step" binds= [-1]]
+[connection signal="gui_input" from="Window/VBox/Row/PreviewFrame" to="." method="_preview_input"]
 [connection signal="pressed" from="Window/VBox/Row/Right" to="." method="_step" binds= [1]]

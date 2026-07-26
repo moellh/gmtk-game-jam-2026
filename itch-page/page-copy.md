@@ -6,11 +6,11 @@ Chronost
 
 ## Tagline
 
-Your last ten seconds are your next teammate.
+Your last run is your next teammate.
 
 ## Short Description
 
-A compact time-loop platformer: record 10-second runs, cooperate with your ghosts, and open the way to the goal.
+A ten-level time-loop platformer: record short runs, team up with replaying ghosts, and turn past selves into platforms.
 
 ## Description
 

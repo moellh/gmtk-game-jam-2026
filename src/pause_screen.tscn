@@ -59,14 +59,17 @@ theme_override_font_sizes/font_size = 24
 text = "Pause"
 horizontal_alignment = 1
 
-[node name="VolumeLabel" type="Label" parent="Screen/Center/VBox"]
+[node name="VolumeControls" type="HBoxContainer" parent="Screen/Center/VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Music Volume"
-horizontal_alignment = 1
+theme_override_constants/separation = 6
 
-[node name="VolumeSlider" type="HSlider" parent="Screen/Center/VBox"]
+[node name="MusicToggle" type="CheckBox" parent="Screen/Center/VBox/VolumeControls"]
 layout_mode = 2
+button_pressed = true
+
+[node name="VolumeSlider" type="HSlider" parent="Screen/Center/VBox/VolumeControls"]
+layout_mode = 2
+size_flags_horizontal = 3
 min_value = -40.0
 max_value = -6.0
 step = 1.0
@@ -94,4 +97,5 @@ text = "Select Level"
 
 [connection signal="pressed" from="Screen/Center/VBox/Buttons/Continue" to="." method="_continue"]
 [connection signal="pressed" from="Screen/Center/VBox/Buttons/Return" to="." method="_return_to_level_selection"]
-[connection signal="value_changed" from="Screen/Center/VBox/VolumeSlider" to="." method="_on_volume_changed"]
+[connection signal="toggled" from="Screen/Center/VBox/VolumeControls/MusicToggle" to="." method="_on_music_toggled"]
+[connection signal="value_changed" from="Screen/Center/VBox/VolumeControls/VolumeSlider" to="." method="_on_volume_changed"]

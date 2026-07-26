@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3xxa0al5n3yn" path="res://src/effects/glitch.gd" id="1"]
 [ext_resource type="Shader" uid="uid://blt3dvn1dtqfu" path="res://src/effects/glitch.gdshader" id="2"]
-[ext_resource type="AudioStream" uid="uid://cacmksa01cf7m" path="res://assets/glitch.wav" id="3_euxdd"]
+[ext_resource type="AudioStream" uid="uid://tkeyi7ageihc" path="res://assets/glitch.ogg" id="3_euxdd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glitch"]
 shader = ExtResource("2")

@@ -2,6 +2,7 @@ extends Control
 
 const HINT_PLAY := "[<] [>] BROWSE     [ENTER] PLAY\n[ESC] MENU"
 const HINT_LOCKED := "[<] [>] BROWSE     LOCKED\n[ESC] MENU"
+const LOCKED_GLITCH_SOUND_STRENGTH := 0.02
 
 @export var levels: Array[LevelInfo] = []
 
@@ -21,10 +22,17 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_left"): _step(-1)
 	elif event.is_action_pressed("ui_right"): _step(1)
-	elif event.is_action_pressed("ui_accept") and not levels.is_empty():
-		if _is_unlocked(_index): get_tree().change_scene_to_packed(levels[_index].scene)
+	elif event.is_action_pressed("ui_accept"): _play()
 	elif event.is_action_pressed("ui_cancel"):
 		get_tree().change_scene_to_file("res://src/main_menu.tscn")
+
+func _preview_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_play()
+
+func _play() -> void:
+	if not levels.is_empty() and _is_unlocked(_index):
+		get_tree().change_scene_to_packed(levels[_index].scene)
 
 func _frontier() -> int:
 	for i in levels.size(): if not Progress.is_completed(levels[i].scene.resource_path): return i
@@ -45,8 +53,12 @@ func _refresh() -> void:
 	_name_label.text = levels[index].name
 	_hint.text = HINT_PLAY if unlocked else HINT_LOCKED
 	_glitch.visible = not unlocked
+	Glitch.set_sound_strength(LOCKED_GLITCH_SOUND_STRENGTH if not unlocked else 0.0)
 	var texture := await _thumbnail(index)
 	if index == _index: _preview.texture = texture
+
+func _exit_tree() -> void:
+	Glitch.set_sound_strength(0.0)
 
 func _thumbnail(index: int) -> Texture2D:
 	if _thumbs.has(index): return _thumbs[index]

@@ -1,5 +1,7 @@
 # GMTK Game Jam 2026
 
+**Chronost** is a ten-level time-loop puzzle platformer. Record short runs, cooperate with replaying ghosts, and turn past selves into platforms to reach each room's exit.
+
 - Currently assumes using Godot as game engine in `./.gitignore`
 - See [Game Jam Website](https://itch.io/jam/gmtk-jam-2026)
 
@@ -48,8 +50,11 @@ The Game Jam website recommends the following sources for art & audio:
 
 ## Credits
 
-- [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke, licensed under the [SIL Open Font License 1.1](assets/fonts/Silkscreen-OFL.txt)
-- Music: "En el pozo" by Santiago "YATEOI" Iurissevich from [No Royals PLS](https://yateoi.bandcamp.com/album/no-royals-pls) (see [itch.io](https://yateoi.itch.io/no-royals-pls))
+- [1-Bit Platformer Pack](https://kenney.nl/assets/1-bit-platformer-pack) by Kenney, licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke and the Silkscreen Project Authors, licensed under the [SIL Open Font License 1.1](assets/fonts/Silkscreen-OFL.txt)
+- Music: “En el pozo” by Santiago “YATEOI” Iurissevich from [No Royals PLS](https://yateoi.bandcamp.com/album/no-royals-pls), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); edited into intro and looping sections
+- Button sounds adapted from [“Open button 2”](https://freesound.org/people/kickhat/sounds/264447/) by kickhat, licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/); edited into button press and release sounds
+- Built with [Godot Engine](https://godotengine.org/license/)
 
 ## Branch preview hosting
 

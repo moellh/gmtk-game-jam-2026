@@ -15,9 +15,9 @@ Everything in this directory is intended for the `Chronost` itch.io edit page.
 ## Image Set
 
 - `cover.png`: the complete room with a ghost holding the switch and the current player approaching the goal
-- `screenshots/01-countdown.png`: the opening view with the countdown and movement instructions
-- `screenshots/02-ghost-on-switch.png`: the first ghost holding the switch and opening the door
-- `screenshots/03-path-open.png`: the current player passing the open door while the ghost remains on the switch
+- `screenshots/01-haunting-mode.png`: the title screen with the optional Haunting Mode enabled
+- `screenshots/02-ghost-teamwork.png`: a mid-game room with a replay ghost holding a switch for the current player
+- `screenshots/03-final-challenge.png`: the large final puzzle with four switches, stacked doors, and five available timelines
 
 ## Project Settings
 
@@ -55,9 +55,11 @@ No background image is needed. The black page lets the game, cover, and screensh
 ## Asset Notes
 
 - `cover.png` and every screenshot are direct captures of the game. No generated artwork is used.
-- The tile and character art comes from Kenney's [1-Bit Platformer Pack](https://kenney.nl/assets/1-bit-platformer-pack), licensed under CC0 1.0.
-- The UI uses [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke, licensed under the SIL Open Font License 1.1.
-- Music: "En el pozo" by Santiago "YATEOI" Iurissevich from [No Royals PLS](https://yateoi.bandcamp.com/album/no-royals-pls) (see [itch.io](https://yateoi.itch.io/no-royals-pls))
+- The tile and character art comes from Kenney's [1-Bit Platformer Pack](https://kenney.nl/assets/1-bit-platformer-pack), licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- The UI uses [Silkscreen](https://github.com/googlefonts/silkscreen) by Jason Kottke and the Silkscreen Project Authors, licensed under the [SIL Open Font License 1.1](../assets/fonts/Silkscreen-OFL.txt).
+- Music: “En el pozo” by Santiago “YATEOI” Iurissevich from [No Royals PLS](https://yateoi.bandcamp.com/album/no-royals-pls), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); edited into intro and looping sections.
+- The button sounds are adapted from [“Open button 2”](https://freesound.org/people/kickhat/sounds/264447/) by kickhat, licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/); edited into button press and release sounds.
+- Built with [Godot Engine](https://godotengine.org/license/).
 
 ## Team
 
