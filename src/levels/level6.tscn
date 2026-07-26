@@ -820,6 +820,7 @@ sources/0 = SubResource("TileSetAtlasSource_vonw3")
 texture_filter = 1
 script = ExtResource("1_xdjht")
 next_level = ExtResource("2_xdjht")
+freeze_unlocked = true
 
 [node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_4h8lw")]
 position = Vector2(0, -32)

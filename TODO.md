@@ -12,9 +12,7 @@
     - 'Haunting Mode', if you touch your previous ghost you die instantly.
 - Change position of the function keys for the right hand
 - Freeze button available after completing level 5
-- Selection Screen:
-    - after leaving level, selection should be on played level
-    - locked/glitched levels if not previous levels done 
+
 
 ## Credits
 - Button: https://freesound.org/people/kickhat/sounds/264447/

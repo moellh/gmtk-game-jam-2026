@@ -2,6 +2,8 @@ extends Node2D
 
 @export var next_level: PackedScene
 
+@export var freeze_unlocked: bool = false
+
 @onready var player: Player = $Player
 @onready var outside_fill: OutsideFill = $OutsideFill
 @onready var round_timer: RoundTimer = %RoundTimer
@@ -21,7 +23,7 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_pressed("clear"):
 		Glitch.play()
 		clear()
-	elif Input.is_action_just_pressed("freeze"):
+	elif freeze_unlocked and Input.is_action_just_pressed("freeze"):
 		if life_hearts.remaining() == 1: play_death()
 		else: Glitch.play(); next_round(true)
 	elif Input.is_action_just_pressed("restart") or round_timer.is_expired():

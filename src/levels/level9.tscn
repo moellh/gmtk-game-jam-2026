@@ -822,6 +822,7 @@ texture_filter = 1
 position = Vector2(4, 4)
 script = ExtResource("1_hqf1q")
 next_level = ExtResource("2_q80s1")
+freeze_unlocked = true
 
 [node name="OutsideFill" parent="." unique_id=845541978 instance=ExtResource("2_yelhk")]
 position = Vector2(-4, -4)

@@ -1,7 +1,7 @@
 extends Control
 
-const HINT_PLAY := "[<] [>] BROWSE     [ENTER] PLAY"
-const HINT_LOCKED := "[<] [>] BROWSE     LOCKED"
+const HINT_PLAY := "[<] [>] BROWSE     [ENTER] PLAY\n[ESC] MENU"
+const HINT_LOCKED := "[<] [>] BROWSE     LOCKED\n[ESC] MENU"
 
 @export var levels: Array[LevelInfo] = []
 
@@ -23,6 +23,8 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_right"): _step(1)
 	elif event.is_action_pressed("ui_accept") and not levels.is_empty():
 		if _is_unlocked(_index): get_tree().change_scene_to_packed(levels[_index].scene)
+	elif event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://src/main_menu.tscn")
 
 func _frontier() -> int:
 	for i in levels.size(): if not Progress.is_completed(levels[i].scene.resource_path): return i
