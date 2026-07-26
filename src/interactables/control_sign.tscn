@@ -50,8 +50,8 @@ autowrap_mode = 2
 
 [node name="PromptSprite" type="Sprite2D" parent="." unique_id=623983014]
 z_index = 10
-position = Vector2(0, -16)
-scale = Vector2(0.09375, 0.093750015)
+position = Vector2(0, -18)
+scale = Vector2(0.08, 0.08)
 texture = SubResource("ViewportTexture_23eqq")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
