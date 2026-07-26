@@ -4,12 +4,14 @@ const BURST_TIME := 0.25
 
 @onready var rect: ColorRect = $Rect
 @onready var _mat: ShaderMaterial = rect.material
+@onready var _sound: AudioStreamPlayer = $Sound
 
 var _burst := 0.0
 var _danger := 0.0
 var _tween: Tween
 
 func play() -> void:
+	_sound.play()
 	if _tween: _tween.kill()
 	_tween = create_tween()
 	_tween.tween_method(_set_burst, 1.0, 0.0, BURST_TIME)

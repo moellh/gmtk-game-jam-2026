@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3xxa0al5n3yn" path="res://src/effects/glitch.gd" id="1"]
 [ext_resource type="Shader" uid="uid://blt3dvn1dtqfu" path="res://src/effects/glitch.gdshader" id="2"]
+[ext_resource type="AudioStream" uid="uid://cacmksa01cf7m" path="res://assets/glitch.wav" id="3_euxdd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glitch"]
 shader = ExtResource("2")
@@ -19,3 +20,7 @@ material = SubResource("ShaderMaterial_glitch")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=606238257]
+stream = ExtResource("3_euxdd")
+volume_db = -6.0
