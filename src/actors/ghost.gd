@@ -1,5 +1,7 @@
 extends AnimatedSprite2D
 
+signal player_touched #for damage when touching a ghost (haunting mode)
+
 @export var frozen_color: Color
 @export var ghost_color: Color
 
@@ -11,6 +13,15 @@ var _is_solid := false
 
 @onready var solid_shape: CollisionShape2D = $Solid/CollisionShape2D
 @onready var trail: CPUParticles2D = $Trail
+@onready var hitbox: Area2D = $Hitbox
+
+func _ready() -> void:
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
+
+func _on_hitbox_body_entered(body: Node) -> void:
+	if _is_solid: return
+	if not GameMode.haunting_enabled: return
+	if body.is_in_group(&"player"): player_touched.emit()
 
 func setup(rec: Array) -> void:
 	recording = rec

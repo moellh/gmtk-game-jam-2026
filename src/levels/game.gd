@@ -52,7 +52,10 @@ func next_round(solid: bool = false) -> void:
 	life_hearts.use_figure()
 	round_timer.reset()
 
-	add_child(player.spawn_ghost(solid))
+	var ghost := player.spawn_ghost(solid)
+	ghost.player_touched.connect(play_death)
+
+	add_child(ghost)
 	get_tree().call_group("ghosts", "restart")
 
 	player.reset()
