@@ -4,6 +4,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	%ModeToggle.button_pressed = GameMode.haunting_enabled
+	%ModeToggle.text = "Haunting Mode" if GameMode.haunting_enabled else "Normal Mode"
 	
 	for button in buttons.get_children():
 		if not button is Button: continue
