@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bqkj7wspkoene"]
 
-[ext_resource type="Theme" path="res://src/ui_theme.tres" id="1_guuao"]
+[ext_resource type="Theme" uid="uid://hlteppub6ywy" path="res://src/ui_theme.tres" id="1_guuao"]
 [ext_resource type="Script" uid="uid://dywpk0ckwglfi" path="res://src/main_menu.gd" id="2_bq8pk"]
+[ext_resource type="SpriteFrames" uid="uid://bwssvvbtnicof" path="res://src/actors/player_frames.tres" id="3_6w7d7"]
 
 [node name="MainMenu" type="Control" unique_id=1819378232]
 layout_mode = 3
@@ -13,6 +14,28 @@ grow_vertical = 2
 theme = ExtResource("1_guuao")
 script = ExtResource("2_bq8pk")
 
+[node name="Backdrop" type="Control" parent="." unique_id=862884732]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -43.0
+offset_right = -4.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Backdrop" unique_id=1688896109]
+modulate = Color(1, 1, 1, 0.2509804)
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("3_6w7d7")
+animation = &"ghost_idle"
+autoplay = "ghost_idle"
+frame = 3
+
 [node name="Center" type="CenterContainer" parent="." unique_id=1798230012]
 layout_mode = 1
 anchors_preset = 15
@@ -23,11 +46,13 @@ grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="Center" unique_id=1547626767]
 layout_mode = 2
-theme_override_constants/separation = 36
+theme_override_constants/separation = 24
 alignment = 1
 
 [node name="Title" type="Label" parent="Center/VBox" unique_id=476434940]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
 text = "Chronost"
 horizontal_alignment = 1
@@ -35,10 +60,12 @@ horizontal_alignment = 1
 [node name="Buttons" type="VBoxContainer" parent="Center/VBox" unique_id=780657328]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 2
 
 [node name="LevelSelection" type="Button" parent="Center/VBox/Buttons" unique_id=267180740]
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Start Game"
 
 [node name="ModeToggle" type="Button" parent="Center/VBox/Buttons" unique_id=267180741]
