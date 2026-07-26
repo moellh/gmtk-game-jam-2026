@@ -21,7 +21,7 @@ func _ready() -> void:
 func _on_hitbox_body_entered(body: Node) -> void:
 	if _is_solid: return
 	if not GameMode.haunting_enabled: return
-	if body.is_in_group(&"player"): player_touched.emit()
+	if body.is_in_group(&"player") and not body.is_in_safe_zone(): player_touched.emit()
 
 func setup(rec: Array) -> void:
 	recording = rec

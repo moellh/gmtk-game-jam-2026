@@ -19,6 +19,8 @@ const DEATH_SCALE := Vector2.ONE * 3.0
 
 const GHOST_SCENE := preload("res://src/actors/ghost.tscn")
 
+const SAFE_ZONE_HALF_SIZE := 24.0 # 3 tiles with 16px each. This ist half the size, so the full size is 48px. This is used to check if the player is in a safe zone when spawning a ghost.
+
 var ledge_timer := 0.0
 var buffer_timer := 0.0
 var drop_timer := 0.0
@@ -88,6 +90,9 @@ func reset() -> void:
 	recording = []
 	velocity = Vector2.ZERO
 	global_position = spawn
+
+func is_in_safe_zone() -> bool:
+	return absf(global_position.x - spawn.x) <= SAFE_ZONE_HALF_SIZE and absf(global_position.y - spawn.y) <= SAFE_ZONE_HALF_SIZE
 
 func play_spawn() -> void:
 	var opaque := modulate
