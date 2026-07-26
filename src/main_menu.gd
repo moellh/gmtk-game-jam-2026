@@ -27,6 +27,3 @@ func _update_mode_ui() -> void:
 	%ModeToggle.text = "Haunting Mode" if GameMode.haunting_enabled else "Normal Mode"
 	%ModeInfo.text = HAUNTING_INFO if GameMode.haunting_enabled else NORMAL_INFO
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
