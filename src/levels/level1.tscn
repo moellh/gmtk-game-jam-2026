@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3n28iv4k07jg" path="res://src/interactables/door1x2.tscn" id="6_door"]
 [ext_resource type="PackedScene" uid="uid://dhjpoxx70p30a" path="res://src/interactables/control_sign.tscn" id="8_sign"]
 [ext_resource type="Curve" uid="uid://cpf60p3mkmx28" path="res://src/effects/glitch_curve.tres" id="9_5lu3u"]
-[ext_resource type="PackedScene" path="res://src/levels/level_complete.tscn" id="9_complete"]
+[ext_resource type="PackedScene" uid="uid://dlsq3o8cnaor5" path="res://src/levels/level_complete.tscn" id="9_complete"]
 [ext_resource type="PackedScene" uid="uid://dangpjatpcv2i" path="res://src/outside_fill.tscn" id="10_outside"]
 [ext_resource type="PackedScene" path="res://src/touch_controls.tscn" id="12_touch_controls"]
 [ext_resource type="PackedScene" uid="uid://dl1fh3artssc0" path="res://src/decorations/life_hearts.tscn" id="13_hearts"]
@@ -61,17 +61,14 @@ position = Vector2(136, 24)
 [node name="MovementSign" parent="WorldUI" unique_id=1640671847 instance=ExtResource("8_sign")]
 position = Vector2(125, 104)
 text = "Left/Right to move"
-prompt_offset = Vector2(0, -4)
 
 [node name="FreezeSign" parent="WorldUI" unique_id=2145279178 instance=ExtResource("8_sign")]
 position = Vector2(152, 57)
 text = "'R' to die early"
-prompt_offset = Vector2(0, -4)
 
 [node name="ResetSign" parent="WorldUI" unique_id=659495750 instance=ExtResource("8_sign")]
 position = Vector2(168, 104)
 text = "Space to jump"
-prompt_offset = Vector2(0, -4)
 
 [node name="LevelComplete" parent="." unique_id=1596680959 instance=ExtResource("9_complete")]
 
